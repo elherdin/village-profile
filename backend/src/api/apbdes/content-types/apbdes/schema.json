@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "apbdes_records",
+  "info": {
+    "singularName": "apbdes",
+    "pluralName": "apbdes-records",
+    "displayName": "APBDes Transparansi",
+    "description": "Laporan Transparansi Anggaran Pendapatan dan Belanja Desa Plantungan"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tahun": {
+      "type": "integer",
+      "required": true,
+      "unique": true
+    },
+    "pendapatan": {
+      "type": "biginteger",
+      "required": true
+    },
+    "belanja": {
+      "type": "biginteger",
+      "required": true
+    },
+    "pembiayaan": {
+      "type": "biginteger",
+      "default": 0
+    },
+    "rincian_pendapatan": {
+      "type": "json"
+    },
+    "rincian_belanja": {
+      "type": "json"
+    },
+    "file_pdf": {
+      "type": "string"
+    },
+    "keterangan": {
+      "type": "text"
+    }
+  }
+}

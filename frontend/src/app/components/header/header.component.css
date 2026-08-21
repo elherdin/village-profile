@@ -1,0 +1,343 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+/* ============================================================
+   1. MAIN HEADER & STICKY GLASSMORPHISM TRANSITIONS
+   ============================================================ */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dynamic State when page is scrolled > 20px */
+.main-header.is-scrolled {
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.header-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .header-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5.25rem;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shrink header content height when scrolled */
+.main-header.is-scrolled .header-content {
+  height: 4.25rem;
+}
+
+/* ============================================================
+   2. BRAND & LOGO (LEFT)
+   ============================================================ */
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.brand-logo-container {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  border-radius: 0.75rem;
+  background-color: #0f172a;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0 !important;
+}
+
+.brand-link:hover .brand-logo-container {
+  border-color: #10b981;
+  transform: scale(1.04);
+}
+
+.brand-logo-img {
+  width: 44px !important;
+  height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+.brand-logo-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #065f46, #047857);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-weight: 800;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: #0f172a;
+  transition: color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .brand-title {
+    font-size: 1.25rem;
+  }
+}
+
+.brand-link:hover .brand-title {
+  color: #059669;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+/* ============================================================
+   3. DESKTOP NAVIGATION (CENTER - CLEAN & SPACIOUS)
+   ============================================================ */
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .desktop-nav {
+    display: flex;
+    gap: 0.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .desktop-nav {
+    gap: 0.45rem;
+  }
+}
+
+.nav-item-link {
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: #475569;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item-link:hover {
+  color: #059669;
+  background-color: #f8fafc;
+}
+
+.nav-item-link.active {
+  color: #047857;
+  background-color: #ecfdf5;
+  font-weight: 700;
+}
+
+/* ============================================================
+   4. CALL TO ACTION & ACTIONS (RIGHT - PILL DESIGN)
+   ============================================================ */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cta-pill-btn {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.375rem;
+  border-radius: 9999px;
+  background-color: #059669;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 1px 2px 0 rgba(5, 150, 105, 0.2);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 640px) {
+  .cta-pill-btn {
+    display: inline-flex;
+  }
+}
+
+.cta-pill-btn:hover {
+  background-color: #047857;
+  box-shadow: 0 4px 12px 0 rgba(4, 120, 87, 0.25);
+  transform: translateY(-1px);
+}
+
+.cta-arrow-icon {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  max-width: 14px !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease;
+}
+
+.cta-pill-btn:hover .cta-arrow-icon {
+  transform: translateX(2px);
+}
+
+.mobile-menu-btn {
+  display: block;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #475569;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+.mobile-menu-btn:hover {
+  color: #0f172a;
+  background-color: #f1f5f9;
+}
+
+.menu-icon {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+}
+
+/* ============================================================
+   5. MOBILE DRAWER NAVIGATION
+   ============================================================ */
+.mobile-drawer {
+  display: block;
+  border-top: 1px solid #e2e8f0;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.75rem 1.25rem 1.5rem 1.25rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 1024px) {
+  .mobile-drawer {
+    display: none;
+  }
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mobile-nav-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.mobile-nav-item:hover {
+  background-color: #f8fafc;
+  color: #059669;
+}
+
+.mobile-nav-item.active {
+  background-color: #ecfdf5;
+  color: #047857;
+  font-weight: 700;
+}
+
+.mobile-cta-box {
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+  margin-top: 0.5rem;
+}
+
+.mobile-cta-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  background-color: #059669;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}

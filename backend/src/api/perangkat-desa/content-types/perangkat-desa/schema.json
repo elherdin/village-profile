@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "perangkat_desas",
+  "info": {
+    "singularName": "perangkat-desa",
+    "pluralName": "perangkat-desas",
+    "displayName": "Perangkat Desa",
+    "description": "Daftar struktur organisasi dan perangkat pemerintahan Desa Plantungan"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nama": {
+      "type": "string",
+      "required": true
+    },
+    "jabatan": {
+      "type": "string",
+      "required": true
+    },
+    "nip": {
+      "type": "string"
+    },
+    "urutan": {
+      "type": "integer",
+      "default": 1
+    },
+    "foto": {
+      "type": "string"
+    },
+    "kontak": {
+      "type": "string"
+    }
+  }
+}

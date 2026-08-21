@@ -1,0 +1,12 @@
+0 verbose cli /usr/local/Cellar/node/25.9.0_2/bin/node /usr/local/bin/npm
+1 info using npm@11.16.0
+2 info using node@v25.9.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/macbookair/Documents/ANGULAR COURSE/desa-plantungan/frontend/.npmrc
+5 silly config load:file:/usr/local/etc/npmrc
+6 verbose title npm run build
+7 verbose argv "run" "build"
+8 verbose logfile logs-max:10 dir:/Users/macbookair/Documents/ANGULAR COURSE/desa-plantungan/frontend/.npm/_logs/2026-08-15T08_13_38_150Z-
+9 verbose logfile /Users/macbookair/Documents/ANGULAR COURSE/desa-plantungan/frontend/.npm/_logs/2026-08-15T08_13_38_150Z-debug-0.log
+10 silly logfile done cleaning log files
+11 http fetch GET https://registry.npmjs.org/npm attempt 1 failed with ENOTFOUND

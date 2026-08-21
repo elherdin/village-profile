@@ -1,0 +1,85 @@
+<!-- Header / Breadcrumb -->
+<div class="detail-header-banner">
+  <div class="detail-header-container">
+    <nav class="breadcrumb-nav">
+      <a routerLink="/" class="breadcrumb-link">Beranda</a>
+      <span class="breadcrumb-sep">/</span>
+      <a routerLink="/berita" class="breadcrumb-link">Berita & Kegiatan</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current">{{ berita()?.judul || 'Detail Artikel' }}</span>
+    </nav>
+
+    <div class="detail-category-badge">
+      {{ berita()?.kategori }}
+    </div>
+
+    <h1 class="detail-title">
+      {{ berita()?.judul }}
+    </h1>
+
+    <div class="detail-meta-row">
+      <span>{{ berita()?.tanggal_publikasi | date:'EEEE, d MMMM yyyy' }}</span>
+      <span>•</span>
+      <span>Ditulis oleh: <strong class="text-white">{{ berita()?.penulis || 'Admin Desa' }}</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Area -->
+<div class="detail-body-container">
+  <div *ngIf="berita(); else notFound" class="detail-article-wrapper">
+
+    <!-- Featured Image -->
+    <div class="detail-featured-box">
+      <img [src]="berita()?.thumbnail" [alt]="berita()?.judul" class="detail-featured-img">
+    </div>
+
+    <!-- Article Summary Box -->
+    <div class="detail-summary-box">
+      {{ berita()?.ringkasan }}
+    </div>
+
+    <!-- Article Rich Body Content -->
+    <div class="detail-content-text">
+      {{ berita()?.konten }}
+    </div>
+
+
+    <div class="detail-share-footer">
+      <a routerLink="/berita" class="back-link">
+        ← Kembali ke Daftar Berita
+      </a>
+    </div>
+
+    <!-- Related News -->
+    <div class="related-section">
+      <h3 class="related-heading">Berita Terkait Lainnya</h3>
+      <div class="related-grid">
+        @for (other of otherBerita(); track other.id) {
+        <div class="related-card">
+          <img [src]="other.thumbnail" [alt]="other.judul" class="related-thumb">
+          <div class="related-info">
+            <span class="related-category">{{ other.kategori }}</span>
+            <h4 class="related-title">
+              <a [routerLink]="['/berita', other.slug]">{{ other.judul }}</a>
+            </h4>
+            <span class="related-date">{{ other.tanggal_publikasi | date:'d MMM yyyy' }}</span>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #notFound>
+    <div class="not-found-card">
+      <div class="not-found-emoji">🔍</div>
+      <h3 class="not-found-title">Artikel Tidak Ditemukan</h3>
+      <p class="not-found-desc">Berita yang Anda cari tidak tersedia atau tautan telah kedaluwarsa.</p>
+      <a routerLink="/berita" class="not-found-btn">
+        Kembali ke Berita
+      </a>
+    </div>
+  </ng-template>
+</div>

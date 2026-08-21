@@ -1,0 +1,577 @@
+{
+  "profilDesa": {
+    "id": 1,
+    "nama_desa": "Desa Plantungan",
+    "tagline": "Maju, Berdaya Saing, Berbudaya, dan Sejahtera Berbasis Potensi Lokal",
+    "tentang": "Desa Plantungan merupakan salah satu desa yang terletak di kawasan strategis dengan bentang alam yang asri dan tanah yang subur. Desa ini memiliki kekayaan sumber daya alam yang melimpah, khususnya di sektor pertanian pangan, perkebunan rakyat penghasil komoditas atsiri/minyak rakyat, serta kelembagaan ekonomi desa yang produktif melalui BUMDes Maju Bersama.\n\nMasyarakat Desa Plantungan menjunjung tinggi nilai-nilai kearifan lokal, gotong royong, dan keterbukaan dalam tata kelola pemerintahan desa modern yang transparan dan akuntabel.",
+    "sejarah": "Asal mula nama Plantungan berakar dari sejarah masa lampau ketika wilayah ini dikenal sebagai area peristirahatan dan pertemuan para perintis desa yang memanfaatkan melimpahnya sumber mata air dan kesuburan tanah pegunungan.\n\nSeiring bergulirnya waktu, Desa Plantungan berkembang menjadi pemukiman masyarakat yang gigih dalam mengolah lahan pertanian dan memelopori pengolahan hasil bumi berupa penyulingan minyak rakyat secara turun-temurun. Saat ini, Desa Plantungan telah bertransformasi menjadi desa mandiri yang memadukan kearifan tradisi dengan sistem informasi digital untuk pelayanan publik yang cepat dan prima.",
+    "visi_misi": {
+      "visi": "Terwujudnya Desa Plantungan yang Mandiri, Sejahtera, Transparan, dan Berdaya Saing Melalui Penguatan Ekonomi Rakyat dan Pelayanan Prima Berbasis Teknologi.",
+      "misi": [
+        "Meningkatkan tata kelola pemerintahan desa yang bersih, transparan, akuntabel, dan berbasis digital.",
+        "Mengoptimalkan potensi sektor pertanian, penyulingan minyak rakyat, dan usaha mikro kecil menengah (UMKM).",
+        "Meningkatkan kualitas infrastruktur jalan desa, irigasi pertanian, dan fasilitas kesehatan masyarakat.",
+        "Mendorong pemberdayaan pemuda, perempuan, dan lembaga kemasyarakatan desa dalam pembangunan.",
+        "Memperkuat peran BUMDes sebagai motor penggerak ekonomi dan kemandirian finansial desa."
+      ],
+      "motto": "Guyub Rukun Mbangun Desa Menuju Kesejahteraan Nyata"
+    },
+    "alamat": "Jl. Raya Utama Plantungan No. 01, Balai Desa Plantungan, Kode Pos 51362",
+    "email": "pemdes@plantungan.desa.id",
+    "telepon": "+62 812-3456-7890",
+    "luas_wilayah": "482,5 Hektar",
+    "jumlah_dusun": 4,
+    "jumlah_rt": 18,
+    "jumlah_rw": 4,
+    "koordinat": {
+      "latitude": -7.0854,
+      "longitude": 109.9532,
+      "zoom": 14
+    },
+    "logo": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786973151978_Lambang_Kabupaten_Blora.gif",
+    "foto_desa": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786974342642_beranda.jpg",
+    "nama_kades": "Endang Susana",
+    "foto_kades": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786973144424_foto_kepala_desa.jpg",
+    "foto_kantor": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786974346769_beranda_2.jpg"
+  },
+  "perangkatDesa": [
+    {
+      "id": 1,
+      "nama": "Endang Susana",
+      "jabatan": "Kepala Desa",
+      "nip": "197508122005011003",
+      "urutan": "1",
+      "foto": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786796899801_1.avif",
+      "pendidikan_terakhir": "S1 Ilmu Pemerintahan",
+      "periode": "2020 - 2026",
+      "kontak": "kades@plantungan.desa.id"
+    },
+    {
+      "id": 2,
+      "nama": "Ahmad Fauzi, S.Kom.",
+      "jabatan": "Sekretaris Desa",
+      "nip": "198804152012011007",
+      "urutan": "2",
+      "foto": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786796876363_1.avif",
+      "pendidikan_terakhir": "S1 Sistem Informasi",
+      "periode": "2021 - Sekarang",
+      "kontak": "sekdes@plantungan.desa.id"
+    },
+    {
+      "id": 3,
+      "nama": "Siti Rahmawati, S.E.",
+      "jabatan": "Kepala Urusan Keuangan",
+      "nip": "199202202018022004",
+      "urutan": 3,
+      "foto": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+      "pendidikan_terakhir": "S1 Akuntansi",
+      "periode": "2021 - Sekarang",
+      "kontak": "keuangan@plantungan.desa.id"
+    },
+    {
+      "id": 4,
+      "nama": "Joko Susilo, A.Md.",
+      "jabatan": "Kepala Urusan Perencanaan",
+      "nip": "199009102015031002",
+      "urutan": 4,
+      "foto": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
+      "pendidikan_terakhir": "D3 Teknik Sipil",
+      "periode": "2021 - Sekarang",
+      "kontak": "perencanaan@plantungan.desa.id"
+    },
+    {
+      "id": 5,
+      "nama": "Bambang Irawan",
+      "jabatan": "Kepala Seksi Kesejahteraan",
+      "nip": "198305142010011005",
+      "urutan": 5,
+      "foto": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      "pendidikan_terakhir": "SMA Sederajat",
+      "periode": "2020 - Sekarang",
+      "kontak": "kesra@plantungan.desa.id"
+    }
+  ],
+  "dataKependudukan": {
+    "id": 1,
+    "total_penduduk": 1102,
+    "laki_laki": 529,
+    "perempuan": 573,
+    "tahun_update": 2025,
+    "kelompok_usia": [
+      {
+        "rentang": "0-4 tahun",
+        "jumlah": 62
+      },
+      {
+        "rentang": "5-9 tahun",
+        "jumlah": 62
+      },
+      {
+        "rentang": "10-14 tahun",
+        "jumlah": 64
+      },
+      {
+        "rentang": "15-19 tahun",
+        "jumlah": 84
+      },
+      {
+        "rentang": "20-24 tahun",
+        "jumlah": 81
+      },
+      {
+        "rentang": "25-29 tahun",
+        "jumlah": 79
+      },
+      {
+        "rentang": "30-34 tahun",
+        "jumlah": 63
+      },
+      {
+        "rentang": "35-39 tahun",
+        "jumlah": 78
+      },
+      {
+        "rentang": "40-44 tahun",
+        "jumlah": 72
+      },
+      {
+        "rentang": "45-49 tahun",
+        "jumlah": 89
+      },
+      {
+        "rentang": "50-54 tahun",
+        "jumlah": 76
+      },
+      {
+        "rentang": "55-59 tahun",
+        "jumlah": 69
+      },
+      {
+        "rentang": "60-64 tahun",
+        "jumlah": 66
+      },
+      {
+        "rentang": "65-69 tahun",
+        "jumlah": 70
+      },
+      {
+        "rentang": "70-74 tahun",
+        "jumlah": 31
+      },
+      {
+        "rentang": "75 tahun keatas",
+        "jumlah": 43
+      }
+    ],
+    "tingkat_pendidikan": [
+      {
+        "tingkat": "Belum / Tidak Sekolah",
+        "jumlah": 330,
+        "persentase": 29.9
+      },
+      {
+        "tingkat": "Belum Tamat SD",
+        "jumlah": 24,
+        "persentase": 2.2
+      },
+      {
+        "tingkat": "Tamat SD",
+        "jumlah": 571,
+        "persentase": 51.8
+      },
+      {
+        "tingkat": "SLTP",
+        "jumlah": 91,
+        "persentase": 8.3
+      },
+      {
+        "tingkat": "SLTA",
+        "jumlah": 70,
+        "persentase": 6.4
+      },
+      {
+        "tingkat": "D1 dan D2",
+        "jumlah": 1,
+        "persentase": 0.1
+      },
+      {
+        "tingkat": "D3",
+        "jumlah": 1,
+        "persentase": 0.1
+      },
+      {
+        "tingkat": "S1",
+        "jumlah": 14,
+        "persentase": 1.3
+      }
+    ],
+    "mata_pencaharian": [
+      {
+        "sektor": "Belum/Tidak bekerja",
+        "jumlah": 326,
+        "persentase": 63.3
+      },
+      {
+        "sektor": "Pelajar dan mahasiswa",
+        "jumlah": 35,
+        "persentase": 6.8
+      },
+      {
+        "sektor": "Perdagangan",
+        "jumlah": 2,
+        "persentase": 0.4
+      },
+      {
+        "sektor": "Mengurus Rumah Tangga",
+        "jumlah": 37,
+        "persentase": 7.2
+      },
+      {
+        "sektor": "Wiraswasta",
+        "jumlah": 111,
+        "persentase": 21.6
+      },
+      {
+        "sektor": "Guru",
+        "jumlah": 4,
+        "persentase": 0.8
+      }
+    ],
+    "distribusi_dusun": [
+      {
+        "dusun": "Desa Plentungan",
+        "laki_laki": 529,
+        "perempuan": 573,
+        "jumlah_jiwa": 1102
+      }
+    ]
+  },
+  "potensiDesa": [
+    {
+      "id": 2,
+      "judul": "Lumbung Pertanian Padi Organik & Palawija Unggul",
+      "kategori": "Pertanian",
+      "deskripsi": "Dengan didukung sistem irigasi alami pegunungan yang subur, sektor pertanian Desa Plantungan memproduksi beras organik varietas Menthik Wangi serta jagung hibrida berkualitas.",
+      "komoditas_utama": "Beras Organik Menthik Wangi, Jagung Manis, Cabai Merah",
+      "kontak_pengelola": "GAPOKTAN Sido Makmur (0821-3344-5566)",
+      "foto": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&h=500&fit=crop",
+      "lokasi": "Hamparan Sawah Dusun Krajan & Sari Rejo",
+      "keunggulan": [
+        "Produktivitas gabah kering panen rata-rata 6.8 ton per hektar",
+        "Irigasi tersier terawat dengan pola tanam terpadu 3 kali setahun"
+      ]
+    },
+    {
+      "id": 3,
+      "judul": "BUMDes \"Maju Bersama Plantungan\" - Unit Jasa & Distribusi",
+      "kategori": "BUMDes",
+      "deskripsi": "Badan Usaha Milik Desa mengelola unit penyewaan traktor, agen laku pandai PPOB, sentra pupuk bersubsidi, dan toko modern pasar desa.",
+      "komoditas_utama": "Penyewaan Alsintan, PPOB, Pasar Desa Digital",
+      "kontak_pengelola": "Direktur BUMDes Maju Bersama (0852-7788-9900)",
+      "foto": "https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=800&h=500&fit=crop",
+      "lokasi": "Kompleks Balai Desa Plantungan",
+      "keunggulan": [
+        "PADes stabil lebih dari Rp 85 Juta/tahun",
+        "Memudahkan sewa alat panen bagi petani lokal"
+      ]
+    },
+    {
+      "id": 4,
+      "judul": "Agrowisata Perkebunan Kopi & Durian Lereng Plantungan",
+      "kategori": "Pariwisata & UMKM",
+      "deskripsi": "Pengembangan kawasan wisata berbasis kebun durian lokal dan kopi robusta lereng perbukitan.",
+      "komoditas_utama": "Kopi Robusta Plantungan, Durian Lokal, Keripik Pisang",
+      "kontak_pengelola": "Pokdarwis \"Pesona Plantungan\" (0812-9988-7766)",
+      "foto": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&h=500&fit=crop",
+      "lokasi": "Perbukitan Dusun Sari Rejo"
+    },
+    {
+      "id": 5,
+      "judul": "tess",
+      "kategori": "Minyak Rakyat",
+      "komoditas_utama": "Tes",
+      "kontak_pengelola": "081234556",
+      "lokasi": "klaten",
+      "foto": "",
+      "deskripsi": "tessss"
+    }
+  ],
+  "programKKN": [
+    {
+      "id": 1,
+      "judul": "Pengembangan Koperasi Desa Plantungan",
+      "divisi": "Tes",
+      "deskripsi": "Program Pengembangan Koperasi Desa Plantungan merupakan program kerja kolaborasi antara kelompok KKNR 11203 dan KKNR 11206 UNY 2025 yang dilaksanakan berdasarkan hasil observasi dan usulan dari Kepala Desa Plantungan. Kegiatan ini berfokus pada pendampingan dan pengembangan koperasi sebagai salah satu potensi ekonomi desa. Koperasi Desa Plantungan memiliki beberapa unit usaha, meliputi toko obat yang berkolaborasi dengan bidan desa, distributor sembako, distributor bibit pertanian, penyedia alat pertanian, serta layanan simpan pinjam. Melalui program ini, mahasiswa memberikan pendampingan dalam administrasi koperasi, pengelolaan keuangan sederhana, serta pengenalan strategi pemasaran digital. Kegiatan ini bertujuan untuk membantu meningkatkan pengelolaan koperasi dan mendukung pengembangan usaha koperasi agar dapat memberikan manfaat bagi pengurus, anggota, dan masyarakat Desa Plantungan.",
+      "tanggal_mulai": "2025-07-25",
+      "tanggal_selesai": "2025-08-12",
+      "tanggal_pelaksanaan": "2025-07-25 s/d 2025-08-12",
+      "capaian": "tes",
+      "dokumentasi": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323064785_PERESMIAN_KOPDES.jpg",
+      "galeri": [
+        "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323064785_PERESMIAN_KOPDES.jpg",
+        "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323072285_kopdes.jpg",
+        "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323085238_kopdes.HEIC"
+      ],
+      "status": "Selesai",
+      "penanggung_jawab": "Pengurus dan anggota Koperasi Plantungan, serta masyarakat sekitar yang berpotensi menjadi anggota koperasi",
+      "lokasi_kegiatan": "Koperasi Desa Plantungan.",
+      "sasaran": "Aparatur Pemerintahan Desa dan Masyarakat Luas"
+    },
+    {
+      "id": 2,
+      "judul": "Event Hari Kemerdekaan Indonesia",
+      "divisi": "Ekonomi Kreatif & UMKM",
+      "deskripsi": "Event Hari Kemerdekaan Indonesia merupakan kegiatan peringatan HUT Kemerdekaan Republik Indonesia yang dilaksanakan oleh mahasiswa KKN UNY 2025 bersama masyarakat Desa Plantungan. Kegiatan ini menjadi wadah bagi warga untuk berpartisipasi dalam berbagai aktivitas perayaan kemerdekaan sekaligus mempererat kebersamaan antarwarga. ersiapan kegiatan diawali dengan koordinasi dan rapat bersama perangkat desa, pembentukan panitia, serta pembagian tugas. Tim KKN turut terlibat dalam penyusunan konsep acara, pembuatan dan penyebaran materi publikasi, pengadaan alat dan properti acara, serta kerja bakti untuk mempersiapkan lokasi. Menjelang pelaksanaan, dilakukan gladi resik untuk memastikan seluruh rangkaian kegiatan berjalan lancar. Puncak acara diisi dengan berbagai lomba dan perayaan yang melibatkan masyarakat Desa Plantungan. Pelaksanaan kegiatan melibatkan berbagai kelompok masyarakat, mulai dari anak-anak, ibu-ibu, hingga warga Desa Plantungan secara umum.",
+      "tanggal_mulai": "2025-07-15",
+      "tanggal_selesai": "2025-08-10",
+      "tanggal_pelaksanaan": "2025-07-15 s/d 2025-08-10",
+      "capaian": "tes",
+      "dokumentasi": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323561470_Perlombaan_HUT_RI_80.JPG",
+      "galeri": [
+        "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323561470_Perlombaan_HUT_RI_80.JPG"
+      ],
+      "status": "Selesai",
+      "penanggung_jawab": "Anak-anak,\tibu-ibu,\tserta seluruh\twarga Desa Plantungan.",
+      "lokasi_kegiatan": "Sekolah Dasar Desa Plantungan, Kecamatan Blora, Kabupaten Blora, Jawa Tengah.",
+      "sasaran": "Kelompok Tani dan Pelaku Usaha Minyak Atsiri"
+    },
+    {
+      "id": 3,
+      "judul": "Sosialisasi Edukasi Komunikasi Interpersonal dan Kesadaran Emosional pada Siswa SD Plantungan",
+      "divisi": "Kesehatan & Lingkungan",
+      "deskripsi": "Kegiatan ini bertujuan meningkatkan kemampuan siswa dalam berkomunikasi secara positif serta mengenali dan mengelola emosi dalam kehidupan sehari-hari. Materi disampaikan secara interaktif melalui penjelasan sederhana, permainan edukatif, dan simulasi percakapan. Melalui kegiatan ini, siswa diajak untuk membiasakan komunikasi yang sopan, menghargai orang lain, serta mampu mengelola emosi dengan baik di lingkungan sekolah maupun keluarga.",
+      "tanggal_mulai": "2025-07-20",
+      "tanggal_selesai": "2025-08-05",
+      "tanggal_pelaksanaan": "2025-07-20 s/d 2025-08-05",
+      "capaian": "Menjangkau 140 balita di 4 dusun dengan zero kasus stunting baru.",
+      "dokumentasi": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323667297_komunikasi_interpersonal.JPG",
+      "galeri": [
+        "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323667297_komunikasi_interpersonal.JPG"
+      ],
+      "status": "Selesai",
+      "penanggung_jawab": "Siswa kelas 6 SD Plantungan",
+      "lokasi_kegiatan": "sd plantungan",
+      "sasaran": "Ibu Hamil, Ibu Menyusui, dan Balita"
+    }
+  ],
+  "berita": [
+    {
+      "id": 1,
+      "judul": "Musrenbangdes Tahun 2025: Prioritaskan Penguatan Irigasi dan Digitalisasi UMKM",
+      "slug": "musrenbangdes-2025-prioritaskan-irigasi-digitalisasi-umkm",
+      "kategori": "Pemerintahan",
+      "tanggal_publikasi": "2026-08-17",
+      "penulis": "Sekretariat Desa Plantungan",
+      "dibaca": 342,
+      "thumbnail": "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&h=500&fit=crop",
+      "ringkasan": "Pemerintah Desa Plantungan menetapkan RKPDes tahun anggaran berikutnya dengan fokus ketahanan pangan dan teknologi.",
+      "konten": "Musyawarah Perencanaan Pembangunan Desa (Musrenbangdes) Desa Plantungan berlangsung khidmat dan produktif di Pendopo Balai Desa. Acara ini dihadiri oleh Kepala Desa, jajaran BPD, tokoh masyarakat, dan warga."
+    },
+    {
+      "id": 2,
+      "judul": "Panen Raya Padi Organik Desa Plantungan Tembus Rekor 7 Ton per Hektar",
+      "slug": "panen-raya-padi-organik-plantungan-tembus-rekor",
+      "kategori": "Kegiatan Warga",
+      "tanggal_publikasi": "2025-07-25",
+      "penulis": "Humas Kelompok Tani",
+      "dibaca": 512,
+      "thumbnail": "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800&h=500&fit=crop",
+      "ringkasan": "Petani Dusun Krajan merayakan panen raya musim tanam kedua dengan hasil 7.1 ton per hektar.",
+      "konten": "Rona bahagia terpancar dari wajah para petani Dusun Krajan Desa Plantungan saat mengawali panen raya padi organik varietas Menthik Wangi."
+    },
+    {
+      "id": 3,
+      "judul": "Inovasi Minyak Atsiri Desa Plantungan Raih Penghargaan Produk Unggulan Daerah",
+      "slug": "inovasi-minyak-atsiri-plantungan-raih-penghargaan",
+      "kategori": "Kegiatan Warga",
+      "tanggal_publikasi": "2025-07-24",
+      "penulis": "Redaksi Berita Desa",
+      "dibaca": 420,
+      "thumbnail": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&h=500&fit=crop",
+      "ringkasan": "Kelompok penyuling minyak rakyat Karya Lestari Plantungan berhasil memenangkan penganugerahan UMKM Inovatif tingkat Kabupaten.",
+      "konten": "Kerja keras perajin minyak rakyat Desa Plantungan membuahkan prestasi membanggakan. Produk minyak daun cengkeh dan minyak nilam hasil olahan lokal dinobatkan sebagai salah satu Produk Unggulan Daerah Terbaik."
+    }
+  ],
+  "apbdes": [
+    {
+      "id": 2,
+      "tahun": 2026,
+      "status_publikasi": "Ditetapkan (Perdes No. 04/2025)",
+      "pendapatan": 10000000,
+      "belanja": 10000000,
+      "file_pdf": "Tes",
+      "keterangan": "",
+      "surplus_defisit": 0,
+      "rincian_pendapatan": [
+        {
+          "kategori": "Bantuan Keuangan Provinsi & Lainnya",
+          "nominal": 90000000
+        }
+      ],
+      "rincian_belanja": [
+        {
+          "kategori": "Bidang Penanggulangan Bencana & Darurat",
+          "nominal": 80000000
+        }
+      ]
+    }
+  ],
+  "pesanMasyarakat": [
+    {
+      "id": 1,
+      "nama": "tesss",
+      "email": "",
+      "telepon": "081234567",
+      "subjek": "Lainnya",
+      "pesan": "abogoboga",
+      "status": "Baru",
+      "createdAt": "2026-08-17T10:34:11.539Z"
+    }
+  ],
+  "mediaLibrary": [
+    {
+      "name": "1786786493690_pngwing_com__4_.png",
+      "key": "desa-plantungan/1786786493690_pngwing_com__4_.png",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786786493690_pngwing_com__4_.png",
+      "size": 74771,
+      "mimeType": "image/png",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-15T09:34:54.070Z"
+    },
+    {
+      "name": "tes.jpeg",
+      "key": "desa-plantungan/1786954157252_tes.jpeg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786954157252_tes.jpeg",
+      "size": 17051,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-17T08:09:18.154Z"
+    },
+    {
+      "name": "foto kepala desa.jpg",
+      "key": "desa-plantungan/1786973144424_foto_kepala_desa.jpg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786973144424_foto_kepala_desa.jpg",
+      "size": 128303,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-17T13:25:45.030Z"
+    },
+    {
+      "name": "Lambang_Kabupaten_Blora.gif",
+      "key": "desa-plantungan/1786973151978_Lambang_Kabupaten_Blora.gif",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786973151978_Lambang_Kabupaten_Blora.gif",
+      "size": 80537,
+      "mimeType": "image/gif",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-17T13:25:52.611Z"
+    },
+    {
+      "name": "beranda.jpg",
+      "key": "desa-plantungan/1786974255856_beranda.jpg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786974255856_beranda.jpg",
+      "size": 910456,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-17T13:44:17.567Z"
+    },
+    {
+      "name": "beranda 2.jpg",
+      "key": "desa-plantungan/1786974261224_beranda_2.jpg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786974261224_beranda_2.jpg",
+      "size": 958523,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-17T13:44:21.770Z"
+    },
+    {
+      "name": "beranda.jpg",
+      "key": "desa-plantungan/1786974342642_beranda.jpg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786974342642_beranda.jpg",
+      "size": 1902032,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-17T13:45:43.632Z"
+    },
+    {
+      "name": "beranda 2.jpg",
+      "key": "desa-plantungan/1786974346769_beranda_2.jpg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786974346769_beranda_2.jpg",
+      "size": 2063295,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-17T13:45:47.610Z"
+    },
+    {
+      "name": "literasi media.PNG",
+      "key": "desa-plantungan/1787234817135_literasi_media.PNG",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787234817135_literasi_media.PNG",
+      "size": 6902540,
+      "mimeType": "image/png",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-20T14:06:59.439Z"
+    },
+    {
+      "name": "PERESMIAN KOPDES.jpg",
+      "key": "desa-plantungan/1787323064785_PERESMIAN_KOPDES.jpg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323064785_PERESMIAN_KOPDES.jpg",
+      "size": 1046757,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-21T14:37:47.712Z"
+    },
+    {
+      "name": "kopdes.jpg",
+      "key": "desa-plantungan/1787323072285_kopdes.jpg",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323072285_kopdes.jpg",
+      "size": 610145,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-21T14:38:01.973Z"
+    },
+    {
+      "name": "kopdes.HEIC",
+      "key": "desa-plantungan/1787323085238_kopdes.HEIC",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323085238_kopdes.HEIC",
+      "size": 1145003,
+      "mimeType": "image/heic",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-21T14:38:07.562Z"
+    },
+    {
+      "name": "Perlombaan HUT RI 80.JPG",
+      "key": "desa-plantungan/1787323502097_Perlombaan_HUT_RI_80.JPG",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323502097_Perlombaan_HUT_RI_80.JPG",
+      "size": 8256113,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-21T14:45:06.524Z"
+    },
+    {
+      "name": "Perlombaan HUT RI 80.JPG",
+      "key": "desa-plantungan/1787323527912_Perlombaan_HUT_RI_80.JPG",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323527912_Perlombaan_HUT_RI_80.JPG",
+      "size": 8256113,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-21T14:45:39.128Z"
+    },
+    {
+      "name": "Perlombaan HUT RI 80.JPG",
+      "key": "desa-plantungan/1787323561470_Perlombaan_HUT_RI_80.JPG",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323561470_Perlombaan_HUT_RI_80.JPG",
+      "size": 8256113,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-21T14:46:07.513Z"
+    },
+    {
+      "name": "komunikasi interpersonal.JPG",
+      "key": "desa-plantungan/1787323667297_komunikasi_interpersonal.JPG",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323667297_komunikasi_interpersonal.JPG",
+      "size": 1584429,
+      "mimeType": "image/jpeg",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-21T14:47:48.297Z"
+    }
+  ]
+}

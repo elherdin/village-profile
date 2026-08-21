@@ -1,0 +1,91 @@
+<!-- Header Banner -->
+<div class="page-banner">
+  <div class="banner-container">
+    <div class="banner-content">
+
+      <h1 class="banner-title">
+        Potensi Unggulan Desa Plantungan
+      </h1>
+      <p class="banner-subtitle">
+        Menelusuri kekayaan alam agraris, sentra industri penyulingan minyak rakyat atsiri tradisional, serta peranan
+        aktif BUMDes dalam memajukan perekonomian warga.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="page-container space-y-12">
+
+  <!-- Category Filter Tabs -->
+  <div class="filter-tabs-wrapper">
+    @for (cat of categories; track cat) {
+    <button (click)="selectedCategory.set(cat)" type="button"
+      [class]="'filter-tab-btn ' + (selectedCategory() === cat ? 'active' : '')">
+      {{ cat }}
+    </button>
+    }
+  </div>
+
+  <!-- Potensi Grid -->
+  <div class="potensi-cards-grid">
+    @for (item of filteredPotensi(); track item.id) {
+    <div class="potensi-item-card">
+      <div>
+        <div class="potensi-image-box">
+          @if (item.foto) {
+          <img [src]="item.foto" [alt]="item.judul" class="potensi-img" (error)="item.foto = '';">
+          } @else {
+          <!-- Fallback: Tampilan default jika foto kosong/error -->
+          <div class="potensi-img-fallback">
+            <svg style="width: 60px; height: 60px" class="fallback-icon" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+              </path>
+            </svg>
+            <span>Tidak ada foto</span>
+          </div>
+          }
+
+
+          <span class="potensi-category-badge">
+            {{ item.kategori }}
+          </span>
+          <span *ngIf="item.lokasi" class="potensi-location-tag">
+            📍 {{ item.lokasi }}
+          </span>
+        </div>
+
+        <div class="potensi-card-body">
+          <h3 class="potensi-main-title">
+            {{ item.judul }}
+          </h3>
+
+          <p class="potensi-description">
+            {{ item.deskripsi }}
+          </p>
+
+          <!-- Komoditas Utama -->
+          <div *ngIf="item.komoditas_utama" class="komoditas-box">
+            <span class="komoditas-label">Komoditas / Produk Utama:</span>
+            <span class="komoditas-val">{{ item.komoditas_utama }}</span>
+          </div>
+
+          <!-- Keunggulan List -->
+
+        </div>
+      </div>
+
+      <!-- Footer Card with Contact -->
+      <div class="potensi-card-footer">
+        <div class="contact-info-col">
+          <span class="contact-title">Pengelola / Kontak:</span>
+          <span>{{ item.kontak_pengelola || 'Pemerintah Desa Plantungan' }}</span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+</div>

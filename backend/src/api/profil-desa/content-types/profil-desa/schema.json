@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "profil_desas",
+  "info": {
+    "singularName": "profil-desa",
+    "pluralName": "profil-desas",
+    "displayName": "Profil Desa",
+    "description": "Profil dan identitas umum Desa Plantungan"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nama_desa": {
+      "type": "string",
+      "required": true,
+      "default": "Desa Plantungan"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "tentang": {
+      "type": "richtext"
+    },
+    "sejarah": {
+      "type": "richtext"
+    },
+    "visi_misi": {
+      "type": "json"
+    },
+    "alamat": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "telepon": {
+      "type": "string"
+    },
+    "koordinat": {
+      "type": "json"
+    }
+  }
+}

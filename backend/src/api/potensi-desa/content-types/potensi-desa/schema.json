@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "potensi_desas",
+  "info": {
+    "singularName": "potensi-desa",
+    "pluralName": "potensi-desas",
+    "displayName": "Potensi Desa",
+    "description": "Potensi ekonomi, pertanian, minyak rakyat, dan BUMDes Desa Plantungan"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "judul": {
+      "type": "string",
+      "required": true
+    },
+    "kategori": {
+      "type": "enumeration",
+      "enum": [
+        "Pertanian",
+        "Minyak Rakyat",
+        "BUMDes",
+        "Pariwisata & UMKM"
+      ],
+      "required": true
+    },
+    "deskripsi": {
+      "type": "text"
+    },
+    "foto": {
+      "type": "string"
+    },
+    "komoditas_utama": {
+      "type": "string"
+    },
+    "kontak_pengelola": {
+      "type": "string"
+    }
+  }
+}

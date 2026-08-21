@@ -1,0 +1,250 @@
+<!-- Header Banner -->
+<div class="page-banner">
+  <div class="banner-container">
+    <div class="banner-content">
+
+      <h1 class="banner-title">
+        Program & Kegiatan KKN Desa Plantungan 2025
+      </h1>
+      <p class="banner-subtitle">
+        Tema Pengabdian: <em>"Mengimplementasikan ilmu pengetahuan dan teknologi untuk pemberdayaan masyarakat desa,
+          meningkatkan kualitas hidup warga, serta mengembangkan potensi lokal melalui program-program inovatif dan
+          berkelanjutan"</em>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="page-container space-y-16">
+
+  <!-- 1. STATISTIK PROGRAM KKN -->
+  <section class="kkn-stats-grid">
+    <div class="kkn-stat-card">
+      <span class="kkn-stat-emoji">🎯</span>
+      <div class="kkn-stat-val text-emerald-700">5 Divisi</div>
+      <span class="kkn-stat-label">Program Kerja Utama</span>
+    </div>
+    <div class="kkn-stat-card">
+      <span class="kkn-stat-emoji">🌿</span>
+      <div class="kkn-stat-val text-amber-600">15 UMKM</div>
+      <span class="kkn-stat-label">Terdampingi Digital</span>
+    </div>
+    <div class="kkn-stat-card">
+      <span class="kkn-stat-emoji">🎓</span>
+      <div class="kkn-stat-val text-blue-600">UNY 2025</div>
+      <span class="kkn-stat-label">Universitas Negeri Yogyakarta</span>
+    </div>
+    <div class="kkn-stat-card">
+      <span class="kkn-stat-emoji">💻</span>
+      <div class="kkn-stat-val text-emerald-700">100%</div>
+      <span class="kkn-stat-label">Website Desa Siap Pakai</span>
+    </div>
+  </section>
+
+  <!-- 2. DAFTAR PROGRAM KERJA & DOKUMENTASI -->
+  <section class="space-y-10">
+    <app-section-header title="Rangkaian Program Kerja KKN 2025"
+      subtitle="Dokumentasi dan capaian program pengabdian masyarakat di berbagai sektor strategis.">
+    </app-section-header>
+
+    <div class="space-y-8">
+      @for (prog of kknList(); track prog.id; let i = $index) {
+      <div class="kkn-program-card cursor-pointer" (click)="openDetailModal(prog)">
+
+        <!-- Left: Image Documentation -->
+        <div class="kkn-img-wrapper">
+          <img [src]="(prog.galeri && prog.galeri[0]) || prog.dokumentasi" [alt]="prog.judul" class="kkn-img">
+
+          <span class="kkn-divisi-badge">
+            {{ prog.divisi }}
+          </span>
+
+          @if (getCardGalleryCount(prog) > 1) {
+          <span class="kkn-photo-count-badge">
+            {{ getCardGalleryCount(prog) }} Foto
+          </span>
+          }
+
+          <span class="kkn-date-tag">
+            {{ prog.tanggal_mulai && prog.tanggal_selesai ? (prog.tanggal_mulai | date:'d MMM yyyy') + ' - ' +
+            (prog.tanggal_selesai | date:'d MMM yyyy') : (prog.tanggal_pelaksanaan || '-') }}
+          </span>
+
+          <div class="kkn-img-overlay-hover">
+            <span class="kkn-hover-pill">Lihat Foto</span>
+          </div>
+        </div>
+
+        <!-- Right: Content & Achievements -->
+        <div class="kkn-card-content">
+          <div>
+            <div class="kkn-status-row">
+              <span class="kkn-status-badge" [class.status-selesai]="(prog.status || 'Selesai') === 'Selesai'"
+                [class.status-berjalan]="prog.status === 'Sedang Berjalan'"
+                [class.status-rencana]="prog.status === 'Rencana'">
+                {{ prog.status || 'Selesai' }}
+              </span>
+              <span class="divider-dot">|</span>
+              <span class="kkn-location">📍 {{ prog.lokasi_kegiatan || 'Desa Plantungan' }}</span>
+            </div>
+
+            <h3 class="kkn-program-title">
+              {{ prog.judul }}
+            </h3>
+
+            <p class="kkn-program-desc">
+              {{ prog.deskripsi }}
+            </p>
+          </div>
+
+          <!-- Capaian & Penanggung Jawab -->
+          <div class="kkn-capaian-box-wrapper">
+            <div *ngIf="prog.capaian" class="kkn-capaian-box">
+              <span class="kkn-capaian-label">Hasil / Capaian Kegiatan:</span>
+              <span class="kkn-capaian-text">{{ prog.capaian }}</span>
+            </div>
+
+            <div class="kkn-card-action-row">
+              <span class="kkn-btn-detail">
+                Lihat Detail & Galeri Lengkap ↗
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      }
+    </div>
+  </section>
+
+  <!-- 3. TESTIMONI & APRESIASI -->
+  <section class="testimoni-card">
+    <div class="testimoni-content">
+      <span class="testimoni-badge">Apresiasi Masyarakat</span>
+      <h3 class="testimoni-title">
+        Sinergi Membangun Desa untuk Kemaslahatan Bersama
+      </h3>
+      <p class="testimoni-quote">
+        "Kehadiran rekan-rekan mahasiswa KKN memberikan energi positif dan akselerasi nyata bagi kemajuan sistem
+        informasi desa serta pembinaan pelaku UMKM penyuling minyak atsiri kami."
+      </p>
+      <div class="testimoni-author">
+        — H. Mulyadi, S.Sos. (Kepala Desa Plantungan)
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. POP-UP DETAIL & PHOTO SLIDER MODAL -->
+  @if (selectedProgram(); as current) {
+  <div class="kkn-modal-backdrop" (click)="closeDetailModal()">
+    <div class="kkn-modal-container" (click)="$event.stopPropagation()">
+
+      <!-- Modal Top Bar -->
+      <div class="kkn-modal-header">
+        <div class="kkn-modal-tags">
+          <span class="kkn-modal-divisi-badge">{{ current.divisi }}</span>
+          <span class="kkn-status-badge" [class.status-selesai]="(current.status || 'Selesai') === 'Selesai'"
+            [class.status-berjalan]="current.status === 'Sedang Berjalan'"
+            [class.status-rencana]="current.status === 'Rencana'">
+            {{ current.status || 'Selesai' }}
+          </span>
+        </div>
+        <button type="button" class="kkn-modal-close-btn" (click)="closeDetailModal()" title="Tutup Modal (ESC)">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="kkn-modal-body">
+
+        <!-- Interactive Photo Slider / Carousel -->
+        <div class="kkn-slider-wrapper">
+          <div class="kkn-slider-main">
+            <img [src]="currentPhotoUrl()" [alt]="current.judul" class="kkn-slider-img">
+
+            <!-- Slide Counter Badge -->
+            <span class="kkn-slider-counter">
+              Foto {{ currentSlideIndex() + 1 }} dari {{ activeGallery().length }}
+            </span>
+
+            <!-- Slider Arrow Buttons (If > 1 photo) -->
+            @if (activeGallery().length > 1) {
+            <button type="button" class="kkn-slider-btn btn-prev" (click)="prevSlide($event)"
+              title="Foto Sebelumnya (←)">
+              ‹
+            </button>
+            <button type="button" class="kkn-slider-btn btn-next" (click)="nextSlide($event)"
+              title="Foto Selanjutnya (→)">
+              ›
+            </button>
+            }
+          </div>
+        </div>
+
+        <!-- Program Information Details -->
+        <div class="kkn-modal-info">
+          <h2 class="kkn-modal-title">{{ current.judul }}</h2>
+
+          <!-- Meta Grid -->
+          <div class="kkn-modal-meta-grid">
+            <div class="kkn-meta-item">
+              <div>
+                <span class="kkn-meta-label">Rentang Waktu Pelaksanaan</span>
+                <span class="kkn-meta-val">
+                  {{ current.tanggal_mulai && current.tanggal_selesai ? (current.tanggal_mulai | date:'d MMMM yyyy') + '
+                  s/d ' + (current.tanggal_selesai | date:'d MMMM yyyy') : (current.tanggal_pelaksanaan || '-') }}
+                </span>
+              </div>
+            </div>
+
+            <div class="kkn-meta-item">
+
+              <div>
+                <span class="kkn-meta-label">Lokasi Kegiatan</span>
+                <span class="kkn-meta-val">{{ current.lokasi_kegiatan || 'Desa Plantungan' }}</span>
+              </div>
+            </div>
+
+            <div class="kkn-meta-item" *ngIf="current.penanggung_jawab">
+
+              <div>
+                <span class="kkn-meta-label">Penanggung Jawab</span>
+                <span class="kkn-meta-val">{{ current.penanggung_jawab }}</span>
+              </div>
+            </div>
+
+            <div class="kkn-meta-item" *ngIf="current.sasaran">
+
+              <div>
+                <span class="kkn-meta-label">Sasaran Program</span>
+                <span class="kkn-meta-val">{{ current.sasaran }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deskripsi Lengkap -->
+          <div class="kkn-modal-desc-section">
+            <h4 class="kkn-desc-heading">Deskripsi & Gambaran Program:</h4>
+            <p class="kkn-modal-desc-text">{{ current.deskripsi }}</p>
+          </div>
+
+          <!-- Capaian / Hasil Box -->
+          <div *ngIf="current.capaian" class="kkn-modal-capaian-box">
+            <div class="kkn-capaian-header">
+              <span>🏆</span>
+              <span class="kkn-capaian-title">Hasil & Dampak Capaian Kegiatan:</span>
+            </div>
+            <p class="kkn-capaian-desc">{{ current.capaian }}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  }
+
+</div>

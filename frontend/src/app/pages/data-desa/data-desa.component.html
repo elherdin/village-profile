@@ -1,0 +1,190 @@
+<!-- Header Banner -->
+<div class="page-banner">
+  <div class="banner-container">
+    <div class="banner-content">
+      <h1 class="banner-title">
+        Data & Statistik Kependudukan
+      </h1>
+      <p class="banner-subtitle">
+        Visualisasi grafik data demografi, kelompok usia, tingkat pendidikan, dan mata pencaharian warga Desa Plantungan
+        berbasis data terkini tahun 2025.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="page-container space-y-16">
+
+  <!-- 1. Ringkasan Key Metrics -->
+  <section class="stat-metrics-grid">
+    <div class="stat-metric-card border-emerald-100">
+      <div class="stat-metric-top">
+        <span class="stat-metric-label">Total Penduduk</span>
+      </div>
+      <div class="stat-metric-val text-emerald-700">
+        {{ (data()?.total_penduduk || 0) | number }}
+      </div>
+      <span class="stat-metric-desc">Jiwa Terdata Resmi</span>
+    </div>
+
+    <div class="stat-metric-card border-blue-100">
+      <div class="stat-metric-top">
+        <span class="stat-metric-label">Laki-Laki</span>
+      </div>
+      <div class="stat-metric-val text-blue-600">
+        {{ (data()?.laki_laki || 0) | number }}
+      </div>
+      <span class="stat-metric-desc text-blue-500 font-medium">
+        {{ data()?.total_penduduk ? (((data()?.laki_laki || 0) / data()!.total_penduduk) * 100).toFixed(2) + '%' : '0%'
+        }} dari populasi
+      </span>
+    </div>
+
+    <div class="stat-metric-card border-rose-100">
+      <div class="stat-metric-top">
+        <span class="stat-metric-label">Perempuan</span>
+      </div>
+      <div class="stat-metric-val text-rose-600">
+        {{ (data()?.perempuan || 0) | number }}
+      </div>
+      <span class="stat-metric-desc text-rose-500 font-medium">
+        {{ data()?.total_penduduk ? (((data()?.perempuan || 0) / data()!.total_penduduk) * 100).toFixed(2) + '%' : '0%'
+        }} dari populasi
+      </span>
+    </div>
+  </section>
+
+  <!-- 2. Interactive Charts Grid (3 Modern Charts) -->
+  <section class="charts-section">
+    <div class="section-title-wrap">
+      <div>
+
+        <h2 class="section-main-heading">Grafik Analisis Kependudukan & Ekonomi Desa</h2>
+      </div>
+      <span class="text-xs text-slate-500 font-medium">Data Terverifikasi 2025</span>
+    </div>
+
+    <div class="charts-grid-3">
+
+      <!-- Chart 1: Kelompok Usia -->
+      <div class="chart-card card-usia">
+        <div class="chart-card-header">
+          <div>
+            <span class="chart-badge text-emerald-700">Demografi Usia</span>
+            <h3 class="chart-title">Distribusi Kelompok Usia</h3>
+          </div>
+          <span class="chart-year-tag">Rentang Umur</span>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas #usiaChartCanvas></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Tingkat Pendidikan -->
+      <div class="chart-card card-pendidikan">
+        <div class="chart-card-header">
+          <div>
+            <span class="chart-badge text-amber-700">Tingkat Pendidikan</span>
+            <h3 class="chart-title">Jenjang Pendidikan Warga</h3>
+          </div>
+          <span class="chart-year-tag">Seluruh Warga</span>
+        </div>
+        <div class="chart-canvas-wrapper">
+          <canvas #pendidikanChartCanvas></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 3: Sektor Mata Pencaharian (Full Width Feature Card) -->
+      <div class="chart-card card-pekerjaan">
+        <div class="chart-card-header">
+          <div>
+            <span class="chart-badge text-teal-700">Struktur Ekonomi</span>
+            <h3 class="chart-title">Sektor Mata Pencaharian & Profesi Penduduk</h3>
+          </div>
+          <span class="chart-year-tag">Tenaga Kerja Produktif</span>
+        </div>
+
+        <div class="chart-pekerjaan-content">
+          <div class="chart-canvas-wrapper chart-canvas-pekerjaan">
+            <canvas #pekerjaanChartCanvas></canvas>
+          </div>
+
+          <div class="pekerjaan-stats-sidebar">
+            <h4 class="sidebar-stat-title">Rincian Profesi Utama:</h4>
+            <div class="pekerjaan-list-wrap">
+              @for (item of data()?.mata_pencaharian; track item.sektor) {
+              <div class="pekerjaan-item-row">
+                <div class="pekerjaan-item-header">
+                  <span class="pekerjaan-item-name">{{ item.sektor }}</span>
+                  <span class="pekerjaan-item-val">{{ item.jumlah | number }} Jiwa</span>
+                </div>
+                <div class="pekerjaan-progress-bar">
+                  <div class="pekerjaan-progress-fill"
+                    [style.width.%]="data()?.total_penduduk ? ((item.jumlah / data()!.total_penduduk) * 100) : 0"></div>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. TABEL DETAIL DISTRIBUSI DUSUN -->
+  <section class="table-section-card">
+    <div class="table-header-row">
+      <div>
+        <h3 class="table-heading">Rincian Data Penduduk per Wilayah Dusun</h3>
+        <p class="table-subheading">Data administrasi kependudukan terverifikasi Desa Plantungan</p>
+      </div>
+      <span class="table-update-badge">
+        Terakhir Diperbarui: 2025
+      </span>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Nama Dusun</th>
+            <th class="text-center">Laki-Laki</th>
+            <th class="text-center">Perempuan</th>
+            <th class="text-center">Total Jiwa</th>
+            <th class="text-center">Proporsi Populasi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (dusun of data()?.distribusi_dusun; track dusun.dusun) {
+          <tr>
+            <td class="dusun-name-cell">
+              <span class="cell-dot"></span>
+              {{ dusun.dusun }}
+            </td>
+            <td class="text-center font-medium text-blue-600">{{ (dusun.laki_laki || 0) | number }} Jiwa</td>
+            <td class="text-center font-medium text-rose-600">{{ (dusun.perempuan || 0) | number }} Jiwa</td>
+            <td class="text-center font-bold text-emerald-700">{{ dusun.jumlah_jiwa | number }} Jiwa</td>
+            <td class="text-center">
+              <div class="flex items-center justify-center gap-2">
+                <div class="table-prop-bar-bg">
+                  <div class="table-prop-bar-fill"
+                    [style.width.%]="data()?.total_penduduk ? (((dusun.jumlah_jiwa || 0) / data()!.total_penduduk) * 100) : 0">
+                  </div>
+                </div>
+                <span class="percent-badge">
+                  {{ data()?.total_penduduk ? (((dusun.jumlah_jiwa || 0) / data()!.total_penduduk) * 100).toFixed(1) +
+                  '%' : '0%' }}
+                </span>
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>

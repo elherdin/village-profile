@@ -1,0 +1,198 @@
+<!-- Header Banner -->
+<div class="page-banner">
+  <div class="banner-container">
+    <div class="banner-content">
+
+      <h1 class="banner-title">
+        Transparansi APBDes & Informasi Publik
+      </h1>
+      <p class="banner-subtitle">
+        Keterbukaan Anggaran Pendapatan dan Belanja Desa (APBDes) Plantungan sebagai bentuk pertanggungjawaban kepada
+        seluruh masyarakat.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="page-container space-y-16">
+
+  @if (apbdesList().length === 0) {
+  <!-- Empty State -->
+  <div
+    style="background:#ffffff; border:1px solid #e2e8f0; border-radius:1.5rem; padding:3.5rem 1.5rem; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); max-width:42rem; margin:2rem auto;">
+    <div
+      style="width:64px; height:64px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem; font-size:28px;">
+      📄
+    </div>
+    <h3 style="font-size:1.25rem; font-weight:700; color:#0f172a; margin-bottom:0.5rem;">
+      Belum Ada Data APBDes yang Ditetapkan
+    </h3>
+    <p style="font-size:0.875rem; color:#64748b; line-height:1.6; margin:0 auto; max-width:28rem;">
+      Data transparansi Anggaran Pendapatan dan Belanja Desa (APBDes) belum dipublikasikan atau sedang dalam proses
+      penyusunan tahun anggaran baru.
+    </p>
+  </div>
+  } @else {
+
+  <!-- Year Selector Tabs & Status -->
+  <div class="year-selector-card">
+    <div class="year-selector-left">
+      <span class="year-selector-label">Pilih Tahun Anggaran:</span>
+      <div class="year-buttons-group">
+        @for (apb of apbdesList(); track apb.tahun) {
+        <button (click)="selectYear(apb.tahun)" type="button"
+          [class]="'year-tab-btn ' + (selectedYear() === apb.tahun ? 'active' : '')">
+          Tahun {{ apb.tahun }}
+        </button>
+        }
+      </div>
+    </div>
+
+    <div *ngIf="currentAPBDes()" class="status-indicator">
+      <span class="status-dot"></span>
+      <span class="status-text">
+        Status: <strong>{{ currentAPBDes()?.status_publikasi }}</strong>
+      </span>
+    </div>
+  </div>
+
+  <!-- 1. Key Metrics Cards (Rupiah Formatted) -->
+  <section class="apb-metrics-grid">
+    <div class="apb-metric-card">
+      <div class="metric-icon-box bg-emerald-100 text-emerald-700">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+      </div>
+      <span class="apb-metric-label">Total Pendapatan Desa</span>
+      <div class="apb-metric-val text-emerald-700">
+        {{ formatRupiah(currentAPBDes()?.pendapatan || 0) }}
+      </div>
+      <span class="apb-metric-sub">Dana Desa, ADD & PADes</span>
+    </div>
+
+    <div class="apb-metric-card">
+      <div class="metric-icon-box bg-rose-100 text-rose-700">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+        </svg>
+      </div>
+      <span class="apb-metric-label">Total Belanja Desa</span>
+      <div class="apb-metric-val text-rose-700">
+        {{ formatRupiah(currentAPBDes()?.belanja || 0) }}
+      </div>
+      <span class="apb-metric-sub">Pembangunan, Siltap & Bansos</span>
+    </div>
+
+    <div class="apb-metric-card">
+      <div class="metric-icon-box bg-blue-100 text-blue-700">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <span class="apb-metric-label">Surplus / (Defisit)</span>
+      <div class="apb-metric-val text-blue-700">
+        {{ formatRupiah(currentAPBDes()?.surplus_defisit || 0) }}
+      </div>
+      <span class="apb-metric-sub">Selisih Realisasi Anggaran</span>
+    </div>
+  </section>
+
+
+  <!-- 2. Rincian Tabel Anggaran Pendapatan & Belanja -->
+  <section class="tables-row">
+
+    <!-- Table Pendapatan -->
+    <div class="apb-table-card">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="apb-table-heading m-0">
+          <span class="indicator-dot bg-emerald-500"></span>
+          Rincian Sumber Pendapatan (Daftar Pos) {{ selectedYear() }}
+        </h3>
+      </div>
+      <div class="table-scroll">
+        <table class="apb-table">
+          <thead>
+            <tr>
+              <th>Uraian Sumber Dana</th>
+              <th class="text-right">Nominal (Rp)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of currentAPBDes()?.rincian_pendapatan; track item.kategori) {
+            <tr>
+              <td class="font-medium text-slate-800">{{ item.kategori }}</td>
+              <td class="text-right font-mono font-bold text-emerald-700">{{ formatRupiah(item.nominal) }}</td>
+            </tr>
+            }
+          </tbody>
+          <tfoot>
+            <tr class="bg-emerald-50/60 font-semibold border-t-2 border-emerald-200">
+              <td class="text-slate-800">Total Rincian Pos Pendapatan</td>
+              <td class="text-right font-mono text-emerald-800 font-bold">{{ formatRupiah(totalRincianPendapatan()) }}
+              </td>
+            </tr>
+            <tr class="bg-emerald-100/50 text-xs text-emerald-900 border-t border-emerald-200">
+              <td class="py-2.5 font-medium italic">
+                🔒 Selisih dana yang belum tercatat (tidak bisa diedit)
+              </td>
+              <td class="text-right font-mono font-bold py-2.5" [class.text-amber-700]="selisihPendapatan() !== 0"
+                [class.text-emerald-700]="selisihPendapatan() === 0">
+                {{ formatRupiah(selisihPendapatan()) }}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- Table Belanja -->
+    <div class="apb-table-card">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="apb-table-heading m-0">
+          <span class="indicator-dot bg-rose-500"></span>
+          Rincian Pos Belanja / Pengeluaran (Daftar Pos) {{ selectedYear() }}
+        </h3>
+      </div>
+      <div class="table-scroll">
+        <table class="apb-table">
+          <thead>
+            <tr>
+              <th>Uraian Bidang Belanja</th>
+              <th class="text-right">Nominal (Rp)</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of currentAPBDes()?.rincian_belanja; track item.kategori) {
+            <tr>
+              <td class="font-medium text-slate-800">{{ item.kategori }}</td>
+              <td class="text-right font-mono font-bold text-rose-700">{{ formatRupiah(item.nominal) }}</td>
+            </tr>
+            }
+          </tbody>
+          <tfoot>
+            <tr class="bg-rose-50/60 font-semibold border-t-2 border-rose-200">
+              <td class="text-slate-800">Total Rincian Pos Belanja</td>
+              <td class="text-right font-mono text-rose-800 font-bold">{{ formatRupiah(totalRincianBelanja()) }}</td>
+            </tr>
+            <tr class="bg-rose-100/50 text-xs text-rose-900 border-t border-rose-200">
+              <td class="py-2.5 font-medium italic">
+                🔒 Selisih dana yang belum tercatat (tidak bisa diedit)
+              </td>
+              <td class="text-right font-mono font-bold py-2.5" [class.text-amber-700]="selisihBelanja() !== 0"
+                [class.text-rose-700]="selisihBelanja() === 0">
+                {{ formatRupiah(selisihBelanja()) }}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  }
+
+</div>

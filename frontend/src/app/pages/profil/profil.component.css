@@ -1,0 +1,731 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.page-banner {
+  background-color: #0f172a;
+  color: #ffffff;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid #1e293b;
+}
+
+@media (min-width: 640px) {
+  .page-banner {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+.banner-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .banner-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .banner-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.banner-content {
+  max-width: 48rem;
+}
+
+.banner-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(2, 44, 34, 0.8);
+  border: 1px solid #065f46;
+  color: #6ee7b7;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.banner-title {
+  font-size: 1.875rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+}
+
+@media (min-width: 640px) {
+  .banner-title {
+    font-size: 3rem;
+  }
+}
+
+.banner-subtitle {
+  margin-top: 1rem;
+  color: #cbd5e1;
+  font-size: 1rem;
+  line-height: 1.625;
+}
+
+@media (min-width: 640px) {
+  .banner-subtitle {
+    font-size: 1.125rem;
+  }
+}
+
+.page-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .page-container {
+    padding: 4rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-container {
+    padding: 4rem 2rem;
+  }
+}
+
+/* 1. Geografis */
+.geografis-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .geografis-section {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.geografis-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .geografis-text-col {
+    grid-column: span 7;
+  }
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #047857;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #059669;
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+@media (min-width: 640px) {
+  .section-heading {
+    font-size: 1.875rem;
+  }
+}
+
+.narrative-body {
+  color: #475569;
+  font-size: 0.875rem;
+  line-height: 1.625;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .narrative-body {
+    font-size: 1rem;
+  }
+}
+
+.geo-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .geo-stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.geo-stat-card {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid;
+  text-align: center;
+}
+
+.geo-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: block;
+}
+
+.geo-stat-value {
+  font-size: 1.125rem;
+  font-weight: 900;
+  margin-top: 0.25rem;
+}
+
+.geografis-visual-col {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .geografis-visual-col {
+    grid-column: span 5;
+  }
+}
+
+.visual-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.visual-img {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+}
+
+.visual-caption {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-style: italic;
+  text-align: center;
+}
+
+/* 2. Sejarah */
+.sejarah-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2rem;
+}
+
+@media (min-width: 640px) {
+  .sejarah-card {
+    padding: 3rem;
+  }
+}
+
+.sejarah-body {
+  color: #334155;
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+@media (min-width: 640px) {
+  .sejarah-body {
+    font-size: 1rem;
+  }
+}
+
+/* 3. Visi Misi */
+.visi-misi-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .visi-misi-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.visi-box {
+  background: linear-gradient(135deg, #064e3b, #022c22);
+  color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 1024px) {
+  .visi-box {
+    grid-column: span 5;
+    padding: 2.5rem;
+  }
+}
+
+.visi-icon-wrapper {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 0.75rem;
+  background-color: #047857;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.visi-icon {
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-block !important;
+  flex-shrink: 0 !important;
+}
+
+.visi-label {
+  font-size: 0.75rem;
+  color: #6ee7b7;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.visi-quote {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 0.75rem;
+  line-height: 1.35;
+  color: #ffffff;
+}
+
+@media (min-width: 640px) {
+  .visi-quote {
+    font-size: 1.5rem;
+  }
+}
+
+.motto-box {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(4, 120, 87, 0.8);
+  margin-top: 2rem;
+}
+
+.motto-label {
+  font-size: 0.75rem;
+  color: #6ee7b7;
+  font-weight: 500;
+}
+
+.motto-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fde047;
+  margin-top: 0.25rem;
+}
+
+.misi-box {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 1024px) {
+  .misi-box {
+    grid-column: span 7;
+    padding: 2.5rem;
+  }
+}
+
+.misi-label {
+  font-size: 0.75rem;
+  color: #047857;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.misi-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .misi-title {
+    font-size: 1.5rem;
+  }
+}
+
+.misi-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.misi-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+  transition: background-color 0.15s;
+}
+
+.misi-item:hover {
+  background-color: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.misi-number {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 9999px;
+  background-color: #059669;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.misi-text {
+  font-size: 0.875rem;
+  color: #334155;
+  font-weight: 500;
+  line-height: 1.625;
+}
+
+/* 4. Struktur Organisasi & Kelembagaan Desa */
+.kades-featured-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.kades-featured-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  border: 2px solid #86efac;
+  border-radius: 1.5rem;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.05);
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 640px) {
+  .kades-featured-card {
+    flex-direction: row;
+    text-align: left;
+    gap: 1.75rem;
+    padding: 1.75rem 2rem;
+  }
+}
+
+.kades-featured-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 20px -5px rgba(16, 185, 129, 0.15);
+  border-color: #4ade80;
+}
+
+.kades-avatar-box {
+  position: relative;
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .kades-avatar-box {
+    margin-bottom: 0;
+  }
+}
+
+.kades-avatar-img {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 1.25rem;
+  object-fit: cover;
+  border: 3px solid #10b981;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.kades-status-tag {
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #059669;
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.kades-details-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.kades-pre-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #059669;
+}
+
+.kades-headline-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.kades-headline-role {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.kades-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.kades-nip-badge,
+.kades-period-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.kades-nip-badge {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-family: monospace;
+}
+
+.kades-period-badge {
+  background-color: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+/* 4.2 Organization Section & Grids (BPD & Perangkat Desa) */
+.org-section-wrapper {
+  margin-bottom: 2.25rem;
+}
+
+.org-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.org-num-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.org-section-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.org-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .org-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bpd-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .perangkat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.org-member-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.org-member-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+}
+
+.org-role-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.45rem;
+  line-height: 1.25;
+}
+
+.bpd-badge {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #dbeafe;
+}
+
+.perangkat-badge {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #dcfce7;
+}
+
+.org-member-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* 5. Fasilitas */
+.fasilitas-section {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2rem;
+}
+
+@media (min-width: 640px) {
+  .fasilitas-section {
+    padding: 3rem;
+  }
+}
+
+.fasilitas-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .fasilitas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .fasilitas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fasilitas-card {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.fasilitas-emoji {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fasilitas-title {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.875rem;
+}
+
+.fasilitas-desc {
+  font-size: 0.75rem;
+  color: #475569;
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}

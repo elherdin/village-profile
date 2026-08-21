@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "program_kkns",
+  "info": {
+    "singularName": "program-kkn",
+    "pluralName": "program-kkns",
+    "displayName": "Program KKN",
+    "description": "Program kerja dan kegiatan KKN Mahasiswa di Desa Plantungan 2025"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "judul": {
+      "type": "string",
+      "required": true
+    },
+    "divisi": {
+      "type": "string",
+      "required": true
+    },
+    "deskripsi": {
+      "type": "text"
+    },
+    "tanggal_pelaksanaan": {
+      "type": "date"
+    },
+    "capaian": {
+      "type": "string"
+    },
+    "dokumentasi": {
+      "type": "string"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["Selesai", "Sedang Berjalan", "Rencana"],
+      "default": "Selesai"
+    }
+  }
+}

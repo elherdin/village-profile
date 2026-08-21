@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "beritas",
+  "info": {
+    "singularName": "berita",
+    "pluralName": "beritas",
+    "displayName": "Berita & Kegiatan",
+    "description": "Publikasi warta, berita, dan pengumuman resmi Desa Plantungan"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "judul": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "judul",
+      "required": true
+    },
+    "ringkasan": {
+      "type": "text"
+    },
+    "konten": {
+      "type": "richtext",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "string"
+    },
+    "kategori": {
+      "type": "enumeration",
+      "enum": [
+        "Pemerintahan",
+        "Pembangunan",
+        "Kegiatan Warga",
+        "Pengumuman",
+        "Kesehatan & Posyandu",
+        "KKN 2025"
+      ],
+      "default": "Kegiatan Warga"
+    },
+    "tanggal_publikasi": {
+      "type": "date"
+    },
+    "penulis": {
+      "type": "string",
+      "default": "Admin Desa Plantungan"
+    }
+  }
+}

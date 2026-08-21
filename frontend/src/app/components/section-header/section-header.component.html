@@ -1,0 +1,15 @@
+<div [class]="'section-header-wrapper ' + (align === 'center' ? 'align-center' : 'align-left')">
+  <div *ngIf="badge" 
+       [class]="'header-badge ' + (badgeColor === 'gold' ? 'badge-gold' : 'badge-emerald')">
+    <span class="badge-dot"></span>
+    <span>{{ badge }}</span>
+  </div>
+  
+  <h2 class="header-main-title">
+    {{ title }}
+  </h2>
+  
+  <p *ngIf="subtitle" class="header-subtitle-text">
+    {{ subtitle }}
+  </p>
+</div>

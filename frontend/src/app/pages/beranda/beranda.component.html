@@ -1,0 +1,340 @@
+<!-- ============================================================
+     1. HERO SECTION (CLEAN, MINIMALIST & AUTHORITATIVE)
+     ============================================================ -->
+<section class="hero-section">
+  <div class="hero-container">
+    <div class="hero-grid">
+
+      <!-- Left Column: Primary Pitch & Key Actions -->
+      <div class="hero-lead">
+
+        <h1 class="hero-title">
+          Pelayanan Publik Terbuka, <br class="hidden sm:inline" />
+          <span class="hero-title-accent">Maju Bersama Warga.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Selamat datang di sistem informasi resmi Desa Plantungan, Kecamatan Blora, Kabupaten Blora, Provinsi Jawa
+          Tengah. Menyajikan layanan administrasi
+          terpadu, transparansi data desa, serta komoditas unggulan pertanian dan minyak rakyat.
+        </p>
+
+        <div class="hero-actions">
+          <a routerLink="/data-desa" class="btn-primary">
+            <svg class="btn-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            <span>Jelajahi Data Desa</span>
+          </a>
+
+          <a routerLink="/profil" class="btn-secondary">
+            <svg class="btn-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Profil & Kelembagaan</span>
+          </a>
+        </div>
+
+        <!-- Quick Summary Metrics -->
+        <div class="hero-metrics">
+          <div class="metric-item">
+            <div class="metric-value text-emerald-400">{{ (dataKependudukan()?.total_penduduk || 0) | number }}</div>
+            <div class="metric-label">Total Penduduk</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value text-amber-400">420</div>
+            <div class="metric-label">Hektar</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-value text-emerald-400">45 Hari</div>
+            <div class="metric-label">Durasi Program KKN</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Sambutan Kepala Desa Card -->
+      <div class="hero-aside">
+        <div class="kades-card">
+          <div class="kades-header">
+            <img
+              [src]="profil()?.foto_kades || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face'"
+              [alt]="profil()?.nama_kades || 'Kepala Desa'" class="kades-avatar">
+            <div class="kades-info">
+              <h3 class="kades-name">{{ profil()?.nama_kades || 'Endang Susana' }}</h3>
+              <p class="kades-role">Kepala Desa Plantungan</p>
+              <span class="kades-period">Masa Bakti: 2019 - 2026</span>
+            </div>
+          </div>
+
+          <div class="kades-body">
+            <div class="kades-quote">
+              <span class="quote-mark">“</span>
+              <p class="quote-text">
+                Website Desa Plantungan hadir sebagai media informasi bagi masyarakat dan pengunjung untuk mengenal
+                lebih dekat Desa Plantungan, mulai dari profil desa, data kependudukan, potensi desa, hingga berbagai
+                informasi dan kegiatan yang dilaksanakan di desa.
+              </p>
+            </div>
+
+            <div class="schedule-pill">
+              <span class="schedule-label">Jam Pelayanan Kantor:</span>
+              <span class="schedule-time">Senin - Jumat (08.00 - 15.30)</span>
+            </div>
+
+            <a routerLink="/kontak" class="kades-cta">
+              <span>Hubungi Kantor Balai Desa</span>
+              <svg class="kades-cta-icon" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. TENTANG DESA & VISI PEMBANGUNAN
+     ============================================================ -->
+<section class="about-section">
+  <div class="section-container">
+    <app-section-header title="Sekilas Tentang Desa Plantungan"
+      subtitle="Desa mandiri berwawasan agraris dengan tradisi kearifan lokal penyulingan minyak rakyat dan tata kelola modern.">
+    </app-section-header>
+
+    <div class="about-grid">
+      <div class="about-narrative">
+        <h3 class="about-heading">
+          Desa Plantungan, Kecamatan Blora, Kabupaten Blora, Provinsi Jawa Tengah
+        </h3>
+        <p class="about-text">
+          Desa Plantungan memiliki jumlah penduduk sebanyak 1.102 jiwa dan luas wilayah 420 hektar, Desa Plantungan
+          merupakan desa yang
+          memiliki sumber daya masyarakat serta potensi lokal yang terus dikembangkan. Secara administratif, Desa
+          Plantungan terdiri atas 2 RW dan 6 RT, dengan jumlah 463 kepala keluarga.<br>
+
+          Berbagai potensi yang dimiliki Desa Plantungan meliputi sektor pertanian, minyak rakyat, dan BUMDes Plantungan
+          SA3. Potensi tersebut menjadi bagian penting dalam kehidupan masyarakat sekaligus menjadi aset yang dapat
+          terus dikembangkan untuk mendukung kemajuan desa.<br>
+
+          Website ini juga menjadi ruang dokumentasi dan informasi mengenai KKN UNY Desa Plantungan 2025, berbagai
+          kegiatan desa, serta informasi publik yang dapat diakses oleh masyarakat.
+        </p>
+
+        <div>
+          <a routerLink="/profil" class="text-link">
+            <span>Lihat Struktur Organisasi & Visi Misi Lengkap</span>
+            <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Feature Visual Grid -->
+      <div class="gallery-grid">
+        <div class="gallery-col">
+          <img
+            [src]="profil()?.foto_desa || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=600&h=700&fit=crop'"
+            alt="Pertanian Desa Plantungan" class="gallery-image">
+          <div class="info-card dark-card">
+            <span class="stat-highlight text-emerald-400">44.5%</span>
+            <p class="stat-desc">Warga Beraktivitas di Sektor Pertanian & Minyak Rakyat</p>
+          </div>
+        </div>
+        <div class="gallery-col gallery-col-offset">
+          <div class="info-card emerald-card">
+            <span class="stat-highlight text-white">100%</span>
+            <p class="stat-desc">Transparansi Akses Informasi Publik dan APBDes</p>
+          </div>
+          <img
+            [src]="profil()?.foto_kantor || 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&h=700&fit=crop'"
+            alt="Penyulingan Minyak Rakyat" class="gallery-image">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. STATISTIK KEPENDUDUKAN (CLEAN FLAT CARDS)
+     ============================================================ -->
+<section class="stats-section">
+  <div class="section-container">
+    <app-section-header title="Sekilas Data & Demografi Kependudukan"
+      subtitle="Data statistik penduduk terpadu Desa Plantungan yang diperbarui secara berkala dan akuntabel.">
+    </app-section-header>
+
+    <div class="stats-cards-grid">
+
+      <!-- Total Penduduk -->
+      <div class="stat-card">
+        <div class="stat-icon-wrapper icon-emerald">
+          <svg class="stat-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <p class="stat-title">Total Penduduk</p>
+        <h3 class="stat-number">{{ dataKependudukan()?.total_penduduk | number }} <span class="stat-unit">Jiwa</span>
+        </h3>
+        <p class="stat-caption text-emerald-700">Tahun Anggaran 2025</p>
+      </div>
+
+      <!-- Laki-Laki -->
+      <div class="stat-card">
+        <div class="stat-icon-wrapper icon-blue">
+          <svg class="stat-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <p class="stat-title">Laki-Laki</p>
+        <h3 class="stat-number">{{ dataKependudukan()?.laki_laki | number }} <span class="stat-unit">Jiwa</span></h3>
+        <p class="stat-caption text-blue-700">50.56% Rasio Gender</p>
+      </div>
+
+      <!-- Perempuan -->
+      <div class="stat-card">
+        <div class="stat-icon-wrapper icon-teal">
+          <svg class="stat-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <p class="stat-title">Perempuan</p>
+        <h3 class="stat-number">{{ dataKependudukan()?.perempuan | number }} <span class="stat-unit">Jiwa</span></h3>
+        <p class="stat-caption text-teal-700">49.44% Rasio Gender</p>
+      </div>
+
+    </div>
+
+    <div class="stats-footer">
+      <a routerLink="/data-desa" class="btn-outline">
+        <span>Lihat Visualisasi Grafik Usia, Pendidikan & Pekerjaan</span>
+        <svg class="btn-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. POTENSI UNGGULAN DESA
+     ============================================================ -->
+<section class="potensi-section">
+  <div class="section-container">
+    <app-section-header title="Potensi Ekonomi Desa Plantungan"
+      subtitle="Kekayaan alam sektor pertanian pangan, sentra minyak rakyat (atsiri), dan unit usaha BUMDes.">
+    </app-section-header>
+
+    <div class="potensi-grid">
+      @for (potensi of potensiList().slice(0, 3); track potensi.id) {
+      <div class="potensi-card">
+        <div class="potensi-thumb-wrapper">
+          <img [src]="potensi.foto" [alt]="potensi.judul" class="potensi-thumb">
+          <span class="potensi-tag">{{ potensi.kategori }}</span>
+        </div>
+        <div class="potensi-content">
+          <div>
+            <h4 class="potensi-card-title">{{ potensi.judul }}</h4>
+            <p class="potensi-card-desc">{{ potensi.deskripsi }}</p>
+          </div>
+          <div class="potensi-card-footer">
+            <span class="potensi-location">📍 {{ potensi.lokasi || 'Desa Plantungan' }}</span>
+            <a routerLink="/potensi" class="potensi-link">Detail Komoditas →</a>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="potensi-footer">
+      <a routerLink="/potensi" class="btn-primary">
+        <span>Jelajahi Seluruh Potensi Desa</span>
+        <svg class="btn-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. BERITA & WARTA DESA TERKINI
+     ============================================================ -->
+<section class="news-section">
+  <div class="section-container">
+    <div class="news-header-row">
+      <div>
+        <h2 class="news-heading">Berita & Kegiatan Desa</h2>
+        <p class="news-subheading">Informasi terkini pembangunan, kegiatan balai desa, dan aktivitas kemasyarakatan.</p>
+      </div>
+      <a routerLink="/berita" class="text-link">
+        <span>Lihat Semua Berita</span>
+        <svg class="link-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="news-grid">
+      @for (item of beritaList().slice(0, 3); track item.id) {
+      <article class="news-card">
+        <div class="news-thumb-wrapper">
+          <img [src]="item.thumbnail" [alt]="item.judul" class="news-thumb">
+          <span class="news-tag">{{ item.kategori }}</span>
+        </div>
+        <div class="news-content">
+          <div>
+            <div class="news-meta">
+              <span>📅 {{ item.tanggal_publikasi | date:'d MMMM yyyy' }}</span>
+              <span>•</span>
+              <span>✍️ {{ item.penulis || 'Admin Desa' }}</span>
+            </div>
+            <h3 class="news-card-title">
+              <a [routerLink]="['/berita', item.slug]">{{ item.judul }}</a>
+            </h3>
+            <p class="news-card-summary">{{ item.ringkasan }}</p>
+          </div>
+          <div class="news-card-footer">
+            <a [routerLink]="['/berita', item.slug]" class="news-read-more">
+              <span>Baca Selengkapnya</span>
+              <svg class="read-icon" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. HIGHLIGHT KKN MAHASISWA 2025
+     ============================================================ -->
+<section class="kkn-highlight-section">
+  <div class="section-container">
+    <div class="kkn-highlight-grid">
+      <div class="kkn-text-col">
+        <h2 class="kkn-title">Program KKN Mahasiswa Desa Plantungan 2025</h2>
+        <p class="kkn-description">
+          Kolaborasi strategis antara Tim Mahasiswa KKN bersama Pemerintah dan Masyarakat Desa Plantungan dalam
+          digitalisasi portal web desa, branding kemasan minyak atsiri rakyat, dan edukasi kesehatan keluarga.
+        </p>
+      </div>
+      <div class="kkn-action-col">
+        <a routerLink="/kkn-2025" class="btn-kkn">
+          Lihat Dokumentasi & Capaian KKN →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

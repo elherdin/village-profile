@@ -1,0 +1,49 @@
+{
+  "kind": "singleType",
+  "collectionName": "data_kependudukans",
+  "info": {
+    "singularName": "data-kependudukan",
+    "pluralName": "data-kependudukans",
+    "displayName": "Data Kependudukan",
+    "description": "Statistik kependudukan, kelompok usia, dan tingkat pendidikan Desa Plantungan"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "total_penduduk": {
+      "type": "integer",
+      "required": true,
+      "default": 3485
+    },
+    "total_kk": {
+      "type": "integer",
+      "default": 1042
+    },
+    "laki_laki": {
+      "type": "integer",
+      "default": 1762
+    },
+    "perempuan": {
+      "type": "integer",
+      "default": 1723
+    },
+    "kelompok_usia": {
+      "type": "json"
+    },
+    "tingkat_pendidikan": {
+      "type": "json"
+    },
+    "mata_pencaharian": {
+      "type": "json"
+    },
+    "distribusi_dusun": {
+      "type": "json"
+    },
+    "tahun_update": {
+      "type": "integer",
+      "default": 2025
+    }
+  }
+}

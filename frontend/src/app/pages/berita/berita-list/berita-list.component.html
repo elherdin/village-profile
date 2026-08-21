@@ -1,0 +1,89 @@
+<!-- Header Banner -->
+<div class="page-banner">
+  <div class="banner-container">
+    <div class="banner-content">
+      <h1 class="banner-title">
+        Warta & Kegiatan Desa Plantungan
+      </h1>
+      <p class="banner-subtitle">
+        Menyajikan berita resmi, liputan kegiatan masyarakat, agenda musrenbang, dan informasi pelayanan terkini.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="page-container space-y-12">
+
+  <!-- Search & Category Filters Bar -->
+  <div class="search-filter-card">
+
+    <!-- Search Input -->
+    <div class="search-input-wrapper">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Cari berita atau agenda..." class="search-input">
+      <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="category-buttons-row">
+      @for (cat of categories; track cat) {
+      <button (click)="selectedCategory.set(cat)" type="button"
+        [class]="'category-btn ' + (selectedCategory() === cat ? 'active' : '')">
+        {{ cat }}
+      </button>
+      }
+    </div>
+  </div>
+
+  <!-- Articles Grid -->
+  <div class="articles-grid">
+    @for (item of filteredBerita(); track item.id) {
+    <article class="article-card">
+      <div>
+        <div class="article-thumb-wrapper">
+          <img [src]="item.thumbnail" [alt]="item.judul" class="article-thumb-img">
+          <span class="article-category-badge">
+            {{ item.kategori }}
+          </span>
+        </div>
+
+        <div class="article-body">
+          <div class="article-meta">
+            <span>{{ item.tanggal_publikasi | date:'d MMMM yyyy' }}</span>
+            <span>•</span>
+            <span>{{ item.penulis || 'Admin Desa' }}</span>
+          </div>
+
+          <h3 class="article-title">
+            <a [routerLink]="['/berita', item.slug]">{{ item.judul }}</a>
+          </h3>
+
+          <p class="article-summary">
+            {{ item.ringkasan }}
+          </p>
+        </div>
+      </div>
+
+      <div class="article-footer">
+        <a [routerLink]="['/berita', item.slug]" class="article-read-btn">
+          <span>Baca Artikel Lengkap</span>
+          <svg class="read-icon" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </article>
+    }
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="filteredBerita().length === 0" class="empty-state-card">
+    <div class="empty-emoji">📰</div>
+    <h3 class="empty-title">Tidak ada berita yang sesuai</h3>
+    <p class="empty-desc">Coba kata kunci lain atau pilih kategori "Semua".</p>
+  </div>
+
+</div>

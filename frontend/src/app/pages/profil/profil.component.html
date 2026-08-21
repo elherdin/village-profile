@@ -1,0 +1,251 @@
+<!-- Header Banner -->
+<div class="page-banner">
+  <div class="banner-container">
+    <div class="banner-content">
+      <h1 class="banner-title">
+        Profil Pemerintah Desa Plantungan
+      </h1>
+      <p class="banner-subtitle">
+        Mengenal lebih dalam sejarah, visi pembangunan jangka menengah, serta susunan aparatur pemerintahan Desa
+        Plantungan.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="page-container space-y-16">
+
+  <!-- 1. TENTANG & GEOGRAFIS -->
+  <section class="geografis-section">
+    <div class="geografis-text-col">
+      <h2 class="section-heading">
+        Kondisi Geografis & Wilayah Desa
+      </h2>
+      <div class="narrative-body">
+        <p>Desa Plantungan merupakan salah satu desa yang berada di wilayah administratif Kecamatan Blora, Kabupaten
+          Blora, Provinsi Jawa Tengah. Desa ini memiliki karakteristik masyarakat yang beragam serta potensi lokal yang
+          menjadi bagian dari kehidupan dan perkembangan masyarakat desa.
+          Dengan jumlah penduduk lebih dari seribu jiwa, Desa Plantungan memiliki sumber daya manusia yang menjadi salah
+          satu kekuatan dalam mendukung pembangunan desa. Keberadaan berbagai kelompok usia, latar belakang pendidikan,
+          serta potensi ekonomi lokal menjadi bagian penting dalam menggambarkan kondisi Desa Plantungan secara
+          keseluruhan.
+      </div>
+    </div>
+
+    <div class="geografis-visual-col">
+      <div class="visual-card">
+        <img
+          [src]="profil()?.foto_desa || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&h=600&fit=crop'"
+          alt="Panorama Wilayah Desa Plantungan" class="visual-img">
+        <div class="visual-caption">
+          <p>Foto bersama Ibu Kepala Desa</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. SEJARAH DESA -->
+  <section class="sejarah-card">
+    <app-section-header badgeColor="gold" title="Sejarah Singkat Desa Plantungan">
+    </app-section-header>
+
+    <div class="sejarah-body">
+      <p>Desa Plantungan merupakan salah satu desa yang berada di wilayah administratif Kecamatan Blora, Kabupaten
+        Blora, Jawa Tengah. Plantungan adalah salah satu desa di kabupaten Blora yg letaknya di sebelah utara. tepatnya
+        berbatasan dengan kabupaten Rembang. Desa Plantungan berasal dari kata Palentungan (panggon lantung) yg berarti
+        tempat minyak bumi. Desa Plantungan dulunya hanya di huni belasan rumah tangga sebelum akhirnya banyak pendatang
+        dari Yogyakarta tepatnya dari Kecamatan Wonosari Kabupaten Gunungkidul dan sekitarnya pada tahun 1960 an. Hingga
+        saat ini Desa Plantungan di huni oleh sekitar 1000 jiwa lebih. Menariknya, di Desa Plantungan terdapat salah
+        satu RT yg penghuninya 90 persen lebih dari keturunan Yogyakarta, tepatnya di RT 03 RW 01. sehingga di RT ini
+        sering di sebut kampung Jogja.Desa Plantungan merupakan salah satu desa yang berada di wilayah administratif
+        Kecamatan Blora, Kabupaten Blora, Jawa Tengah. Plantungan adalah salah satu desa di kabupaten Blora yg letaknya
+        di sebelah utara. tepatnya berbatasan dengan kabupaten Rembang. Desa Plantungan berasal dari kata Palentungan
+        (panggon lantung) yg berarti tempat minyak bumi. Desa Plantungan dulunya hanya di huni belasan rumah tangga
+        sebelum akhirnya banyak pendatang dari Yogyakarta tepatnya dari Kecamatan Wonosari Kabupaten Gunungkidul dan
+        sekitarnya pada tahun 1960 an. Hingga saat ini Desa Plantungan di huni oleh sekitar 1000 jiwa lebih. Menariknya,
+        di Desa Plantungan terdapat salah satu RT yg penghuninya 90 persen lebih dari keturunan Yogyakarta, tepatnya di
+        RT 03 RW 01. sehingga di RT ini sering di sebut kampung Jogja.</p>
+    </div>
+  </section>
+
+  <!-- 3. VISI & MISI -->
+  <section class="space-y-10">
+    <app-section-header title="Visi & Misi Pembangunan Desa"
+      subtitle="Landasan dan arah strategis pembangunan jangka menengah Desa Plantungan.">
+    </app-section-header>
+
+    <div class="visi-misi-grid">
+      <!-- Visi Box -->
+      <div class="visi-box">
+        <div>
+          <div class="visi-icon-wrapper">
+            <svg class="visi-icon" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <span class="visi-label">VISI UTAMA</span>
+          <h3 class="visi-quote">
+            "{{ profil()?.visi_misi?.visi }}"
+          </h3>
+        </div>
+
+        <div class="motto-box">
+          <span class="motto-label">Motto Kerja:</span>
+          <p class="motto-text">
+            {{ profil()?.visi_misi?.motto || 'Guyub Rukun Mbangun Desa Menuju Kesejahteraan Nyata' }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Misi List -->
+      <div class="misi-box">
+        <span class="misi-label">MISI PEMBANGUNAN</span>
+        <h3 class="misi-title">
+          5 Pilar Program Strategis
+        </h3>
+
+        <div class="misi-list">
+          @for (misi of profil()?.visi_misi?.misi; track $index) {
+          <div class="misi-item">
+            <div class="misi-number">
+              {{ $index + 1 }}
+            </div>
+            <p class="misi-text">
+              {{ misi }}
+            </p>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PERANGKAT DESA & STRUKTUR ORGANISASI -->
+  <section class="space-y-12">
+    <app-section-header title="Struktur Organisasi & Kelembagaan Desa"
+      subtitle="Bagan susunan kepemimpinan dan aparatur Pemerintah Desa Plantungan.">
+    </app-section-header>
+
+    <!-- 1. Pimpinan Utama: Kepala Desa -->
+    <div class="kades-featured-container">
+      <div class="kades-featured-card">
+        <div class="kades-avatar-box">
+          <img [src]="kades().foto" [alt]="kades().nama" class="kades-avatar-img">
+        </div>
+        <div class="kades-details-box">
+          <span class="kades-pre-title">Kepala Desa</span>
+          <h3 class="kades-headline-name">{{ kades().nama }}</h3>
+          <p class="kades-headline-role">{{ kades().jabatan }}</p>
+          <div class="kades-badge-row">
+            <span class="kades-period-badge">Masa Bakti: 2019-2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Badan Permusyawaratan Desa (BPD) - Grid -->
+    <div class="org-section-wrapper">
+      <div class="org-section-header">
+        <h3 class="org-section-title">Badan Permusyawaratn Desa (BPD)</h3>
+      </div>
+      <div class="org-cards-grid bpd-grid">
+        <div class="org-member-card">
+          <span class="org-role-badge bpd-badge">Ketua BPD</span>
+          <h4 class="org-member-name">Muhammad Muslimin</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge bpd-badge">Wakil ketua BPD</span>
+          <h4 class="org-member-name">Sulasdi</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge bpd-badge">Sekretaris BPD</span>
+          <h4 class="org-member-name">Windi Afrianti</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge bpd-badge">Anggota BPD</span>
+          <h4 class="org-member-name">Rita Adriyani</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Kelembagaan dan Perangkat Desa - Grid -->
+    <div class="org-section-wrapper">
+      <div class="org-section-header">
+        <h3 class="org-section-title">Kelembagaan dan Perangkat Desa</h3>
+      </div>
+      <div class="org-cards-grid perangkat-grid">
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Ketua LKMD</span>
+          <h4 class="org-member-name">Ngadul</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Wakil Ketua LKMD</span>
+          <h4 class="org-member-name">Sukiran</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Sekretaris Desa</span>
+          <h4 class="org-member-name">Siti Maisaroh</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Kaur Tata Usaha dan Umum</span>
+          <h4 class="org-member-name">Reni Susanti</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Kaur Perencanaan</span>
+          <h4 class="org-member-name">M. Erfandi</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Kaur Keuangan</span>
+          <h4 class="org-member-name">Indah Fitriani</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Kasi Pelayanan</span>
+          <h4 class="org-member-name">Sufajar</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Kasi Pemerintahan</span>
+          <h4 class="org-member-name">Wiluyo</h4>
+        </div>
+        <div class="org-member-card">
+          <span class="org-role-badge perangkat-badge">Kasi Kesehatan</span>
+          <h4 class="org-member-name">Muhadi</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. INFRASTRUKTUR & FASILITAS UMUM -->
+  <section class="fasilitas-section">
+    <app-section-header title="Fasilitas & Infrastruktur Desa"
+      subtitle="Sarana prasarana penunjang pelayanan sosial, pendidikan, kesehatan, dan keagamaan di Desa Plantungan."
+      align="left">
+    </app-section-header>
+
+    <div class="fasilitas-grid">
+      <div class="fasilitas-card">
+        <div class="fasilitas-emoji">🏛️</div>
+        <h4 class="fasilitas-title">Balai Desa</h4>
+        <p class="fasilitas-desc">Pusat pelayanan administrasi kependudukan, musyawarah desa, dan layanan aspirasi
+          warga.</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-emoji">🏫</div>
+        <h4 class="fasilitas-title">SDN Plantungan</h4>
+        <p class="fasilitas-desc">Sarana Pendidikan</p>
+      </div>
+
+      <div class="fasilitas-card">
+        <div class="fasilitas-emoji">🕌</div>
+        <h4 class="fasilitas-title">Masjid</h4>
+        <p class="fasilitas-desc">Sarana ibadah utama, kegiatan keagamaan, dan pusat silaturahmi masyarakat desa.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
