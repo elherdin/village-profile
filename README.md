@@ -1,4 +1,4 @@
-# Website Profil & Sistem Informasi Desa Plantungan 🌾
+# Website Profil & Sistem Informasi Desa Plantungan 
 
 Sistem informasi dan profil digital resmi Pemerintah Desa Plantungan dengan arsitektur **Headless CMS Monorepo** yang memisahkan backend (Strapi Headless CMS) dan frontend (Angular 18/19 Standalone + Tailwind CSS + Chart.js + Leaflet).
 
@@ -34,7 +34,7 @@ desa-plantungan/
 
 ---
 
-## 🚀 Panduan Menjalankan Proyek
+## Panduan Menjalankan Proyek
 
 ### 1. Menjalankan Frontend (Angular)
 
@@ -58,7 +58,7 @@ Panel admin Strapi akan aktif di `http://localhost:1337/admin` dan REST API di `
 
 ---
 
-## 🌟 Fitur Utama Website
+## Fitur Utama Website
 
 1. **Beranda (`/`)**: Hero banner, sambutan Kepala Desa, sekilas demografi, potensi unggulan minyak rakyat, 3 berita terbaru, sorotan KKN 2025, dan quick contact.
 2. **Profil Desa (`/profil`)**: Gambaran geografis 4 dusun, sejarah desa, visi-misi 5 pilar, struktur aparatur perangkat desa dengan foto & NIP, serta fasilitas umum.
