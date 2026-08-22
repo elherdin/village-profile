@@ -17,7 +17,6 @@
           </div>
           <div>
             <span class="footer-brand-title">{{ profil()?.nama_desa?.toUpperCase() || 'PEMERINTAH DESA' }}</span>
-            <p class="footer-brand-subtitle">Kecamatan Plantungan, Kabupaten Kendal</p>
           </div>
         </div>
 
@@ -32,8 +31,8 @@
         <ul class="footer-nav-list">
           <li><a routerLink="/profil" class="footer-nav-link">Profil & Struktur Organisasi</a></li>
           <li><a routerLink="/data-desa" class="footer-nav-link">Infografis Data Kependudukan</a></li>
-          <li><a routerLink="/potensi" class="footer-nav-link">Sentra Minyak Rakyat & Pertanian</a></li>
-          <li><a routerLink="/kkn-2025" class="footer-nav-link">Program KKN Tematik 2025</a></li>
+          <li><a routerLink="/potensi" class="footer-nav-link">Potensi Desa</a></li>
+          <li><a routerLink="/kkn-2025" class="footer-nav-link">Program KKN UNY 2025</a></li>
           <li><a routerLink="/informasi-publik" class="footer-nav-link">Transparansi APBDes</a></li>
           <li><a routerLink="/berita" class="footer-nav-link">Berita & Pengumuman</a></li>
         </ul>
@@ -74,7 +73,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span>{{ profil()?.alamat || 'Jl. Raya Utama Plantungan No. 01, Kode Pos 51362' }}</span>
+            <span>{{ profil()?.alamat || 'Plantungan, Kec. Blora, Kabupaten Blora, Jawa Tengah 58219, Indonesia'
+              }}</span>
           </div>
           <div class="contact-item">
             <svg class="contact-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">

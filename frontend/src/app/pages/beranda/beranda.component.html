@@ -236,18 +236,19 @@
     <div class="potensi-grid">
       @for (potensi of potensiList().slice(0, 3); track potensi.id) {
       <div class="potensi-card">
-        <div class="potensi-thumb-wrapper">
-          <img [src]="potensi.foto" [alt]="potensi.judul" class="potensi-thumb">
-          <span class="potensi-tag">{{ potensi.kategori }}</span>
-        </div>
         <div class="potensi-content">
           <div>
+            <div class="flex items-center justify-between mb-3">
+
+              <span class="text-xs text-slate-400 font-medium">{{ potensi.lokasi || 'Desa Plantungan' }}</span>
+            </div>
             <h4 class="potensi-card-title">{{ potensi.judul }}</h4>
             <p class="potensi-card-desc">{{ potensi.deskripsi }}</p>
           </div>
           <div class="potensi-card-footer">
-            <span class="potensi-location">📍 {{ potensi.lokasi || 'Desa Plantungan' }}</span>
-            <a routerLink="/potensi" class="potensi-link">Detail Komoditas →</a>
+            <span class="potensi-location font-semibold text-emerald-700">{{ potensi.komoditas_utama || 'Potensi Lokal'
+              }}</span>
+            <a routerLink="/potensi" class="potensi-link">Baca Selengkapnya →</a>
           </div>
         </div>
       </div>

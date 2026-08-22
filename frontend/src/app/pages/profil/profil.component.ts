@@ -24,7 +24,6 @@ export class ProfilComponent implements OnInit {
       nama: p?.nama_kades || fromList?.nama || 'Endang Susana',
       jabatan: 'Kepala Desa Plantungan',
       foto: p?.foto_kades || fromList?.foto || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
-      periode: fromList?.periode || '2019 - 2026'
     };
   });
 

@@ -1,4 +1,4 @@
-export type KategoriPotensi = 'Pertanian' | 'Minyak Rakyat' | 'BUMDes' | 'Pariwisata & UMKM';
+export type KategoriPotensi = 'Pertanian' | 'Peternakan' | 'Minyak Rakyat' | 'BUMDes' | 'Sumber Daya Air' | 'Pariwisata & UMKM' | string;
 
 export interface PotensiDesa {
   id?: number;

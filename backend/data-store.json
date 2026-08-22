@@ -16,18 +16,19 @@
       ],
       "motto": "Guyub Rukun Mbangun Desa Menuju Kesejahteraan Nyata"
     },
-    "alamat": "Jl. Raya Utama Plantungan No. 01, Balai Desa Plantungan, Kode Pos 51362",
-    "email": "pemdes@plantungan.desa.id",
-    "telepon": "+62 812-3456-7890",
+    "alamat": "Plantungan, Kec. Blora, Kabupaten Blora, Jawa Tengah 58219, Indonesia",
+    "email": "desaplantungan@gmail.com",
+    "telepon": "+62 895-3927-48251",
     "luas_wilayah": "482,5 Hektar",
     "jumlah_dusun": 4,
     "jumlah_rt": 18,
     "jumlah_rw": 4,
     "koordinat": {
-      "latitude": -7.0854,
-      "longitude": 109.9532,
-      "zoom": 14
+      "latitude": -6.8892678,
+      "longitude": 111.4723041,
+      "zoom": 15
     },
+    "gmaps_url": "https://maps.app.goo.gl/MPJn3BfPZmvqdNaQ7",
     "logo": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786973151978_Lambang_Kabupaten_Blora.gif",
     "foto_desa": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786974342642_beranda.jpg",
     "nama_kades": "Endang Susana",
@@ -248,64 +249,61 @@
   },
   "potensiDesa": [
     {
-      "id": 2,
-      "judul": "Lumbung Pertanian Padi Organik & Palawija Unggul",
+      "id": 1,
+      "judul": "Pertanian: Tebu, Padi dan Jagung",
       "kategori": "Pertanian",
-      "deskripsi": "Dengan didukung sistem irigasi alami pegunungan yang subur, sektor pertanian Desa Plantungan memproduksi beras organik varietas Menthik Wangi serta jagung hibrida berkualitas.",
-      "komoditas_utama": "Beras Organik Menthik Wangi, Jagung Manis, Cabai Merah",
-      "kontak_pengelola": "GAPOKTAN Sido Makmur (0821-3344-5566)",
-      "foto": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&h=500&fit=crop",
-      "lokasi": "Hamparan Sawah Dusun Krajan & Sari Rejo",
-      "keunggulan": [
-        "Produktivitas gabah kering panen rata-rata 6.8 ton per hektar",
-        "Irigasi tersier terawat dengan pola tanam terpadu 3 kali setahun"
-      ]
+      "komoditas_utama": "Tebu, Padi, dan Jagung",
+      "kontak_pengelola": "Kelompok Tani Desa Plantungan",
+      "lokasi": "Hamparan Wilayah Pertanian Desa Plantungan",
+      "deskripsi": "Pertanian merupakan salah satu sektor yang banyak dijalankan oleh masyarakat Desa Plantungan. Komoditas pertanian yang terdapat di desa meliputi tebu, padi, dan jagung. Ketiga komoditas tersebut menjadi bagian dari hasil pertanian masyarakat dan menunjukkan adanya pemanfaatan lahan untuk berbagai jenis tanaman sesuai dengan kondisi wilayah. Selain sebagai sumber hasil pertanian, sektor ini juga memiliki keterkaitan dengan aktivitas ekonomi masyarakat. Hasil pertanian dapat dimanfaatkan untuk memenuhi kebutuhan pangan maupun menjadi sumber pendapatan bagi masyarakat yang bergerak di bidang pertanian."
+    },
+    {
+      "id": 2,
+      "judul": "Ternak Sapi Terpadu",
+      "kategori": "Peternakan",
+      "komoditas_utama": "Sapi Potong & Pupuk Organik",
+      "kontak_pengelola": "Kelompok Peternak Desa Plantungan",
+      "lokasi": "Kawasan Peternakan Warga Desa Plantungan",
+      "deskripsi": "Peternakan sapi merupakan salah satu potensi lain yang terdapat di Desa Plantungan. Pemeliharaan sapi menjadi bagian dari aktivitas masyarakat dan mendukung sumber penghasilan rumah tangga di bidang peternakan. Potensi peternakan sapi juga memiliki keterkaitan dengan sektor pertanian. Kotoran ternak, misalnya, dapat dimanfaatkan sebagai bahan pupuk organik untuk mendukung kegiatan pertanian. Hubungan antara sektor pertanian dan peternakan tersebut menunjukkan adanya peluang pemanfaatan sumber daya lokal secara terpadu di Desa Plantungan."
     },
     {
       "id": 3,
-      "judul": "BUMDes \"Maju Bersama Plantungan\" - Unit Jasa & Distribusi",
-      "kategori": "BUMDes",
-      "deskripsi": "Badan Usaha Milik Desa mengelola unit penyewaan traktor, agen laku pandai PPOB, sentra pupuk bersubsidi, dan toko modern pasar desa.",
-      "komoditas_utama": "Penyewaan Alsintan, PPOB, Pasar Desa Digital",
-      "kontak_pengelola": "Direktur BUMDes Maju Bersama (0852-7788-9900)",
-      "foto": "https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=800&h=500&fit=crop",
-      "lokasi": "Kompleks Balai Desa Plantungan",
-      "keunggulan": [
-        "PADes stabil lebih dari Rp 85 Juta/tahun",
-        "Memudahkan sewa alat panen bagi petani lokal"
-      ]
+      "judul": "Sentra Minyak Rakyat",
+      "kategori": "Minyak Rakyat",
+      "komoditas_utama": "Minyak Atsiri Tradisional",
+      "kontak_pengelola": "Pengrajin Penyulingan Minyak Rakyat",
+      "lokasi": "Sentra Penyulingan Desa Plantungan",
+      "deskripsi": "Desa Plantungan juga memiliki potensi minyak rakyat yang menjadi salah satu karakteristik sumber daya lokal desa. Potensi minyak rakyat tidak hanya menjadi bagian dari sumber daya yang terdapat di wilayah Desa Plantungan, tetapi juga memiliki nilai historis yang berkaitan dengan identitas dan perkembangan desa. Keberadaannya menjadi salah satu karakteristik yang turut memperkaya potensi lokal Desa Plantungan."
     },
     {
       "id": 4,
-      "judul": "Agrowisata Perkebunan Kopi & Durian Lereng Plantungan",
-      "kategori": "Pariwisata & UMKM",
-      "deskripsi": "Pengembangan kawasan wisata berbasis kebun durian lokal dan kopi robusta lereng perbukitan.",
-      "komoditas_utama": "Kopi Robusta Plantungan, Durian Lokal, Keripik Pisang",
-      "kontak_pengelola": "Pokdarwis \"Pesona Plantungan\" (0812-9988-7766)",
-      "foto": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&h=500&fit=crop",
-      "lokasi": "Perbukitan Dusun Sari Rejo"
+      "judul": "BUMDes Plantungan SA3",
+      "kategori": "BUMDes",
+      "komoditas_utama": "Wadah Usaha & Penguatan Ekonomi Desa",
+      "kontak_pengelola": "Pengurus BUMDes Plantungan SA3",
+      "lokasi": "Kompleks Balai Desa Plantungan",
+      "deskripsi": "BUMDes Plantungan SA3 merupakan lembaga ekonomi desa yang menjadi bagian dari pengelolaan dan pengembangan kegiatan ekonomi di Desa Plantungan. BUMDes berperan sebagai salah satu wadah usaha desa dalam memanfaatkan potensi dan sumber daya yang tersedia. Keberadaan BUMDes menjadi bagian dari upaya penguatan ekonomi desa dan dapat mendukung pengelolaan berbagai potensi lokal secara lebih terorganisasi. Pengembangan BUMDes juga dapat berjalan berdampingan dengan sektor pertanian, peternakan, dan potensi ekonomi lainnya yang dimiliki masyarakat."
     },
     {
       "id": 5,
-      "judul": "tess",
-      "kategori": "Minyak Rakyat",
-      "komoditas_utama": "Tes",
-      "kontak_pengelola": "081234556",
-      "lokasi": "klaten",
-      "foto": "",
-      "deskripsi": "tessss"
+      "judul": "Sendang (Konservasi Sumber Daya Air)",
+      "kategori": "Sumber Daya Air",
+      "komoditas_utama": "Sumber Air Alami & Kelestarian Lingkungan",
+      "kontak_pengelola": "Pemerintah Desa & Masyarakat Plantungan",
+      "lokasi": "Kawasan Mata Air Sendang Desa Plantungan",
+      "deskripsi": "Sendang merupakan salah satu potensi lokal yang terdapat di Desa Plantungan. Keberadaan sendang menjadi bagian dari sumber daya air yang dimiliki desa dan memiliki keterkaitan dengan kehidupan masyarakat serta kondisi lingkungan di sekitarnya. Selain memiliki fungsi sebagai sumber air, sendang juga dapat menjadi bagian dari kekayaan lingkungan dan identitas lokal Desa Plantungan. Keberadaannya berpotensi untuk mendukung pemanfaatan sumber daya air secara berkelanjutan serta menjadi salah satu bagian dari potensi desa yang dapat dijaga dan dikembangkan. Sebagai salah satu sumber daya lokal, keberadaan sendang perlu dijaga kelestarian dan kebersihannya agar manfaatnya dapat terus dirasakan oleh masyarakat."
     }
   ],
   "programKKN": [
     {
       "id": 1,
       "judul": "Pengembangan Koperasi Desa Plantungan",
-      "divisi": "Tes",
+      "divisi": "Ekonomi & Koperasi",
       "deskripsi": "Program Pengembangan Koperasi Desa Plantungan merupakan program kerja kolaborasi antara kelompok KKNR 11203 dan KKNR 11206 UNY 2025 yang dilaksanakan berdasarkan hasil observasi dan usulan dari Kepala Desa Plantungan. Kegiatan ini berfokus pada pendampingan dan pengembangan koperasi sebagai salah satu potensi ekonomi desa. Koperasi Desa Plantungan memiliki beberapa unit usaha, meliputi toko obat yang berkolaborasi dengan bidan desa, distributor sembako, distributor bibit pertanian, penyedia alat pertanian, serta layanan simpan pinjam. Melalui program ini, mahasiswa memberikan pendampingan dalam administrasi koperasi, pengelolaan keuangan sederhana, serta pengenalan strategi pemasaran digital. Kegiatan ini bertujuan untuk membantu meningkatkan pengelolaan koperasi dan mendukung pengembangan usaha koperasi agar dapat memberikan manfaat bagi pengurus, anggota, dan masyarakat Desa Plantungan.",
       "tanggal_mulai": "2025-07-25",
       "tanggal_selesai": "2025-08-12",
       "tanggal_pelaksanaan": "2025-07-25 s/d 2025-08-12",
-      "capaian": "tes",
+      "jumlah_anggota": "20 anggota KKN UNY 2025",
       "dokumentasi": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323064785_PERESMIAN_KOPDES.jpg",
       "galeri": [
         "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323064785_PERESMIAN_KOPDES.jpg",
@@ -325,13 +323,13 @@
       "tanggal_mulai": "2025-07-15",
       "tanggal_selesai": "2025-08-10",
       "tanggal_pelaksanaan": "2025-07-15 s/d 2025-08-10",
-      "capaian": "tes",
+      "jumlah_anggota": "20 anggota dari KKN UNY 2025 dan seluruh warga Desa Plantungan.",
       "dokumentasi": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323561470_Perlombaan_HUT_RI_80.JPG",
       "galeri": [
         "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323561470_Perlombaan_HUT_RI_80.JPG"
       ],
       "status": "Selesai",
-      "penanggung_jawab": "Anak-anak,\tibu-ibu,\tserta seluruh\twarga Desa Plantungan.",
+      "penanggung_jawab": "Anak-anak, ibu-ibu, serta seluruh warga Desa Plantungan.",
       "lokasi_kegiatan": "Sekolah Dasar Desa Plantungan, Kecamatan Blora, Kabupaten Blora, Jawa Tengah.",
       "sasaran": "Kelompok Tani dan Pelaku Usaha Minyak Atsiri"
     },
@@ -343,14 +341,14 @@
       "tanggal_mulai": "2025-07-20",
       "tanggal_selesai": "2025-08-05",
       "tanggal_pelaksanaan": "2025-07-20 s/d 2025-08-05",
-      "capaian": "Menjangkau 140 balita di 4 dusun dengan zero kasus stunting baru.",
+      "jumlah_anggota": "11 Orang",
       "dokumentasi": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323667297_komunikasi_interpersonal.JPG",
       "galeri": [
         "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787323667297_komunikasi_interpersonal.JPG"
       ],
       "status": "Selesai",
       "penanggung_jawab": "Siswa kelas 6 SD Plantungan",
-      "lokasi_kegiatan": "sd plantungan",
+      "lokasi_kegiatan": "SD Plantungan",
       "sasaran": "Ibu Hamil, Ibu Menyusui, dan Balita"
     }
   ],
@@ -417,6 +415,16 @@
     }
   ],
   "pesanMasyarakat": [
+    {
+      "id": 2,
+      "nama": "tes",
+      "email": "tes",
+      "telepon": "081111",
+      "subjek": "Aspirasi Pembangunan & Infrastruktur",
+      "pesan": "tes",
+      "status": "Baru",
+      "createdAt": "2026-08-22T10:52:38.925Z"
+    },
     {
       "id": 1,
       "nama": "tesss",

@@ -577,11 +577,42 @@ function renderAdminDashboardHtml() {
           cardsHtml +
         '</div>';
       } else if (currentView === 'profilDesa') {
-        titleEl.innerText = 'Profil Desa (Upload Foto & Media)';
-        actionEl.innerHTML = '<button class="btn btn-success" onclick="saveProfilDesa()">💾 Simpan Foto Profil</button>';
+        titleEl.innerText = 'Profil & Informasi Desa';
+        actionEl.innerHTML = '<button class="btn btn-success" onclick="saveProfilDesa()">💾 Simpan Perubahan Profil</button>';
         const p = dbState.profilDesa || {};
         contentEl.innerHTML = \`
           <div class="panel">
+            <!-- Informasi Kontak & Lokasi Kantor Desa -->
+            <div style="background:#0f172a; padding:16px; border-radius:12px; border:1px solid var(--card-border); margin-bottom:20px;">
+              <h3 style="font-size:14px; font-weight:700; color:#38bdf8; margin:0 0 12px 0;">📍 Informasi Lokasi & Kontak Desa</h3>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px;">
+                <div>
+                  <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Nama Desa</label>
+                  <input type="text" id="p-nama-desa" value="\${p.nama_desa || 'Desa Plantungan'}" style="width:100%;">
+                </div>
+                <div>
+                  <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Nama Kepala Desa</label>
+                  <input type="text" id="p-nama-kades" value="\${p.nama_kades || 'Endang Susana'}" style="width:100%;">
+                </div>
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Alamat Kantor Balai Desa (Tampil di Website & Footer)</label>
+                <textarea id="p-alamat" rows="2" style="width:100%; font-size:13px;" placeholder="contoh: Plantungan, Kec. Blora, Kabupaten Blora, Jawa Tengah 58219, Indonesia">\${p.alamat || ''}</textarea>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div>
+                  <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Email Resmi Desa</label>
+                  <input type="email" id="p-email" value="\${p.email || 'desaplantungan@gmail.com'}" style="width:100%;">
+                </div>
+                <div>
+                  <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">No. Telepon / WhatsApp Desa</label>
+                  <input type="text" id="p-telepon" value="\${p.telepon || '+62 895-3927-48251'}" style="width:100%;">
+                </div>
+              </div>
+            </div>
+
             <!-- 1. Logo Desa -->
             <div style="display:flex; gap:20px; align-items:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--card-border);">
               <img id="p-logo-preview" src="\${p.logo || 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=200&fit=crop'}" style="width:72px; height:72px; border-radius:12px; object-fit:contain; border:2px solid var(--primary); background:#0f172a; padding:4px;">
@@ -663,20 +694,18 @@ function renderAdminDashboardHtml() {
             <table>
               <thead>
                 <tr>
-                  <th>Foto</th>
                   <th>Judul Potensi</th>
-                  <th>Kategori</th>
                   <th>Komoditas Utama</th>
+                  <th>Lokasi</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 \${list.map((item) => \`
                   <tr>
-                    <td><img src="\${item.foto}" class="thumb-img"></td>
                     <td><strong>\${item.judul}</strong></td>
-                    <td><span class="badge" style="background:#854d0e; color:#fde047;">\${item.kategori}</span></td>
                     <td>\${item.komoditas_utama || '-'}</td>
+                    <td>\${item.lokasi || 'Desa Plantungan'}</td>
                     <td>
                       <button class="btn btn-outline" style="padding:4px 8px; font-size:11px;" onclick="openEditModal('potensiDesa', \${item.id})">Edit</button>
                       <button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="deleteItem('potensiDesa', \${item.id})">Hapus</button>
@@ -734,6 +763,7 @@ function renderAdminDashboardHtml() {
                   <th>Dokumentasi</th>
                   <th>Judul Program Kerja</th>
                   <th>Divisi</th>
+                  <th>Jumlah Anggota</th>
                   <th>Rentang Tanggal Pelaksanaan</th>
                   <th>Status</th>
                   <th>Aksi</th>
@@ -769,6 +799,7 @@ function renderAdminDashboardHtml() {
                     </td>
                     <td><strong>\${item.judul}</strong></td>
                     <td><span class="badge" style="background:#1e3a8a; color:#93c5fd;">\${item.divisi}</span></td>
+                    <td><span class="badge" style="background:#0f172a; color:#38bdf8; border:1px solid #0284c7; font-weight:600;">\${item.jumlah_anggota || '-'}</span></td>
                     <td><span style="font-size:12px; color:#cbd5e1; font-weight:500;">🗓️ \${dateDisplay}</span></td>
                     <td><span class="badge" style="background:\${stBg}; color:\${stColor}; font-weight:600;">\${st}</span></td>
                     <td>
@@ -1259,18 +1290,23 @@ function renderAdminDashboardHtml() {
     }
 
     async function saveProfilDesa() {
-      if (document.getElementById('p-logo')) dbState.profilDesa.logo = document.getElementById('p-logo').value;
-      if (document.getElementById('p-foto-kades')) dbState.profilDesa.foto_kades = document.getElementById('p-foto-kades').value;
-      if (document.getElementById('p-nama-kades')) dbState.profilDesa.nama_kades = document.getElementById('p-nama-kades').value;
-      if (document.getElementById('p-foto-desa')) dbState.profilDesa.foto_desa = document.getElementById('p-foto-desa').value;
-      if (document.getElementById('p-foto-kantor')) dbState.profilDesa.foto_kantor = document.getElementById('p-foto-kantor').value;
+      if (!dbState.profilDesa) dbState.profilDesa = {};
+      if (document.getElementById('p-nama-desa')) dbState.profilDesa.nama_desa = document.getElementById('p-nama-desa').value.trim();
+      if (document.getElementById('p-nama-kades')) dbState.profilDesa.nama_kades = document.getElementById('p-nama-kades').value.trim();
+      if (document.getElementById('p-alamat')) dbState.profilDesa.alamat = document.getElementById('p-alamat').value.trim();
+      if (document.getElementById('p-email')) dbState.profilDesa.email = document.getElementById('p-email').value.trim();
+      if (document.getElementById('p-telepon')) dbState.profilDesa.telepon = document.getElementById('p-telepon').value.trim();
+      if (document.getElementById('p-logo')) dbState.profilDesa.logo = document.getElementById('p-logo').value.trim();
+      if (document.getElementById('p-foto-kades')) dbState.profilDesa.foto_kades = document.getElementById('p-foto-kades').value.trim();
+      if (document.getElementById('p-foto-desa')) dbState.profilDesa.foto_desa = document.getElementById('p-foto-desa').value.trim();
+      if (document.getElementById('p-foto-kantor')) dbState.profilDesa.foto_kantor = document.getElementById('p-foto-kantor').value.trim();
 
       await fetch('/api/cms-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ profilDesa: dbState.profilDesa })
       });
-      showToast('✅ Foto Profil Desa Berhasil Disimpan!');
+      showToast('✅ Profil & Kontak Desa Berhasil Disimpan!');
       await loadData();
     }
 
@@ -1385,28 +1421,11 @@ function renderAdminDashboardHtml() {
       if (col === 'potensiDesa') {
         return \`
           <div class="form-group"><label>Judul Potensi</label><input type="text" name="judul" value="\${data.judul || ''}" required></div>
-          <div class="form-group"><label>Kategori</label>
-            <select name="kategori">
-              <option value="Pertanian" \${data.kategori==='Pertanian'?'selected':''}>Pertanian</option>
-              <option value="Minyak Rakyat" \${data.kategori==='Minyak Rakyat'?'selected':''}>Minyak Rakyat</option>
-              <option value="BUMDes" \${data.kategori==='BUMDes'?'selected':''}>BUMDes</option>
-              <option value="Pariwisata & UMKM" \${data.kategori==='Pariwisata & UMKM'?'selected':''}>Pariwisata & UMKM</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Komoditas Utama</label><input type="text" name="komoditas_utama" value="\${data.komoditas_utama || ''}" placeholder="contoh: Minyak Daun Cengkeh, Minyak Nilam"></div>
-          <div class="form-group"><label>Pengelola / Kontak</label><input type="text" name="kontak_pengelola" value="\${data.kontak_pengelola || ''}" placeholder="contoh: Kelompok Tani Karya Lestari (0813-xxxx)"></div>
-          <div class="form-group"><label>Lokasi Wilayah</label><input type="text" name="lokasi" value="\${data.lokasi || ''}" placeholder="contoh: Dusun Plantungan Wetan"></div>
-          <div class="form-group">
-            <label>Foto Potensi</label>
-            <div style="display:flex; gap:8px;">
-              <input type="text" id="m-potensi-foto" name="foto" value="\${data.foto || ''}">
-              <label class="upload-inline-btn" style="margin:0; display:flex; align-items:center;">
-                Upload Foto
-                <input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], 'm-potensi-foto')">
-              </label>
-            </div>
-          </div>
-          <div class="form-group"><label>Deskripsi</label><textarea name="deskripsi" rows="3">\${data.deskripsi || ''}</textarea></div>
+          
+          <div class="form-group"><label>Komoditas / Produk Utama</label><input type="text" name="komoditas_utama" value="\${data.komoditas_utama || ''}" placeholder="contoh: Tebu, Padi, Jagung / Minyak Atsiri"></div>
+          <div class="form-group"><label>Pengelola / Lembaga Terkait</label><input type="text" name="kontak_pengelola" value="\${data.kontak_pengelola || ''}" placeholder="contoh: Kelompok Tani / BUMDes Plantungan SA3"></div>
+          <div class="form-group"><label>Lokasi Wilayah</label><input type="text" name="lokasi" value="\${data.lokasi || ''}" placeholder="contoh: Wilayah Persawahan / Desa Plantungan"></div>
+          <div class="form-group"><label>Deskripsi & Ulasan Potensi</label><textarea name="deskripsi" rows="5" placeholder="Penjelasan mengenai potensi dan keterkaitannya dengan perekonomian warga desa...">\${data.deskripsi || ''}</textarea></div>
         \`;
       } else if (col === 'berita') {
         return \`
@@ -1517,8 +1536,8 @@ function renderAdminDashboardHtml() {
             </div>
           </div>
 
+          <div class="form-group"><label>Jumlah / Keterangan Anggota (Bisa teks/angka bebas)</label><input type="text" name="jumlah_anggota" value="\${data.jumlah_anggota || ''}" placeholder="contoh: 11 Orang / 10 Mahasiswa & 1 DPL"></div>
           <div class="form-group"><label>Deskripsi Program</label><textarea name="deskripsi" rows="3">\${data.deskripsi || ''}</textarea></div>
-          <div class="form-group"><label>Capaian / Hasil</label><input type="text" name="capaian" value="\${data.capaian || ''}"></div>
         \`;
       } else if (col === 'apbdes') {
         const listPendapatan = (Array.isArray(data.rincian_pendapatan) && data.rincian_pendapatan.length > 0)
@@ -1768,6 +1787,11 @@ function renderAdminDashboardHtml() {
         } else if (tglMulai) {
           values.tanggal_pelaksanaan = tglMulai;
         }
+
+        if (values.jumlah_anggota !== undefined) {
+          values.jumlah_anggota = String(values.jumlah_anggota).trim();
+        }
+        delete values.capaian;
       }
 
       if (editingCollection === 'apbdes') {

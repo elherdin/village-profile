@@ -6,7 +6,7 @@ export interface ProgramKKN {
   tanggal_pelaksanaan?: string;
   tanggal_mulai?: string;
   tanggal_selesai?: string;
-  capaian?: string;
+  jumlah_anggota?: number | string;
   dokumentasi?: string;
   galeri?: string[];
   foto?: string[];

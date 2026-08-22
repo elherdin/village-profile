@@ -46,9 +46,9 @@ export class KontakComponent implements OnInit, AfterViewInit, OnDestroy {
   private initMap(): void {
     if (typeof window === 'undefined' || !this.mapContainer) return;
 
-    const lat = -7.0854;
-    const lng = 109.9532;
-    const zoom = 14;
+    const lat = this.profil()?.koordinat?.latitude || -6.8892678;
+    const lng = this.profil()?.koordinat?.longitude || 111.4723041;
+    const zoom = this.profil()?.koordinat?.zoom || 15;
 
     this.map = L.map(this.mapContainer.nativeElement, {
       center: [lat, lng],
@@ -71,9 +71,9 @@ export class KontakComponent implements OnInit, AfterViewInit, OnDestroy {
     const marker = L.marker([lat, lng], { icon }).addTo(this.map);
     marker.bindPopup(`
       <div style="font-family: sans-serif; font-size: 13px; line-height: 1.4;">
-        <strong style="color: #059669; font-size: 14px;">Kantor Balai Desa Plantungan</strong><br/>
-        Jl. Raya Utama Plantungan No. 01<br/>
-        Kecamatan Plantungan, Jawa Tengah
+        <strong style="color: #059669; font-size: 14px;">Desa Plantungan</strong><br/>
+        Kecamatan Blora, Kabupaten Blora<br/>
+        Jawa Tengah 58219, Indonesia
       </div>
     `).openPopup();
   }

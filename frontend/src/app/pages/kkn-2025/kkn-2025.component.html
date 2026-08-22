@@ -76,7 +76,7 @@
           </div>
         </div>
 
-        <!-- Right: Content & Achievements -->
+        <!-- Right: Content & Action -->
         <div class="kkn-card-content">
           <div>
             <div class="kkn-status-row">
@@ -86,7 +86,11 @@
                 {{ prog.status || 'Selesai' }}
               </span>
               <span class="divider-dot">|</span>
-              <span class="kkn-location">📍 {{ prog.lokasi_kegiatan || 'Desa Plantungan' }}</span>
+              <span class="kkn-location">Lokasi: {{ prog.lokasi_kegiatan || 'Desa Plantungan' }}</span>
+              @if (prog.jumlah_anggota) {
+              <span class="divider-dot">|</span>
+              <span class="kkn-members-tag">{{ prog.jumlah_anggota }}</span>
+              }
             </div>
 
             <h3 class="kkn-program-title">
@@ -98,18 +102,11 @@
             </p>
           </div>
 
-          <!-- Capaian & Penanggung Jawab -->
-          <div class="kkn-capaian-box-wrapper">
-            <div *ngIf="prog.capaian" class="kkn-capaian-box">
-              <span class="kkn-capaian-label">Hasil / Capaian Kegiatan:</span>
-              <span class="kkn-capaian-text">{{ prog.capaian }}</span>
-            </div>
-
-            <div class="kkn-card-action-row">
-              <span class="kkn-btn-detail">
-                Lihat Detail & Galeri Lengkap ↗
-              </span>
-            </div>
+          <!-- Card Action Row -->
+          <div class="kkn-card-action-row" style="margin-top: 1rem;">
+            <span class="kkn-btn-detail">
+              Lihat Detail & Galeri Lengkap ↗
+            </span>
           </div>
 
         </div>
@@ -207,8 +204,14 @@
               </div>
             </div>
 
-            <div class="kkn-meta-item" *ngIf="current.penanggung_jawab">
+            <div class="kkn-meta-item" *ngIf="current.jumlah_anggota">
+              <div>
+                <span class="kkn-meta-label">Jumlah Anggota</span>
+                <span class="kkn-meta-val">{{ current.jumlah_anggota }}</span>
+              </div>
+            </div>
 
+            <div class="kkn-meta-item" *ngIf="current.penanggung_jawab">
               <div>
                 <span class="kkn-meta-label">Penanggung Jawab</span>
                 <span class="kkn-meta-val">{{ current.penanggung_jawab }}</span>
@@ -216,7 +219,6 @@
             </div>
 
             <div class="kkn-meta-item" *ngIf="current.sasaran">
-
               <div>
                 <span class="kkn-meta-label">Sasaran Program</span>
                 <span class="kkn-meta-val">{{ current.sasaran }}</span>
@@ -228,15 +230,6 @@
           <div class="kkn-modal-desc-section">
             <h4 class="kkn-desc-heading">Deskripsi & Gambaran Program:</h4>
             <p class="kkn-modal-desc-text">{{ current.deskripsi }}</p>
-          </div>
-
-          <!-- Capaian / Hasil Box -->
-          <div *ngIf="current.capaian" class="kkn-modal-capaian-box">
-            <div class="kkn-capaian-header">
-              <span>🏆</span>
-              <span class="kkn-capaian-title">Hasil & Dampak Capaian Kegiatan:</span>
-            </div>
-            <p class="kkn-capaian-desc">{{ current.capaian }}</p>
           </div>
 
         </div>

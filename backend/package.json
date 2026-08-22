@@ -5,9 +5,9 @@
   "description": "Strapi REST API Server untuk Website Profil Desa Plantungan",
   "main": "server.js",
   "scripts": {
+    "develop": "node server.js",
     "start": "node server.js",
-    "dev": "node server.js",
-    "develop": "node server.js"
+    "build": "echo 'Backend ready'"
   },
   "author": "Pemerintah Desa Plantungan",
   "license": "MIT",

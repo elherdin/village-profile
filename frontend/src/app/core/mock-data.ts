@@ -28,17 +28,18 @@ Seiring bergulirnya waktu, Desa Plantungan berkembang menjadi pemukiman masyarak
     ],
     motto: 'Guyub Rukun Mbangun Desa Menuju Kesejahteraan Nyata'
   },
-  alamat: 'Jl. Raya Utama Plantungan No. 01, Balai Desa Plantungan, Kode Pos 51362',
-  email: 'pemdes@plantungan.desa.id',
-  telepon: '+62 812-3456-7890',
+  alamat: 'Plantungan, Kec. Blora, Kabupaten Blora, Jawa Tengah 58219, Indonesia',
+  email: 'desaplantungan@gmail.com',
+  telepon: '+62 895-3927-48251',
+  nama_kades: 'Endang Susana',
   luas_wilayah: '482,5 Hektar',
   jumlah_dusun: 4,
   jumlah_rt: 18,
   jumlah_rw: 4,
   koordinat: {
-    latitude: -7.0854,
-    longitude: 109.9532,
-    zoom: 14
+    latitude: -6.8892678,
+    longitude: 111.4723041,
+    zoom: 15
   }
 };
 
@@ -184,76 +185,61 @@ export const MOCK_DATA_KEPENDUDUKAN: DataKependudukan = {
 export const MOCK_POTENSI_DESA: PotensiDesa[] = [
   {
     id: 1,
-    judul: 'Sentra Produksi & Penyulingan Minyak Rakyat (Atsiri & Cengkeh)',
-    kategori: 'Minyak Rakyat',
-    deskripsi: 'Desa Plantungan dikenal sebagai salah satu sentra penghasil minyak atsiri dan minyak daun cengkeh tradisional berkualitas tinggi. Melalui teknik penyulingan uap yang diwariskan turun-temurun dan didukung inovasi modern, produk minyak rakyat ini memasok kebutuhan industri herbal, aromaterapi, dan farmasi nasional.',
-    komoditas_utama: 'Minyak Daun Cengkeh, Minyak Nilam, Minyak Kayu Putih',
-    kontak_pengelola: 'Kelompok Tani Penyuling Minyak "Karya Lestari" (0813-8899-1122)',
-    foto: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&h=500&fit=crop',
-    lokasi: 'Dusun Plantungan Wetan',
-    keunggulan: [
-      'Kadar eugenol minyak cengkeh mencapai standar ekspor >78%',
-      'Penyulingan ramah lingkungan dengan pemanfaatan kembali biomassa ampas daun',
-      'Menyerap lebih dari 120 tenaga kerja lokal di musim panen'
-    ]
+    judul: 'Pertanian: Tebu, Padi dan Jagung',
+    kategori: 'Pertanian',
+    deskripsi: 'Pertanian merupakan salah satu sektor yang banyak dijalankan oleh masyarakat Desa Plantungan. Komoditas pertanian yang terdapat di desa meliputi tebu, padi, dan jagung. Ketiga komoditas tersebut menjadi bagian dari hasil pertanian masyarakat dan menunjukkan adanya pemanfaatan lahan untuk berbagai jenis tanaman sesuai dengan kondisi wilayah. Selain sebagai sumber hasil pertanian, sektor ini juga memiliki keterkaitan dengan aktivitas ekonomi masyarakat. Hasil pertanian dapat dimanfaatkan untuk memenuhi kebutuhan pangan maupun menjadi sumber pendapatan bagi masyarakat yang bergerak di bidang pertanian.',
+    komoditas_utama: 'Tebu, Padi, dan Jagung',
+    kontak_pengelola: 'Kelompok Tani Desa Plantungan',
+    lokasi: 'Hamparan Pertanian Desa Plantungan'
   },
   {
     id: 2,
-    judul: 'Lumbung Pertanian Padi Organik & Palawija Unggul',
-    kategori: 'Pertanian',
-    deskripsi: 'Dengan didukung sistem irigasi alami dari pegunungan dan tanah vulkanik yang subur, sektor pertanian Desa Plantungan memproduksi padi varietas unggul organik, jagung hibrida, serta aneka sayuran segar tanpa pestisida berbahaya.',
-    komoditas_utama: 'Beras Organik Menthik Wangi, Jagung Manis, Cabai Merah',
-    kontak_pengelola: 'Gabungan Kelompok Tani (GAPOKTAN) Sido Makmur (0821-3344-5566)',
-    foto: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&h=500&fit=crop',
-    lokasi: 'Hamparan Sawah Dusun Krajan & Sari Rejo',
-    keunggulan: [
-      'Produktivitas gabah kering panen rata-rata 6.8 ton per hektar',
-      'Irigasi tersier terawat dengan pola tanam terpadu 3 kali setahun',
-      'Penerapan pupuk kompos organik hasil fermentasi mandiri'
-    ]
+    judul: 'Ternak Sapi Terpadu',
+    kategori: 'Peternakan',
+    deskripsi: 'Peternakan sapi merupakan salah satu potensi lain yang terdapat di Desa Plantungan. Pemeliharaan sapi menjadi bagian dari aktivitas masyarakat dan mendukung sumber penghasilan rumah tangga di bidang peternakan. Potensi peternakan sapi juga memiliki keterkaitan dengan sektor pertanian. Kotoran ternak, misalnya, dapat dimanfaatkan sebagai bahan pupuk organik untuk mendukung kegiatan pertanian. Hubungan antara sektor pertanian dan peternakan tersebut menunjukkan adanya peluang pemanfaatan sumber daya lokal secara terpadu di Desa Plantungan.',
+    komoditas_utama: 'Sapi Potong & Pupuk Organik',
+    kontak_pengelola: 'Kelompok Peternak Desa Plantungan',
+    lokasi: 'Kawasan Peternakan Warga Desa Plantungan'
   },
   {
     id: 3,
-    judul: 'BUMDes "Maju Bersama Plantungan" - Unit Jasa & Distribusi',
-    kategori: 'BUMDes',
-    deskripsi: 'Badan Usaha Milik Desa (BUMDes) Maju Bersama menjadi pilar penggerak ekonomi desa dengan mengelola unit usaha penyewaan traktor dan combine harvester, agen laku pandai PPOB, sentra pengadaan pupuk bersubsidi, serta outlet toko desa modern.',
-    komoditas_utama: 'Penyewaan Alat Mesin Pertanian (Alsintan), PPOB, Pasar Desa Digital',
-    kontak_pengelola: 'Direktur BUMDes Maju Bersama (0852-7788-9900)',
-    foto: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=800&h=500&fit=crop',
-    lokasi: 'Kompleks Balai Desa Plantungan',
-    keunggulan: [
-      'Memberikan Pendapatan Asli Desa (PADes) stabil lebih dari Rp 85 Juta/tahun',
-      'Memudahkan petani mendapatkan sewa alat panen dengan biaya terjangkau',
-      'Layanan pembayaran tagihan listrik, air, dan BPJS langsung di desa'
-    ]
+    judul: 'Sentra Minyak Rakyat',
+    kategori: 'Minyak Rakyat',
+    deskripsi: 'Desa Plantungan juga memiliki potensi minyak rakyat yang menjadi salah satu karakteristik sumber daya lokal desa. Potensi minyak rakyat tidak hanya menjadi bagian dari sumber daya yang terdapat di wilayah Desa Plantungan, tetapi juga memiliki nilai historis yang berkaitan dengan identitas dan perkembangan desa. Keberadaannya menjadi salah satu karakteristik yang turut memperkaya potensi lokal Desa Plantungan.',
+    komoditas_utama: 'Minyak Atsiri Tradisional',
+    kontak_pengelola: 'Pengrajin Penyulingan Minyak Rakyat',
+    lokasi: 'Sentra Penyulingan Desa Plantungan'
   },
   {
     id: 4,
-    judul: 'Agrowisata Perkebunan Kopi & Durian Lereng Plantungan',
-    kategori: 'Pariwisata & UMKM',
-    deskripsi: 'Pengembangan kawasan agrowisata berbasis kebun durian lokal dan kopi robusta lereng bukit. Wisatawan dapat menikmati pemandangan alam perbukitan, edukasi petik kopi, serta mencicipi kuliner khas olahan warga desa.',
-    komoditas_utama: 'Kopi Robusta Plantungan, Durian Lokal Montong, Keripik Pisang',
-    kontak_pengelola: 'Pokdarwis "Pesona Plantungan" (0812-9988-7766)',
-    foto: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=800&h=500&fit=crop',
-    lokasi: 'Perbukitan Dusun Sari Rejo',
-    keunggulan: [
-      'Sensasi ngopi langsung di kebun kopi dengan udara sejuk pegunungan',
-      'Pemberdayaan kelompok ibu-ibu PKK dalam memproduksi makanan olahan khas',
-      'Spot foto alam dan camping ground keluarga'
-    ]
+    judul: 'BUMDes Plantungan SA3',
+    kategori: 'BUMDes',
+    deskripsi: 'BUMDes Plantungan SA3 merupakan lembaga ekonomi desa yang menjadi bagian dari pengelolaan dan pengembangan kegiatan ekonomi di Desa Plantungan. BUMDes berperan sebagai salah satu wadah usaha desa dalam memanfaatkan potensi dan sumber daya yang tersedia. Keberadaan BUMDes menjadi bagian dari upaya penguatan ekonomi desa dan dapat mendukung pengelolaan berbagai potensi lokal secara lebih terorganisasi. Pengembangan BUMDes juga dapat berjalan berdampingan dengan sektor pertanian, peternakan, dan potensi ekonomi lainnya yang dimiliki masyarakat.',
+    komoditas_utama: 'Wadah Usaha & Penguatan Ekonomi Desa',
+    kontak_pengelola: 'Pengurus BUMDes Plantungan SA3',
+    lokasi: 'Kompleks Balai Desa Plantungan'
+  },
+  {
+    id: 5,
+    judul: 'Sendang (Konservasi Sumber Daya Air)',
+    kategori: 'Sumber Daya Air',
+    deskripsi: 'Sendang merupakan salah satu potensi lokal yang terdapat di Desa Plantungan. Keberadaan sendang menjadi bagian dari sumber daya air yang dimiliki desa dan memiliki keterkaitan dengan kehidupan masyarakat serta kondisi lingkungan di sekitarnya. Selain memiliki fungsi sebagai sumber air, sendang juga dapat menjadi bagian dari kekayaan lingkungan dan identitas lokal Desa Plantungan. Keberadaannya berpotensi untuk mendukung pemanfaatan sumber daya air secara berkelanjutan serta menjadi salah satu bagian dari potensi desa yang dapat dijaga dan dikembangkan. Sebagai salah satu sumber daya lokal, keberadaan sendang perlu dijaga kelestarian dan kebersihannya agar manfaatnya dapat terus dirasakan oleh masyarakat.',
+    komoditas_utama: 'Sumber Air Alami & Kelestarian Lingkungan',
+    kontak_pengelola: 'Pemerintah Desa & Masyarakat Plantungan',
+    lokasi: 'Kawasan Mata Air Sendang Desa Plantungan'
   }
 ];
 
 export const MOCK_PROGRAM_KKN: ProgramKKN[] = [
   {
     id: 1,
-    judul: 'Pengembangan Website Sistem Informasi & Profil Digital Desa',
-    divisi: 'Teknologi & Digitalisasi',
-    deskripsi: 'Merancang dan mengimplementasikan portal web desa modern berbasis Headless CMS untuk meningkatkan transparansi layanan publik, menyajikan data kependudukan real-time, serta mempromosikan potensi komoditas unggulan desa ke kancah nasional.',
+    judul: 'Pengembangan & Digitalisasi Sistem Informasi Desa (Website)',
+    divisi: 'Teknologi & Informasi',
+    deskripsi: 'Pembangunan website resmi Pemerintah Desa Plantungan terintegrasi Headless CMS Strapi untuk transparansi APBDes, publikasi potensi komoditas minyak rakyat & pertanian, berita kegiatan desa, serta pangkalan data kependudukan real-time.',
     tanggal_mulai: '2025-07-10',
     tanggal_selesai: '2025-08-15',
     tanggal_pelaksanaan: '10 Juli 2025 s/d 15 Agustus 2025',
-    capaian: 'Website resmi desa aktif 100% dan pelatihan pengelola konten aparatur desa.',
+    jumlah_anggota: '11 Orang',
     dokumentasi: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&h=500&fit=crop',
     galeri: [
       'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&h=500&fit=crop',
@@ -273,7 +259,7 @@ export const MOCK_PROGRAM_KKN: ProgramKKN[] = [
     tanggal_mulai: '2025-07-15',
     tanggal_selesai: '2025-08-10',
     tanggal_pelaksanaan: '15 Juli 2025 s/d 10 Agustus 2025',
-    capaian: 'Dibuatkannya 4 desain kemasan eksklusif dan onboarding 15 UMKM desa ke marketplace.',
+    jumlah_anggota: '11 Orang',
     dokumentasi: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?w=800&h=500&fit=crop',
     galeri: [
       'https://images.unsplash.com/photo-1556740758-90de374c12ad?w=800&h=500&fit=crop',
@@ -293,7 +279,7 @@ export const MOCK_PROGRAM_KKN: ProgramKKN[] = [
     tanggal_mulai: '2025-07-20',
     tanggal_selesai: '2025-08-05',
     tanggal_pelaksanaan: '20 Juli 2025 s/d 05 Agustus 2025',
-    capaian: 'Menjangkau 140 balita di 4 dusun dengan zero kasus stunting baru.',
+    jumlah_anggota: '11 Orang',
     dokumentasi: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&h=500&fit=crop',
     galeri: [
       'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&h=500&fit=crop',
@@ -312,7 +298,7 @@ export const MOCK_PROGRAM_KKN: ProgramKKN[] = [
     tanggal_mulai: '2025-07-25',
     tanggal_selesai: '2025-08-12',
     tanggal_pelaksanaan: '25 Juli 2025 s/d 12 Agustus 2025',
-    capaian: 'Diikuti lebih dari 85 siswa dengan antusiasme tinggi setiap minggunya.',
+    jumlah_anggota: '11 Orang',
     dokumentasi: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=500&fit=crop',
     galeri: [
       'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=500&fit=crop',
@@ -331,7 +317,7 @@ export const MOCK_PROGRAM_KKN: ProgramKKN[] = [
     tanggal_mulai: '2025-08-01',
     tanggal_selesai: '2025-08-14',
     tanggal_pelaksanaan: '01 Agustus 2025 s/d 14 Agustus 2025',
-    capaian: 'Terpasangnya 12 titik papan nama dusun dan 1 peta besar infografis desa.',
+    jumlah_anggota: '11 Orang',
     dokumentasi: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?w=800&h=500&fit=crop',
     galeri: [
       'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?w=800&h=500&fit=crop',
