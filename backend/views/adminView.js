@@ -620,11 +620,11 @@ function renderAdminDashboardHtml() {
 
             <!-- 1. Logo Desa -->
             <div style="display:flex; gap:20px; align-items:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--card-border);">
-              <img id="p-logo-preview" src="\${p.logo || 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=200&fit=crop'}" style="width:72px; height:72px; border-radius:12px; object-fit:contain; border:2px solid var(--primary); background:#0f172a; padding:4px;">
+              <img id="p-logo-preview" src="\${p.logo || 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=200&fit=crop'}" onerror="this.src='https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=200&fit=crop'" style="width:72px; height:72px; border-radius:12px; object-fit:contain; border:2px solid var(--primary); background:#0f172a; padding:4px;">
               <div style="flex:1;">
                 <label style="font-size:13px; font-weight:700; color:var(--text-main);">Logo Resmi Desa</label>
                 <div style="display:flex; gap:8px; margin-top:6px;">
-                  <input type="text" id="p-logo" value="\${p.logo || ''}" placeholder="/api/media-file?key=...">
+                  <input type="text" id="p-logo" value="\${p.logo || ''}" placeholder="/api/media-file?key=..." oninput="document.getElementById('p-logo-preview').src = this.value || 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200&h=200&fit=crop'">
                   <label class="upload-inline-btn" style="margin:0; display:flex; align-items:center; white-space:nowrap;">
                     Upload Foto
                     <input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], 'p-logo')">
@@ -636,11 +636,11 @@ function renderAdminDashboardHtml() {
 
             <!-- 2. Foto Kepala Desa -->
             <div style="display:flex; gap:20px; align-items:center; margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--card-border);">
-              <img id="p-foto-kades-preview" src="\${p.foto_kades || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop'}" style="width:72px; height:72px; border-radius:12px; object-fit:cover; border:2px solid #0284c7; background:#0f172a;">
+              <img id="p-foto-kades-preview" src="\${p.foto_kades || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop'}" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop'" style="width:72px; height:72px; border-radius:12px; object-fit:cover; border:2px solid #0284c7; background:#0f172a;">
               <div style="flex:1;">
                 <label style="font-size:13px; font-weight:700; color:var(--text-main);">Foto Kepala Desa</label>
                 <div style="display:flex; gap:8px; margin-top:6px;">
-                  <input type="text" id="p-foto-kades" value="\${p.foto_kades || ''}" placeholder="URL Foto Kepala Desa">
+                  <input type="text" id="p-foto-kades" value="\${p.foto_kades || ''}" placeholder="URL Foto Kepala Desa" oninput="document.getElementById('p-foto-kades-preview').src = this.value || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop'">
                   <label class="upload-inline-btn" style="margin:0; display:flex; align-items:center; white-space:nowrap;">
                     Upload Foto
                     <input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], 'p-foto-kades')">
@@ -655,14 +655,14 @@ function renderAdminDashboardHtml() {
               <!-- Foto 1 -->
               <div style="background:#0f172a; padding:16px; border-radius:12px; border:1px solid var(--card-border);">
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom:10px;">
-                  <img id="p-foto-desa-preview" src="\${p.foto_desa || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=200&h=200&fit=crop'}" style="width:60px; height:60px; border-radius:8px; object-fit:cover; border:1px solid var(--card-border);">
+                  <img id="p-foto-desa-preview" src="\${p.foto_desa || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=200&h=200&fit=crop'}" onerror="this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=200&h=200&fit=crop'" style="width:60px; height:60px; border-radius:8px; object-fit:cover; border:1px solid var(--card-border);">
                   <div style="flex:1;">
                     <label style="font-size:13px; font-weight:700; color:var(--text-main);">Foto 1</label>
                     <p style="font-size:11px; color:var(--text-muted);">Foto dokumentasi wilayah / landscape desa.</p>
                   </div>
                 </div>
                 <div style="display:flex; gap:8px;">
-                  <input type="text" id="p-foto-desa" value="\${p.foto_desa || ''}" placeholder="URL Foto 1">
+                  <input type="text" id="p-foto-desa" value="\${p.foto_desa || ''}" placeholder="URL Foto 1" oninput="document.getElementById('p-foto-desa-preview').src = this.value || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=200&h=200&fit=crop'">
                   <label class="upload-inline-btn" style="margin:0; display:flex; align-items:center; white-space:nowrap;">
                     Upload Foto
                     <input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], 'p-foto-desa')">
@@ -673,14 +673,14 @@ function renderAdminDashboardHtml() {
               <!-- Foto 2 -->
               <div style="background:#0f172a; padding:16px; border-radius:12px; border:1px solid var(--card-border);">
                 <div style="display:flex; gap:14px; align-items:center; margin-bottom:10px;">
-                  <img id="p-foto-kantor-preview" src="\${p.foto_kantor || 'https://images.unsplash.com/photo-1577495508048-b635879837f1?w=200&h=200&fit=crop'}" style="width:60px; height:60px; border-radius:8px; object-fit:cover; border:1px solid var(--card-border);">
+                  <img id="p-foto-kantor-preview" src="\${p.foto_kantor || 'https://images.unsplash.com/photo-1577495508048-b635879837f1?w=200&h=200&fit=crop'}" onerror="this.src='https://images.unsplash.com/photo-1577495508048-b635879837f1?w=200&h=200&fit=crop'" style="width:60px; height:60px; border-radius:8px; object-fit:cover; border:1px solid var(--card-border);">
                   <div style="flex:1;">
                     <label style="font-size:13px; font-weight:700; color:var(--text-main);">Foto 2</label>
                     <p style="font-size:11px; color:var(--text-muted);">Foto kantor balai desa / fasilitas desa.</p>
                   </div>
                 </div>
                 <div style="display:flex; gap:8px;">
-                  <input type="text" id="p-foto-kantor" value="\${p.foto_kantor || ''}" placeholder="URL Foto 2">
+                  <input type="text" id="p-foto-kantor" value="\${p.foto_kantor || ''}" placeholder="URL Foto 2" oninput="document.getElementById('p-foto-kantor-preview').src = this.value || 'https://images.unsplash.com/photo-1577495508048-b635879837f1?w=200&h=200&fit=crop'">
                   <label class="upload-inline-btn" style="margin:0; display:flex; align-items:center; white-space:nowrap;">
                     Upload Foto
                     <input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], 'p-foto-kantor')">

@@ -668,6 +668,24 @@
       "mimeType": "image/png",
       "storage": "Cloudflare R2",
       "createdAt": "2026-08-23T09:29:48.473Z"
+    },
+    {
+      "name": "1787479107026_Lambang_Kabupaten_Blora.gif",
+      "key": "desa-plantungan/1787479107026_Lambang_Kabupaten_Blora.gif",
+      "url": "https://pub-c02abbf5934048a585b2a9eb164f2af9.r2.dev/desa-plantungan/1787479107026_Lambang_Kabupaten_Blora.gif",
+      "size": 80537,
+      "mimeType": "image/gif",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-23T09:58:27.369Z"
+    },
+    {
+      "name": "1787479362051_1.png",
+      "key": "desa-plantungan/1787479362051_1.png",
+      "url": "https://pub-c02abbf5934048a585b2a9eb164f2af9.r2.dev/desa-plantungan/1787479362051_1.png",
+      "size": 58756,
+      "mimeType": "image/png",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-23T10:02:42.402Z"
     }
   ]
 }
