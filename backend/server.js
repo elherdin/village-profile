@@ -6,6 +6,7 @@ const path = require('path');
 
 const { PORT, DB_FILE, UPLOAD_DIR, r2BucketName } = require('./config/env');
 const { s3Client, isR2Configured } = require('./config/s3Client');
+const { isPostgresConfigured } = require('./config/postgresClient');
 const { db, saveDb, fixR2Url, formatStrapiSingle, formatStrapiCollection } = require('./services/databaseService');
 const { getObjectBufferFromR2, uploadFileToStorage, deleteFileFromStorage, syncMediaWithR2 } = require('./services/storageService');
 const { renderAdminDashboardHtml } = require('./views/adminView');
@@ -356,6 +357,7 @@ if (isR2Configured) {
 server.listen(PORT, () => {
   console.log(`\n======================================================`);
   console.log(`Strapi Headless CMS Desa Plantungan Berjalan!`);
+  console.log(`PostgreSQL:   ${isPostgresConfigured ? 'Terkoneksi (Database Aktif)' : 'Lokal Mode (data-store.json)'}`);
   console.log(`Cloudflare R2: ${isR2Configured ? 'Terkoneksi' : 'Lokal (Uploads)'}`);
   console.log(`Admin Panel:  http://localhost:${PORT}/admin`);
   console.log(`REST API:     http://localhost:${PORT}/api/`);

@@ -1,0 +1,55 @@
+services:
+  # ==========================================
+  # 1. POSTGRESQL DATABASE SERVER
+  # ==========================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: desa_plantungan_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-desa_plantungan_db}
+      POSTGRES_USER: ${POSTGRES_USER:-desa_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-SuperSecretPassword123!}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/scripts/init-postgres.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-desa_user} -d ${POSTGRES_DB:-desa_plantungan_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # 2. STRAPI / NODE.JS BACKEND CMS
+  # ==========================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: desa_plantungan_backend
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 1337
+      DATABASE_URL: postgres://${POSTGRES_USER:-desa_user}:${POSTGRES_PASSWORD:-SuperSecretPassword123!}@postgres:5432/${POSTGRES_DB:-desa_plantungan_db}
+      # Cloudflare R2 Credentials
+      R2_ACCOUNT_ID: ${R2_ACCOUNT_ID}
+      R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID}
+      R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY}
+      R2_BUCKET_NAME: ${R2_BUCKET_NAME:-desa-plantungan-media}
+      R2_PUBLIC_URL: ${R2_PUBLIC_URL}
+    ports:
+      - "1337:1337"
+    volumes:
+      - backend_uploads:/app/public/uploads
+
+volumes:
+  postgres_data:
+    driver: local
+  backend_uploads:
+    driver: local

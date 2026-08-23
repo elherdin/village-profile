@@ -1,17 +1,47 @@
-const fs = require('fs');
-const { DB_FILE, PORT } = require('../config/env');
+const fs = require("fs");
+const { DB_FILE, PORT } = require("../config/env");
+const { 
+  isPostgresConfigured, 
+  initPostgres, 
+  loadAllFromPostgres, 
+  saveCollectionToPostgres, 
+  saveAllToPostgres 
+} = require("./postgresService");
 
 let db = {};
 
-// Load or initialize DB from disk
+// 1. Initial load from local data-store.json disk cache
 try {
   if (fs.existsSync(DB_FILE)) {
-    const raw = fs.readFileSync(DB_FILE, 'utf8');
+    const raw = fs.readFileSync(DB_FILE, "utf8");
     db = JSON.parse(raw);
     if (!db.mediaLibrary) db.mediaLibrary = [];
   }
 } catch (e) {
-  console.error('Error loading db:', e);
+  console.error("Error loading db from file:", e);
+}
+
+// 2. If PostgreSQL is configured, initialize & sync on startup
+if (isPostgresConfigured) {
+  (async () => {
+    try {
+      const initialized = await initPostgres(db);
+      if (initialized) {
+        const pgData = await loadAllFromPostgres();
+        if (pgData && Object.keys(pgData).length > 0) {
+          Object.assign(db, pgData);
+          if (!db.mediaLibrary) db.mediaLibrary = [];
+          // update local cache file
+          try {
+            fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
+          } catch (_) {}
+          console.log("[PostgreSQL] Data berhasil disinkronkan ke memori server!");
+        }
+      }
+    } catch (err) {
+      console.error("[PostgreSQL] Error startup sync:", err.message);
+    }
+  })();
 }
 
 function getDb() {
@@ -22,15 +52,29 @@ function saveDb() {
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
   } catch (err) {
-    console.error('Error saving database:', err);
+    console.error("Error saving database file:", err);
+  }
+
+  if (isPostgresConfigured) {
+    saveAllToPostgres(db).catch(err => {
+      console.error("[PostgreSQL] Background save error:", err.message);
+    });
+  }
+}
+
+async function saveCollection(collectionName, data) {
+  db[collectionName] = data;
+  saveDb();
+  if (isPostgresConfigured) {
+    await saveCollectionToPostgres(collectionName, data);
   }
 }
 
 // Helper to auto-proxy r2.dev URLs to prevent broken images on client
 function fixR2Url(urlStr) {
-  if (!urlStr || typeof urlStr !== 'string') return urlStr;
-  if (urlStr.includes('r2.dev/')) {
-    const key = urlStr.split('r2.dev/')[1];
+  if (!urlStr || typeof urlStr !== "string") return urlStr;
+  if (urlStr.includes("r2.dev/")) {
+    const key = urlStr.split("r2.dev/")[1];
     return `http://localhost:${PORT}/api/media-file?key=${encodeURIComponent(key)}`;
   }
   return urlStr;
@@ -64,6 +108,7 @@ module.exports = {
   db,
   getDb,
   saveDb,
+  saveCollection,
   fixR2Url,
   formatStrapiSingle,
   formatStrapiCollection

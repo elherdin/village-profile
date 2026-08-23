@@ -490,15 +490,6 @@
   ],
   "mediaLibrary": [
     {
-      "name": "tes.png",
-      "key": "desa-plantungan/1787474604602_tes.png",
-      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787474604602_tes.png",
-      "size": 558565,
-      "mimeType": "image/png",
-      "storage": "Cloudflare R2",
-      "createdAt": "2026-08-23T08:43:25.279Z"
-    },
-    {
       "name": "1786786493690_pngwing_com__4_.png",
       "key": "desa-plantungan/1786786493690_pngwing_com__4_.png",
       "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1786786493690_pngwing_com__4_.png",
@@ -641,6 +632,15 @@
       "mimeType": "image/jpeg",
       "storage": "Cloudflare R2",
       "createdAt": "2026-08-21T14:47:48.297Z"
+    },
+    {
+      "name": "tes.png",
+      "key": "desa-plantungan/1787474604602_tes.png",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787474604602_tes.png",
+      "size": 558565,
+      "mimeType": "image/png",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-23T08:43:25.156Z"
     }
   ]
 }
