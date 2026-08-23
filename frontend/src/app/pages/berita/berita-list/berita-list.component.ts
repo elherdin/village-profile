@@ -19,13 +19,15 @@ export class BeritaListComponent implements OnInit {
   public searchQuery = '';
   public selectedCategory = signal<string>('Semua');
 
-  public categories: string[] = [
-    'Semua',
-    'Pemerintahan',
-    'Kegiatan Warga',
-    'Pengumuman',
-    'Kesehatan & Posyandu'
-  ];
+  public allCategories = computed(() => {
+    const list = this.beritaList();
+    const defaults = ['Pemerintahan', 'Kegiatan Warga', 'Pengumuman', 'Kesehatan & Posyandu'];
+    const customCats = list
+      .map((b) => b.kategori?.trim())
+      .filter((k): k is string => !!k && !defaults.includes(k) && k !== 'Semua');
+    const uniqueCustom = Array.from(new Set(customCats));
+    return ['Semua', ...defaults, ...uniqueCustom];
+  });
 
   public filteredBerita = computed(() => {
     const list = this.beritaList();

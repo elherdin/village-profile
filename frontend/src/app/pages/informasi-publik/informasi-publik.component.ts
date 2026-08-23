@@ -13,12 +13,16 @@ import { APBDes } from '../../models/apbdes.model';
 export class InformasiPublikComponent implements OnInit {
   private strapi = inject(StrapiService);
   public apbdesList = signal<APBDes[]>([]);
-  public selectedYear = signal<number>(2025);
+  public selectedId = signal<number | null>(null);
 
   public currentAPBDes = computed<APBDes | null>(() => {
     const list = this.apbdesList();
-    const yr = this.selectedYear();
-    return list.find((a) => a.tahun === yr) || (list.length > 0 ? list[0] : null);
+    const id = this.selectedId();
+    if (id !== null) {
+      const found = list.find((a) => a.id === id);
+      if (found) return found;
+    }
+    return list.length > 0 ? list[0] : null;
   });
 
   public totalRincianPendapatan = computed<number>(() => {
@@ -47,18 +51,40 @@ export class InformasiPublikComponent implements OnInit {
 
   ngOnInit(): void {
     this.strapi.getAPBDes().subscribe((res) => {
-      const sorted = [...(res || [])].sort((a, b) => (Number(b.tahun) || 0) - (Number(a.tahun) || 0));
+      const sorted = [...(res || [])].sort((a, b) => {
+        const diffYear = (Number(b.tahun) || 0) - (Number(a.tahun) || 0);
+        if (diffYear !== 0) return diffYear;
+        return (Number(b.id) || 0) - (Number(a.id) || 0);
+      });
       this.apbdesList.set(sorted);
       if (sorted.length > 0) {
-        if (!sorted.some(a => a.tahun === this.selectedYear())) {
-          this.selectedYear.set(sorted[0].tahun);
+        if (!sorted.some(a => a.id === this.selectedId())) {
+          this.selectedId.set(sorted[0].id ?? null);
         }
       }
     });
   }
 
-  selectYear(yr: number): void {
-    this.selectedYear.set(yr);
+  selectAPBDes(id: number | undefined): void {
+    if (id !== undefined) {
+      this.selectedId.set(id);
+    }
+  }
+
+  getTabLabel(item: APBDes): string {
+    const list = this.apbdesList();
+    const sameYearItems = list.filter((a) => a.tahun === item.tahun);
+    if (sameYearItems.length > 1) {
+      if (item.status_publikasi) {
+        const shortStatus = item.status_publikasi.replace(/Perdes\s*No\.?\s*[0-9\/]+/gi, '').replace(/[\(\)]/g, '').trim();
+        if (shortStatus && shortStatus.length <= 25) {
+          return `Tahun ${item.tahun} (${shortStatus})`;
+        }
+      }
+      const idx = sameYearItems.findIndex((a) => a.id === item.id);
+      return `Tahun ${item.tahun} #${idx + 1}`;
+    }
+    return `Tahun ${item.tahun}`;
   }
 
   formatRupiah(nominal: number): string {

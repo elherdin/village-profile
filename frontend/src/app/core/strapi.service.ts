@@ -10,6 +10,7 @@ import { PotensiDesa } from '../models/potensi-desa.model';
 import { ProgramKKN } from '../models/program-kkn.model';
 import { Berita } from '../models/berita.model';
 import { APBDes } from '../models/apbdes.model';
+import { InfrastrukturDesa } from '../models/infrastruktur-desa.model';
 import {
   MOCK_PROFIL_DESA,
   MOCK_PERANGKAT_DESA,
@@ -17,7 +18,8 @@ import {
   MOCK_POTENSI_DESA,
   MOCK_PROGRAM_KKN,
   MOCK_BERITA,
-  MOCK_APBDES
+  MOCK_APBDES,
+  MOCK_INFRASTRUKTUR_DESA
 } from './mock-data';
 
 @Injectable({
@@ -188,6 +190,23 @@ export class StrapiService {
       catchError(() => {
         this.isBackendOnline.set(false);
         return of(MOCK_APBDES);
+      })
+    );
+  }
+
+  /**
+   * Get Infrastruktur & Fasilitas Desa list (Collection Type)
+   */
+  getInfrastrukturDesa(): Observable<InfrastrukturDesa[]> {
+    return this.http.get<any>(`${this.apiUrl}/infrastruktur-desas?populate=*`).pipe(
+      tap(() => this.isBackendOnline.set(true)),
+      map((res) => {
+        const data = this.normalizeStrapiData<InfrastrukturDesa[]>(res);
+        return Array.isArray(data) ? data : (data ? [data] : []);
+      }),
+      catchError(() => {
+        this.isBackendOnline.set(false);
+        return of(MOCK_INFRASTRUKTUR_DESA);
       })
     );
   }

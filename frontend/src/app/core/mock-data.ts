@@ -5,6 +5,7 @@ import { PotensiDesa } from '../models/potensi-desa.model';
 import { ProgramKKN } from '../models/program-kkn.model';
 import { Berita } from '../models/berita.model';
 import { APBDes } from '../models/apbdes.model';
+import { InfrastrukturDesa } from '../models/infrastruktur-desa.model';
 
 export const MOCK_PROFIL_DESA: ProfilDesa = {
   id: 1,
@@ -459,5 +460,44 @@ export const MOCK_APBDES: APBDes[] = [
       { kategori: 'Penanggulangan Bencana', nominal: 70000000, persentase: 4.1 }
     ],
     file_pdf: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+  }
+];
+
+export const MOCK_INFRASTRUKTUR_DESA: InfrastrukturDesa[] = [
+  {
+    id: 1,
+    nama: 'Balai Desa',
+    kategori: 'Pemerintahan',
+    deskripsi: 'Pusat pelayanan administrasi kependudukan, musyawarah desa, dan layanan aspirasi warga.',
+    ikon: 'home',
+    lokasi: 'Kawasan Balai Desa Plantungan',
+    kondisi: 'Sangat Baik'
+  },
+  {
+    id: 2,
+    nama: 'SDN Plantungan',
+    kategori: 'Pendidikan',
+    deskripsi: 'Sarana pendidikan formal dasar bagi anak-anak dan generasi penerus Desa Plantungan.',
+    ikon: 'book-open',
+    lokasi: 'Dusun Krajan',
+    kondisi: 'Baik'
+  },
+  {
+    id: 3,
+    nama: 'Masjid Jami\'',
+    kategori: 'Keagamaan',
+    deskripsi: 'Sarana ibadah utama, kegiatan keagamaan, pengajian, dan pusat silaturahmi masyarakat desa.',
+    ikon: 'moon',
+    lokasi: 'Dusun Krajan',
+    kondisi: 'Sangat Baik'
+  },
+  {
+    id: 4,
+    nama: 'Poskesdes & Posyandu',
+    kategori: 'Kesehatan',
+    deskripsi: 'Pusat layanan pemeriksaan kesehatan balita, lansia, dan ibu hamil di Desa Plantungan.',
+    ikon: 'activity',
+    lokasi: 'Kompleks Balai Desa',
+    kondisi: 'Baik'
   }
 ];

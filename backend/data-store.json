@@ -352,6 +352,44 @@
       "sasaran": "Ibu Hamil, Ibu Menyusui, dan Balita"
     }
   ],
+  "infrastrukturDesa": [
+    {
+      "id": 1,
+      "nama": "Balai Desa Plantungan",
+      "kategori": "Pemerintahan",
+      "deskripsi": "Pusat pelayanan administrasi kependudukan, musyawarah desa, pertemuan warga, dan layanan aspirasi masyarakat.",
+      "ikon": "home",
+      "lokasi": "Kompleks Balai Desa Plantungan",
+      "kondisi": "Sangat Baik"
+    },
+    {
+      "id": 2,
+      "nama": "SDN Plantungan",
+      "kategori": "Pendidikan",
+      "deskripsi": "Sarana pendidikan formal dasar yang membina generasi muda dan anak-anak warga Desa Plantungan.",
+      "ikon": "book-open",
+      "lokasi": "Dusun Krajan",
+      "kondisi": "Baik"
+    },
+    {
+      "id": 3,
+      "nama": "Masjid ",
+      "kategori": "Keagamaan",
+      "deskripsi": "Sarana ibadah utama, kegiatan keagamaan rutin, pengajian warga, dan pusat silaturahmi masyarakat desa.",
+      "ikon": "moon",
+      "lokasi": "Dusun Krajan",
+      "kondisi": "Sangat Baik"
+    },
+    {
+      "id": 4,
+      "nama": "Poskesdes & Posyandu",
+      "kategori": "Kesehatan",
+      "deskripsi": "Pusat pelayanan kesehatan dasar balita, lansia, dan ibu hamil yang terintegrasi dengan Bidan Desa.",
+      "ikon": "activity",
+      "lokasi": "Kompleks Balai Desa",
+      "kondisi": "Baik"
+    }
+  ],
   "berita": [
     {
       "id": 1,
@@ -361,7 +399,7 @@
       "tanggal_publikasi": "2026-08-17",
       "penulis": "Sekretariat Desa Plantungan",
       "dibaca": 342,
-      "thumbnail": "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&h=500&fit=crop",
+      "thumbnail": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787474604602_tes.png",
       "ringkasan": "Pemerintah Desa Plantungan menetapkan RKPDes tahun anggaran berikutnya dengan fokus ketahanan pangan dan teknologi.",
       "konten": "Musyawarah Perencanaan Pembangunan Desa (Musrenbangdes) Desa Plantungan berlangsung khidmat dan produktif di Pendopo Balai Desa. Acara ini dihadiri oleh Kepala Desa, jajaran BPD, tokoh masyarakat, dan warga."
     },
@@ -392,26 +430,40 @@
   ],
   "apbdes": [
     {
-      "id": 2,
-      "tahun": 2026,
-      "status_publikasi": "Ditetapkan (Perdes No. 04/2025)",
-      "pendapatan": 10000000,
+      "id": 3,
+      "tahun": 2025,
+      "status_publikasi": "",
+      "file_pdf": "",
+      "keterangan": "tes",
+      "pendapatan": 20000000,
       "belanja": 10000000,
-      "file_pdf": "Tes",
+      "surplus_defisit": 10000000,
+      "rincian_pendapatan": [],
+      "rincian_belanja": []
+    },
+    {
+      "id": 4,
+      "tahun": 2026,
+      "status_publikasi": "",
+      "file_pdf": "",
       "keterangan": "",
-      "surplus_defisit": 0,
-      "rincian_pendapatan": [
-        {
-          "kategori": "Bantuan Keuangan Provinsi & Lainnya",
-          "nominal": 90000000
-        }
-      ],
-      "rincian_belanja": [
-        {
-          "kategori": "Bidang Penanggulangan Bencana & Darurat",
-          "nominal": 80000000
-        }
-      ]
+      "pendapatan": 5000000,
+      "belanja": 2000000,
+      "surplus_defisit": 3000000,
+      "rincian_pendapatan": [],
+      "rincian_belanja": []
+    },
+    {
+      "id": 5,
+      "tahun": 2026,
+      "status_publikasi": "",
+      "file_pdf": "",
+      "keterangan": "",
+      "pendapatan": 3333,
+      "belanja": 33333,
+      "surplus_defisit": -30000,
+      "rincian_pendapatan": [],
+      "rincian_belanja": []
     }
   ],
   "pesanMasyarakat": [
@@ -437,6 +489,15 @@
     }
   ],
   "mediaLibrary": [
+    {
+      "name": "tes.png",
+      "key": "desa-plantungan/1787474604602_tes.png",
+      "url": "http://localhost:1337/api/media-file?key=desa-plantungan%2F1787474604602_tes.png",
+      "size": 558565,
+      "mimeType": "image/png",
+      "storage": "Cloudflare R2",
+      "createdAt": "2026-08-23T08:43:25.279Z"
+    },
     {
       "name": "1786786493690_pngwing_com__4_.png",
       "key": "desa-plantungan/1786786493690_pngwing_com__4_.png",

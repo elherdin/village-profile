@@ -308,6 +308,11 @@ const server = http.createServer(async (req, res) => {
     return sendJson(200, formatStrapiCollection(list));
   }
 
+  if (pathname === '/api/infrastruktur-desas' || pathname === '/api/infrastruktur-desa') {
+    const list = db.infrastrukturDesa || [];
+    return sendJson(200, formatStrapiCollection(list));
+  }
+
   if (pathname === '/api/pesan-masyarakats' && req.method === 'POST') {
     let body = '';
     req.on('data', chunk => { body += chunk.toString(); });
@@ -350,9 +355,9 @@ if (isR2Configured) {
 
 server.listen(PORT, () => {
   console.log(`\n======================================================`);
-  console.log(`🌾 Strapi Headless CMS Desa Plantungan Berjalan!`);
-  console.log(`☁️  Cloudflare R2: ${isR2Configured ? 'Terkoneksi' : 'Lokal (Uploads)'}`);
-  console.log(`🖥️  Admin Panel:  http://localhost:${PORT}/admin`);
-  console.log(`📡 REST API:     http://localhost:${PORT}/api/`);
+  console.log(`Strapi Headless CMS Desa Plantungan Berjalan!`);
+  console.log(`Cloudflare R2: ${isR2Configured ? 'Terkoneksi' : 'Lokal (Uploads)'}`);
+  console.log(`Admin Panel:  http://localhost:${PORT}/admin`);
+  console.log(`REST API:     http://localhost:${PORT}/api/`);
   console.log(`======================================================\n`);
 });

@@ -16,13 +16,20 @@
             </svg>
           </div>
           <div>
-            <span class="footer-brand-title">{{ profil()?.nama_desa?.toUpperCase() || 'PEMERINTAH DESA' }}</span>
+            <span class="footer-brand-title">{{ profil()?.nama_desa?.toUpperCase() || 'PEMERINTAH DESA PLANTUNGAN'
+              }}</span>
+            <span class="footer-brand-subtitle">Kecamatan Blora, Kabupaten Blora</span>
           </div>
         </div>
 
         <p class="footer-about-text">
-          Pusat Pelayanan Informasi dan Administrasi Pemerintahan Desa Plantungan.
+          Portal Resmi Pusat Informasi dan Pelayanan Administrasi Pemerintahan Desa Plantungan, Kecamatan Blora,
+          Kabupaten Blora, Jawa Tengah.
         </p>
+
+        <div class="footer-address-info" *ngIf="profil()?.alamat">
+          <span class="footer-addr-text">{{ profil()?.alamat }}</span>
+        </div>
       </div>
 
       <!-- Column 2: Navigasi Cepat -->
@@ -31,10 +38,11 @@
         <ul class="footer-nav-list">
           <li><a routerLink="/profil" class="footer-nav-link">Profil & Struktur Organisasi</a></li>
           <li><a routerLink="/data-desa" class="footer-nav-link">Infografis Data Kependudukan</a></li>
-          <li><a routerLink="/potensi" class="footer-nav-link">Potensi Desa</a></li>
-          <li><a routerLink="/kkn-2025" class="footer-nav-link">Program KKN UNY 2025</a></li>
+          <li><a routerLink="/potensi" class="footer-nav-link">Potensi & Komoditas Desa</a></li>
+          <li><a routerLink="/kkn-2025" class="footer-nav-link">Program KKN 2025</a></li>
           <li><a routerLink="/informasi-publik" class="footer-nav-link">Transparansi APBDes</a></li>
           <li><a routerLink="/berita" class="footer-nav-link">Berita & Pengumuman</a></li>
+          <li><a routerLink="/kontak" class="footer-nav-link">Kontak & Lokasi Balai Desa</a></li>
         </ul>
       </div>
 
@@ -57,45 +65,10 @@
         </ul>
 
         <div class="online-service-card">
-          <p class="online-service-title">Layanan Surat Menyurat 24 Jam:</p>
-          <p class="online-service-desc">Permohonan dokumen dapat diajukan via WhatsApp Balai Desa atau form kontak.</p>
-        </div>
-      </div>
-
-      <!-- Column 4: Kontak & Lokasi -->
-      <div class="footer-col">
-        <h4 class="footer-heading">Kontak & Lokasi Kantor</h4>
-        <div class="contact-list">
-          <div class="contact-item">
-            <svg class="contact-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span>{{ profil()?.alamat || 'Plantungan, Kec. Blora, Kabupaten Blora, Jawa Tengah 58219, Indonesia'
-              }}</span>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-            <span>{{ profil()?.telepon || '+62 812-3456-7890' }}</span>
-          </div>
-          <div class="contact-item">
-            <svg class="contact-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <span>{{ profil()?.email || 'pemdes@plantungan.desa.id' }}</span>
-          </div>
-        </div>
-
-        <div class="footer-action-row">
-          <a routerLink="/kontak" class="footer-cta-btn">
-            Kirim Pengaduan Warga →
-          </a>
+          <p class="online-service-title">Layanan Surat & Pengaduan Online:</p>
+          <p class="online-service-desc">Permohonan dokumen dan penyampaian aspirasi dapat disampaikan melalui form
+            kontak online.</p>
+          <a routerLink="/kontak" class="online-service-link">Buka Halaman Kontak & Layanan</a>
         </div>
       </div>
 
@@ -107,7 +80,7 @@
         © 2025 Pemerintah Desa Plantungan. Hak Cipta Dilindungi Undang-Undang Republik Indonesia.
       </p>
       <div class="footer-bottom-links">
-        <span class="kkn-credit">Didukung oleh: Program KKN Tematik Digital Desa 2025</span>
+        <span class="kkn-credit">Didukung oleh: Program KKN UNY 2025</span>
         <span class="sep-dot">•</span>
         <a routerLink="/kontak" class="privacy-link">Layanan Pengaduan & Kontak</a>
       </div>

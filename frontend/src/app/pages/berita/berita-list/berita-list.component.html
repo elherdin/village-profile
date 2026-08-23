@@ -29,7 +29,7 @@
 
     <!-- Filter Buttons -->
     <div class="category-buttons-row">
-      @for (cat of categories; track cat) {
+      @for (cat of allCategories(); track cat) {
       <button (click)="selectedCategory.set(cat)" type="button"
         [class]="'category-btn ' + (selectedCategory() === cat ? 'active' : '')">
         {{ cat }}

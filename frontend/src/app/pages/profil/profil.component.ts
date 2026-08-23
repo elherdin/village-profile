@@ -4,6 +4,7 @@ import { StrapiService } from '../../core/strapi.service';
 import { SectionHeaderComponent } from '../../components/section-header/section-header.component';
 import { ProfilDesa } from '../../models/profil-desa.model';
 import { PerangkatDesa } from '../../models/perangkat-desa.model';
+import { InfrastrukturDesa } from '../../models/infrastruktur-desa.model';
 
 @Component({
   selector: 'app-profil',
@@ -16,6 +17,7 @@ export class ProfilComponent implements OnInit {
   private strapi = inject(StrapiService);
   public profil = signal<ProfilDesa | null>(null);
   public perangkatList = signal<PerangkatDesa[]>([]);
+  public infrastrukturList = signal<InfrastrukturDesa[]>([]);
 
   public kades = computed(() => {
     const fromList = this.perangkatList().find(p => p.jabatan?.toLowerCase().includes('kepala desa') || p.kategori === 'Kepala Desa');
@@ -38,5 +40,6 @@ export class ProfilComponent implements OnInit {
   ngOnInit(): void {
     this.strapi.getProfilDesa().subscribe((res) => this.profil.set(res));
     this.strapi.getPerangkatDesa().subscribe((res) => this.perangkatList.set(res));
+    this.strapi.getInfrastrukturDesa().subscribe((res) => this.infrastrukturList.set(res));
   }
 }

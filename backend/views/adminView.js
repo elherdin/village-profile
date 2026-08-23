@@ -2,7 +2,7 @@ const { PORT, r2BucketName } = require('../config/env');
 const { isR2Configured } = require('../config/s3Client');
 
 function renderAdminDashboardHtml() {
-  const r2StatusText = isR2Configured ? '🟢 Cloudflare R2 Aktif' : '🟡 Local Storage Mode';
+  const r2StatusText = isR2Configured ? 'Cloudflare R2 Aktif' : 'Local Storage Mode';
   const r2StatusBg = isR2Configured ? '#065f46' : '#854d0e';
   const r2StatusColor = isR2Configured ? '#34d399' : '#fde047';
 
@@ -289,7 +289,7 @@ function renderAdminDashboardHtml() {
   <!-- Sidebar Navigation -->
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-icon">🌱</div>
+      
       <div class="brand-text">
         <h2>Strapi Headless CMS</h2>
         <p>Desa Plantungan + Cloudflare R2</p>
@@ -312,6 +312,10 @@ function renderAdminDashboardHtml() {
       </div>
 
       <div class="nav-label">Collection Types</div>
+      <div class="nav-item" onclick="switchView('infrastrukturDesa', this)">
+        <span>Infrastruktur Desa</span>
+        <span class="badge" id="badge-infrastruktur">0</span>
+      </div>
       <div class="nav-item" onclick="switchView('potensiDesa', this)">
         <span>Potensi Desa</span>
         <span class="badge" id="badge-potensi">0</span>
@@ -341,7 +345,7 @@ function renderAdminDashboardHtml() {
         <span style="font-size:11px; padding:2px 8px; border-radius:4px; background:${r2StatusBg}; color:${r2StatusColor}; font-weight:700;">
           ${r2StatusText}
         </span>
-        <a href="http://localhost:4200" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:700;">Lihat Web ↗</a>
+        <a href="http://localhost:4200" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:700;">Lihat Web </a>
       </div>
       <span style="font-size:10px; color:#64748b;">Bucket: ${r2BucketName}</span>
     </div>
@@ -394,6 +398,7 @@ function renderAdminDashboardHtml() {
         if (el) el.innerText = val || 0;
       };
       setBadge('badge-media', dbState.mediaLibrary?.length);
+      setBadge('badge-infrastruktur', dbState.infrastrukturDesa?.length);
       setBadge('badge-potensi', dbState.potensiDesa?.length);
       setBadge('badge-kkn', dbState.programKKN?.length);
       setBadge('badge-berita', dbState.berita?.length);
@@ -435,7 +440,7 @@ function renderAdminDashboardHtml() {
         });
         const uploaded = await res.json();
         if (uploaded.url) {
-          showToast('✅ Berhasil diunggah ke Cloudflare R2!');
+          showToast('Berhasil diunggah ke Cloudflare R2!');
           
           if (targetInputId) {
             const inputEl = document.getElementById(targetInputId);
@@ -456,7 +461,7 @@ function renderAdminDashboardHtml() {
           }
           await loadData();
         } else {
-          showToast('❌ Gagal upload: ' + (uploaded.error || 'Terjadi kesalahan'));
+          showToast('Gagal upload: ' + (uploaded.error || 'Terjadi kesalahan'));
         }
       };
       reader.readAsDataURL(file);
@@ -468,7 +473,7 @@ function renderAdminDashboardHtml() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ field, url })
       });
-      showToast('🌟 ' + (label || field) + ' Berhasil Ditetapkan!');
+      showToast('' + (label || field) + ' Berhasil Ditetapkan!');
       await loadData();
     }
 
@@ -498,10 +503,10 @@ function renderAdminDashboardHtml() {
           showToast('File berhasil dihapus dari Cloudflare R2!');
           await loadData();
         } else {
-          showToast('❌ Gagal menghapus: ' + (result.error || 'Terjadi kesalahan'));
+          showToast('Gagal menghapus: ' + (result.error || 'Terjadi kesalahan'));
         }
       } catch (err) {
-        showToast('❌ Error jaringan: ' + err.message);
+        showToast('Error jaringan: ' + err.message);
       }
     }
 
@@ -514,10 +519,10 @@ function renderAdminDashboardHtml() {
           showToast('Berhasil menyinkronkan ' + result.count + ' file dari Cloudflare R2!');
           await loadData();
         } else {
-          showToast('❌ Gagal sync: ' + (result.error || 'Gagal terhubung'));
+          showToast('Gagal sync: ' + (result.error || 'Gagal terhubung'));
         }
       } catch (err) {
-        showToast('❌ Error sync: ' + err.message);
+        showToast('Error sync: ' + err.message);
       }
     }
 
@@ -536,7 +541,7 @@ function renderAdminDashboardHtml() {
         } else {
           cardsHtml = '<div class="media-grid">' + list.map(function(m) {
             var isImg = (m.mimeType && m.mimeType.indexOf('image') !== -1) || (m.name && /\\.(jpg|jpeg|png|webp|gif|svg|avif)$/i.test(m.name));
-            var previewHtml = isImg ? '<img src="' + m.url + '">' : '<span style="font-size:28px;">📄</span>';
+            var previewHtml = isImg ? '<img src="' + m.url + '">' : '<span style="font-size:28px;">File</span>';
             var sizeKb = m.size ? (m.size / 1024).toFixed(1) + ' KB' : 'R2 Object';
             var safeKey = encodeURIComponent(m.key || '');
             var safeName = encodeURIComponent(m.name || '');
@@ -549,7 +554,7 @@ function renderAdminDashboardHtml() {
               '<div class="media-preview">' + previewHtml + '</div>' +
               '<div class="media-info">' +
                 '<strong style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="' + m.name + '">' + m.name + '</strong>' +
-                '<span style="color:var(--text-muted); font-size:10px;">' + sizeKb + ' • ' + (m.storage || 'Cloudflare R2') + '</span>' +
+                '<span style="color:var(--text-muted); font-size:10px;">' + sizeKb + ' - ' + (m.storage || 'Cloudflare R2') + '</span>' +
                 '<div style="display:flex; flex-direction:column; gap:4px; margin-top:6px;">' +
                   '<div style="display:flex; gap:4px;">' +
                     '<button class="btn btn-outline" style="padding:4px 6px; font-size:10px; flex:1; justify-content:center;" onclick="navigator.clipboard.writeText(decodeURIComponent(\\'' + safeUrl + '\\')); showToast(\\'URL Berhasil Disalin!\\')">Salin URL</button>' +
@@ -572,19 +577,19 @@ function renderAdminDashboardHtml() {
         '<div class="panel">' +
           '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">' +
             '<h3 style="font-size:15px; font-weight:700;">Daftar File Tersimpan (' + list.length + ')</h3>' +
-            '<button class="btn btn-outline" style="font-size:11px; padding:6px 12px;" onclick="syncCloudflareR2()">🔄 Sync dari Cloudflare R2</button>' +
+            '<button class="btn btn-outline" style="font-size:11px; padding:6px 12px;" onclick="syncCloudflareR2()">Sync dari Cloudflare R2</button>' +
           '</div>' +
           cardsHtml +
         '</div>';
       } else if (currentView === 'profilDesa') {
         titleEl.innerText = 'Profil & Informasi Desa';
-        actionEl.innerHTML = '<button class="btn btn-success" onclick="saveProfilDesa()">💾 Simpan Perubahan Profil</button>';
+        actionEl.innerHTML = '<button class="btn btn-success" onclick="saveProfilDesa()">Simpan Perubahan Profil</button>';
         const p = dbState.profilDesa || {};
         contentEl.innerHTML = \`
           <div class="panel">
             <!-- Informasi Kontak & Lokasi Kantor Desa -->
             <div style="background:#0f172a; padding:16px; border-radius:12px; border:1px solid var(--card-border); margin-bottom:20px;">
-              <h3 style="font-size:14px; font-weight:700; color:#38bdf8; margin:0 0 12px 0;">📍 Informasi Lokasi & Kontak Desa</h3>
+              <h3 style="font-size:14px; font-weight:700; color:#38bdf8; margin:0 0 12px 0;">Informasi Lokasi & Kontak Desa</h3>
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:12px;">
                 <div>
                   <label style="font-size:12px; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">Nama Desa</label>
@@ -685,6 +690,50 @@ function renderAdminDashboardHtml() {
             </div>
           </div>
         \`;
+      } else if (currentView === 'infrastrukturDesa') {
+        titleEl.innerText = 'Infrastruktur & Fasilitas Desa (Collection Type)';
+        actionEl.innerHTML = '<button class="btn btn-primary" onclick="openCreateModal(\\'infrastrukturDesa\\')">+ Tambah Fasilitas Baru</button>';
+        const list = dbState.infrastrukturDesa || [];
+        contentEl.innerHTML = \`
+          <div class="panel">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama Sarana / Fasilitas</th>
+                  <th>Kategori</th>
+                  <th>Ikon Feather</th>
+                  <th>Kondisi</th>
+                  <th>Lokasi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                \${list.map((item) => {
+                  const ik = item.ikon || 'home';
+                  let badgeKondisiBg = '#065f46';
+                  let badgeKondisiColor = '#34d399';
+                  if (item.kondisi === 'Perlu Perbaikan') {
+                    badgeKondisiBg = '#451a03';
+                    badgeKondisiColor = '#fbbf24';
+                  }
+                  return \`
+                  <tr>
+                    <td><strong>\${item.nama}</strong><br><span style="font-size:11px; color:var(--text-muted);">\${item.deskripsi || '-'}</span></td>
+                    <td><span class="badge" style="background:#1e3a8a; color:#93c5fd;">\${item.kategori || '-'}</span></td>
+                    <td><span class="badge" style="background:#0f172a; color:#38bdf8; border:1px solid #0284c7; font-family:monospace;">\${ik}</span></td>
+                    <td><span class="badge" style="background:\${badgeKondisiBg}; color:\${badgeKondisiColor}; font-weight:600;">\${item.kondisi || 'Baik'}</span></td>
+                    <td><span style="font-size:12px; color:#cbd5e1;">\${item.lokasi || '-'}</span></td>
+                    <td>
+                      <button class="btn btn-outline" style="padding:4px 8px; font-size:11px;" onclick="openEditModal('infrastrukturDesa', \${item.id})">Edit</button>
+                      <button class="btn btn-danger" style="padding:4px 8px; font-size:11px;" onclick="deleteItem('infrastrukturDesa', \${item.id})">Hapus</button>
+                    </td>
+                  </tr>
+                  \`;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        \`;
       } else if (currentView === 'potensiDesa') {
         titleEl.innerText = 'Potensi Desa (Collection Type)';
         actionEl.innerHTML = '<button class="btn btn-primary" onclick="openCreateModal(\\'potensiDesa\\')">+ Tambah Potensi Baru</button>';
@@ -783,7 +832,7 @@ function renderAdminDashboardHtml() {
                   }
                   const galeri = Array.isArray(item.galeri) && item.galeri.length > 0 ? item.galeri : (item.dokumentasi ? [item.dokumentasi] : []);
                   const mainPhoto = galeri[0] || item.dokumentasi || '';
-                  const photoBadge = galeri.length > 1 ? ('<span style="position:absolute; bottom:2px; right:2px; background:rgba(0,0,0,0.8); color:#34d399; font-size:10px; padding:1px 5px; border-radius:4px; font-weight:700; border:1px solid #059669;">📸 ' + galeri.length + '</span>') : '';
+                  const photoBadge = galeri.length > 1 ? ('<span style="position:absolute; bottom:2px; right:2px; background:rgba(0,0,0,0.8); color:#34d399; font-size:10px; padding:1px 5px; border-radius:4px; font-weight:700; border:1px solid #059669;">' + galeri.length + '</span>') : '';
                   
                   let dateDisplay = item.tanggal_pelaksanaan || '-';
                   if (item.tanggal_mulai && item.tanggal_selesai) {
@@ -800,7 +849,7 @@ function renderAdminDashboardHtml() {
                     <td><strong>\${item.judul}</strong></td>
                     <td><span class="badge" style="background:#1e3a8a; color:#93c5fd;">\${item.divisi}</span></td>
                     <td><span class="badge" style="background:#0f172a; color:#38bdf8; border:1px solid #0284c7; font-weight:600;">\${item.jumlah_anggota || '-'}</span></td>
-                    <td><span style="font-size:12px; color:#cbd5e1; font-weight:500;">🗓️ \${dateDisplay}</span></td>
+                    <td><span style="font-size:12px; color:#cbd5e1; font-weight:500;">\${dateDisplay}</span></td>
                     <td><span class="badge" style="background:\${stBg}; color:\${stColor}; font-weight:600;">\${st}</span></td>
                     <td>
                       <button class="btn btn-outline" style="padding:4px 8px; font-size:11px;" onclick="openEditModal('programKKN', \${item.id})">Edit</button>
@@ -816,13 +865,17 @@ function renderAdminDashboardHtml() {
       } else if (currentView === 'apbdes') {
         titleEl.innerText = 'Transparansi APBDes (Collection Type)';
         actionEl.innerHTML = '<button class="btn btn-primary" onclick="openCreateModal(\\'apbdes\\')">+ Tambah Tahun Anggaran</button>';
-        const list = dbState.apbdes || [];
+        const list = [...(dbState.apbdes || [])].sort((a, b) => {
+          const diffYear = (Number(b.tahun) || 0) - (Number(a.tahun) || 0);
+          if (diffYear !== 0) return diffYear;
+          return (Number(b.id) || 0) - (Number(a.id) || 0);
+        });
         contentEl.innerHTML = \`
           <div class="panel">
             <table>
               <thead>
                 <tr>
-                  <th>Tahun</th>
+                  <th>Tahun Anggaran</th>
                   <th>Total Pendapatan</th>
                   <th>Total Belanja (Pengeluaran)</th>
                   <th>Surplus / (Defisit)</th>
@@ -833,7 +886,10 @@ function renderAdminDashboardHtml() {
               <tbody>
                 \${list.map((item) => \`
                   <tr>
-                    <td><strong>\${item.tahun}</strong></td>
+                    <td>
+                      <strong>\${item.tahun}</strong>
+                      \${item.keterangan ? \`<div style="font-size:11px; color:var(--text-muted); max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="\${item.keterangan}">\${item.keterangan}</div>\` : ''}
+                    </td>
                     <td style="color:#34d399; font-weight:700;">Rp \${Number(item.pendapatan || 0).toLocaleString('id-ID')}</td>
                     <td style="color:#f87171; font-weight:700;">Rp \${Number(item.belanja || 0).toLocaleString('id-ID')}</td>
                     <td style="color:#60a5fa; font-weight:600;">Rp \${Number(item.surplus_defisit ?? ((item.pendapatan || 0) - (item.belanja || 0))).toLocaleString('id-ID')}</td>
@@ -850,7 +906,7 @@ function renderAdminDashboardHtml() {
         \`;
       } else if (currentView === 'dataKependudukan') {
         titleEl.innerText = 'Data Kependudukan (Single Type)';
-        actionEl.innerHTML = '<button class="btn btn-success" onclick="saveDataKependudukan()">💾 Simpan Data Kependudukan</button>';
+        actionEl.innerHTML = '<button class="btn btn-success" onclick="saveDataKependudukan()">Simpan Data Kependudukan</button>';
         const d = dbState.dataKependudukan || {};
         
         const listDusun = Array.isArray(d.distribusi_dusun) ? d.distribusi_dusun : [];
@@ -876,7 +932,7 @@ function renderAdminDashboardHtml() {
             '<div style="flex:2;">' +
               '<input type="number" class="row-dusun-jiwa" value="' + jiwa + '" placeholder="Total Jiwa" style="width:100%; font-size:12px; background:#022c22; border:1px solid #059669; color:#34d399; font-weight:700;" readonly>' +
             '</div>' +
-            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.dusun-item-row\\x27).remove(); updateDusunTotals();" title="Hapus Dusun">🗑️</button>' +
+            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.dusun-item-row\\x27).remove(); updateDusunTotals();" title="Hapus Dusun">Hapus</button>' +
           '</div>';
         }).join('');
 
@@ -890,7 +946,7 @@ function renderAdminDashboardHtml() {
             '<div style="flex:2;">' +
               '<input type="number" class="row-usia-jumlah" value="' + total + '" placeholder="Total Jiwa" style="width:100%; font-size:12px;" oninput="updateUsiaTotals()" required>' +
             '</div>' +
-            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.usia-item-row\\x27).remove(); updateUsiaTotals();" title="Hapus Usia">🗑️</button>' +
+            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.usia-item-row\\x27).remove(); updateUsiaTotals();" title="Hapus Usia">Hapus</button>' +
           '</div>';
         }).join('');
 
@@ -903,7 +959,7 @@ function renderAdminDashboardHtml() {
             '<div style="flex:2;">' +
               '<input type="number" class="row-pendidikan-jumlah" value="' + (item.jumlah || 0) + '" placeholder="Jumlah Warga" style="width:100%; font-size:12px;" oninput="updatePendidikanTotals()" required>' +
             '</div>' +
-            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pendidikan-item-row\\x27).remove(); updatePendidikanTotals();" title="Hapus Pendidikan">🗑️</button>' +
+            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pendidikan-item-row\\x27).remove(); updatePendidikanTotals();" title="Hapus Pendidikan">Hapus</button>' +
           '</div>';
         }).join('');
 
@@ -916,7 +972,7 @@ function renderAdminDashboardHtml() {
             '<div style="flex:2;">' +
               '<input type="number" class="row-pekerjaan-jumlah" value="' + (item.jumlah || 0) + '" placeholder="Jumlah Pekerja" style="width:100%; font-size:12px;" oninput="updatePekerjaanTotals()" required>' +
             '</div>' +
-            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pekerjaan-item-row\\x27).remove(); updatePekerjaanTotals();" title="Hapus Pekerjaan">🗑️</button>' +
+            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pekerjaan-item-row\\x27).remove(); updatePekerjaanTotals();" title="Hapus Pekerjaan">Hapus</button>' +
           '</div>';
         }).join('');
 
@@ -925,7 +981,7 @@ function renderAdminDashboardHtml() {
           <div class="panel" style="margin-bottom: 20px; border: 1px solid #1e293b;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
               <h3 style="font-size:15px; font-weight:700; margin:0; color:var(--text-main);">Statistik Umum Kependudukan</h3>
-              <span style="font-size:11px; color:#38bdf8; background:#0c4a6e; padding:3px 10px; border-radius:6px; border:1px solid #0284c7; font-weight:600;">🔒 Tidak Bisa Diedit (Tersinkron Otomatis dari Rincian Dusun)</span>
+              <span style="font-size:11px; color:#38bdf8; background:#0c4a6e; padding:3px 10px; border-radius:6px; border:1px solid #0284c7; font-weight:600;">Tidak Bisa Diedit (Tersinkron Otomatis dari Rincian Dusun)</span>
             </div>
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:14px;">
               <div class="form-group" style="margin:0;">
@@ -1200,7 +1256,7 @@ function renderAdminDashboardHtml() {
         '<div style="flex:2;">' +
           '<input type="number" class="row-dusun-jiwa" value="' + jiwa + '" placeholder="Total Jiwa" style="width:100%; font-size:12px; background:#022c22; border:1px solid #059669; color:#34d399; font-weight:700;" readonly>' +
         '</div>' +
-        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.dusun-item-row\\x27).remove(); updateDusunTotals();" title="Hapus Dusun">🗑️</button>';
+        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.dusun-item-row\\x27).remove(); updateDusunTotals();" title="Hapus Dusun">Hapus</button>';
       container.appendChild(div);
       updateDusunTotals();
     }
@@ -1228,7 +1284,7 @@ function renderAdminDashboardHtml() {
         '<div style="flex:2;">' +
           '<input type="number" class="row-usia-jumlah" value="' + jumlah + '" placeholder="Total Jiwa" style="width:100%; font-size:12px;" oninput="updateUsiaTotals()" required>' +
         '</div>' +
-        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.usia-item-row\\x27).remove(); updateUsiaTotals();" title="Hapus Usia">🗑️</button>';
+        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.usia-item-row\\x27).remove(); updateUsiaTotals();" title="Hapus Usia">Hapus</button>';
       container.appendChild(div);
       updateUsiaTotals();
     }
@@ -1256,7 +1312,7 @@ function renderAdminDashboardHtml() {
         '<div style="flex:2;">' +
           '<input type="number" class="row-pendidikan-jumlah" value="' + jumlah + '" placeholder="Jumlah Warga" style="width:100%; font-size:12px;" oninput="updatePendidikanTotals()" required>' +
         '</div>' +
-        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pendidikan-item-row\\x27).remove(); updatePendidikanTotals();" title="Hapus Pendidikan">🗑️</button>';
+        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pendidikan-item-row\\x27).remove(); updatePendidikanTotals();" title="Hapus Pendidikan">Hapus</button>';
       container.appendChild(div);
       updatePendidikanTotals();
     }
@@ -1284,7 +1340,7 @@ function renderAdminDashboardHtml() {
         '<div style="flex:2;">' +
           '<input type="number" class="row-pekerjaan-jumlah" value="' + jumlah + '" placeholder="Jumlah Pekerja" style="width:100%; font-size:12px;" oninput="updatePekerjaanTotals()" required>' +
         '</div>' +
-        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pekerjaan-item-row\\x27).remove(); updatePekerjaanTotals();" title="Hapus Sektor">🗑️</button>';
+        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.pekerjaan-item-row\\x27).remove(); updatePekerjaanTotals();" title="Hapus Sektor">Hapus</button>';
       container.appendChild(div);
       updatePekerjaanTotals();
     }
@@ -1306,7 +1362,7 @@ function renderAdminDashboardHtml() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ profilDesa: dbState.profilDesa })
       });
-      showToast('✅ Profil & Kontak Desa Berhasil Disimpan!');
+      showToast('Profil & Kontak Desa Berhasil Disimpan!');
       await loadData();
     }
 
@@ -1385,7 +1441,7 @@ function renderAdminDashboardHtml() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dataKependudukan: dbState.dataKependudukan })
       });
-      showToast('✅ Data kependudukan & statistik berhasil disimpan!');
+      showToast('Data kependudukan & statistik berhasil disimpan!');
       await loadData();
     }
 
@@ -1427,17 +1483,56 @@ function renderAdminDashboardHtml() {
           <div class="form-group"><label>Lokasi Wilayah</label><input type="text" name="lokasi" value="\${data.lokasi || ''}" placeholder="contoh: Wilayah Persawahan / Desa Plantungan"></div>
           <div class="form-group"><label>Deskripsi & Ulasan Potensi</label><textarea name="deskripsi" rows="5" placeholder="Penjelasan mengenai potensi dan keterkaitannya dengan perekonomian warga desa...">\${data.deskripsi || ''}</textarea></div>
         \`;
+      } else if (col === 'infrastrukturDesa') {
+        const ik = data.ikon || 'home';
+        const kd = data.kondisi || 'Baik';
+        return \`
+          <div class="form-group"><label>Nama Sarana / Fasilitas / Infrastruktur</label><input type="text" name="nama" value="\${data.nama || ''}" placeholder="contoh: Balai Desa / SDN Plantungan / Masjid" required></div>
+          <div class="form-group"><label>Kategori</label><input type="text" name="kategori" value="\${data.kategori || ''}" placeholder="contoh: Pemerintahan / Pendidikan / Keagamaan / Kesehatan / Fasilitas Umum" required></div>
+          <div class="form-group">
+            <label>Ikon Feather (Pilih Ikon Sesuai Jenis Fasilitas)</label>
+            <select name="ikon" style="width:100%; font-size:13px; padding:8px 12px; border-radius:8px; background:#0f172a; color:#38bdf8; border:1px solid #334155; font-weight:600;">
+              <option value="home" \${ik==='home'?'selected':''}>home (Gedung / Balai Desa / Kantor)</option>
+              <option value="book-open" \${ik==='book-open'?'selected':''}>book-open (Pendidikan / Sekolah / Perpustakaan)</option>
+              <option value="moon" \${ik==='moon'?'selected':''}>moon (Keagamaan / Masjid / Musholla)</option>
+              <option value="activity" \${ik==='activity'?'selected':''}>activity (Kesehatan / Posyandu / Polindes)</option>
+              <option value="tool" \${ik==='tool'?'selected':''}>tool (Jalan / Jembatan / Irigasi / Fisik)</option>
+              <option value="layers" \${ik==='layers'?'selected':''}>layers (Sarana Umum / Lapangan / Balai Warga)</option>
+              <option value="map-pin" \${ik==='map-pin'?'selected':''}>map-pin (Lokasi Wisata / Titik Khusus)</option>
+              <option value="shield" \${ik==='shield'?'selected':''}>shield (Keamanan / Pos Kamling)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Kondisi Fasilitas</label>
+            <select name="kondisi" style="width:100%; font-size:13px; padding:8px 12px; border-radius:8px; background:#0f172a; color:#34d399; border:1px solid #059669; font-weight:600;">
+              <option value="Sangat Baik" \${kd==='Sangat Baik'?'selected':''}>Sangat Baik</option>
+              <option value="Baik" \${kd==='Baik'?'selected':''}>Baik</option>
+              <option value="Perlu Perbaikan" \${kd==='Perlu Perbaikan'?'selected':''}>Perlu Perbaikan</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Lokasi Fasilitas</label><input type="text" name="lokasi" value="\${data.lokasi || ''}" placeholder="contoh: Dusun Krajan / Kompleks Balai Desa"></div>
+          <div class="form-group"><label>Deskripsi Sarana / Fasilitas</label><textarea name="deskripsi" rows="3" placeholder="Jelaskan fungsi atau peranan fasilitas ini...">\${data.deskripsi || ''}</textarea></div>
+        \`;
       } else if (col === 'berita') {
+        const standardCats = ['Pemerintahan', 'Kegiatan Warga', 'Pengumuman', 'Kesehatan & Posyandu'];
+        const currentCat = data.kategori || 'Pemerintahan';
+        const isCustom = Boolean(currentCat && !standardCats.includes(currentCat));
         return \`
           <div class="form-group"><label>Judul Berita</label><input type="text" name="judul" value="\${data.judul || ''}" required></div>
           <div class="form-group"><label>Slug URL</label><input type="text" name="slug" value="\${data.slug || ''}" required></div>
-          <div class="form-group"><label>Kategori</label>
-            <select name="kategori">
-              <option value="Pemerintahan" \${data.kategori==='Pemerintahan'?'selected':''}>Pemerintahan</option>
-              <option value="Kegiatan Warga" \${data.kategori==='Kegiatan Warga'?'selected':''}>Kegiatan Warga</option>
-              <option value="Pengumuman" \${data.kategori==='Pengumuman'?'selected':''}>Pengumuman</option>
-              <option value="Kesehatan & Posyandu" \${data.kategori==='Kesehatan & Posyandu'?'selected':''}>Kesehatan & Posyandu</option>
+          <div class="form-group">
+            <label>Kategori Berita</label>
+            <select name="kategori_select" id="m-berita-kat-select" onchange="toggleBeritaKategoriCustom(this.value)" style="width:100%; font-size:13px; padding:8px 12px; border-radius:8px; background:#0f172a; color:#f8fafc; border:1px solid #334155;">
+              <option value="Pemerintahan" \${!isCustom && currentCat==='Pemerintahan'?'selected':''}>Pemerintahan</option>
+              <option value="Kegiatan Warga" \${!isCustom && currentCat==='Kegiatan Warga'?'selected':''}>Kegiatan Warga</option>
+              <option value="Pengumuman" \${!isCustom && currentCat==='Pengumuman'?'selected':''}>Pengumuman</option>
+              <option value="Kesehatan & Posyandu" \${!isCustom && currentCat==='Kesehatan & Posyandu'?'selected':''}>Kesehatan & Posyandu</option>
+              <option value="Lainnya" \${isCustom?'selected':''}>+ Lainnya (Ketik Sendiri...)</option>
             </select>
+          </div>
+          <div class="form-group" id="m-berita-kat-custom-box" style="display:\${isCustom ? 'block' : 'none'}; background:#0b1329; padding:10px 12px; border-radius:8px; border:1px solid #1e293b; margin-top:-6px; margin-bottom:12px;">
+            <label style="color:#38bdf8; font-size:12px; margin-bottom:4px; display:block; font-weight:600;">Ketik Kategori Kustom Anda:</label>
+            <input type="text" name="kategori_custom" id="m-berita-kat-custom" value="\${isCustom ? currentCat : ''}" placeholder="contoh: Pertanian / Inovasi Desa / UMKM / Olahraga" style="width:100%; font-size:13px;">
           </div>
           <div class="form-group"><label>Tanggal Publikasi</label><input type="date" name="tanggal_publikasi" value="\${data.tanggal_publikasi || new Date().toISOString().split('T')[0]}"></div>
           <div class="form-group">
@@ -1478,7 +1573,7 @@ function renderAdminDashboardHtml() {
               'Ganti' +
               '<input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], \\x27' + uid + '\\x27)">' +
             '</label>' +
-            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.kkn-photo-item\\x27).remove()" title="Hapus Foto">🗑️</button>' +
+            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.kkn-photo-item\\x27).remove()" title="Hapus Foto">Hapus</button>' +
           '</div>';
         }).join('');
 
@@ -1499,7 +1594,7 @@ function renderAdminDashboardHtml() {
 
           <!-- Tanggal Pelaksanaan (Dari tanggal sekian ke sekian) -->
           <div class="form-group" style="background:#0b1329; padding:12px; border-radius:10px; border:1px solid #1e293b; margin-bottom:14px;">
-            <label style="color:#38bdf8; font-weight:700; margin-bottom:8px; display:block;">🗓️ Rentang Tanggal Pelaksanaan Kegiatan</label>
+            <label style="color:#38bdf8; font-weight:700; margin-bottom:8px; display:block;">Rentang Tanggal Pelaksanaan Kegiatan</label>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
               <div>
                 <label style="font-size:11px; color:#94a3b8; display:block; margin-bottom:4px;">Dari Tanggal (Mulai):</label>
@@ -1519,12 +1614,12 @@ function renderAdminDashboardHtml() {
           <div class="form-group" style="background:#0b1329; padding:12px; border-radius:10px; border:1px solid #1e293b; margin-bottom:14px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
               <div>
-                <label style="color:#34d399; font-weight:700; margin:0;">📸 Galeri Foto Dokumentasi (Bisa Lebih Dari 1 Foto)</label>
+                <label style="color:#34d399; font-weight:700; margin:0;">Galeri Foto Dokumentasi (Bisa Lebih Dari 1 Foto)</label>
                 <p style="font-size:11px; color:var(--text-muted); margin:2px 0 0 0;">Upload beberapa foto kegiatan sekaligus untuk ditampilkan sebagai pop-up slider di website.</p>
               </div>
               <div style="display:flex; gap:6px;">
                 <label class="upload-inline-btn" style="margin:0; font-size:11px; padding:5px 12px; cursor:pointer;">
-                  ☁️ Upload Banyak Foto Sekaligus
+                  Upload Banyak Foto Sekaligus
                   <input type="file" multiple accept="image/*" style="display:none;" onchange="handleMultipleKknUpload(this.files)">
                 </label>
                 <button type="button" class="btn btn-outline" style="font-size:11px; padding:4px 10px;" onclick="addKknPhotoRow()">+ Tambah URL</button>
@@ -1540,63 +1635,54 @@ function renderAdminDashboardHtml() {
           <div class="form-group"><label>Deskripsi Program</label><textarea name="deskripsi" rows="3">\${data.deskripsi || ''}</textarea></div>
         \`;
       } else if (col === 'apbdes') {
-        const listPendapatan = (Array.isArray(data.rincian_pendapatan) && data.rincian_pendapatan.length > 0)
-          ? data.rincian_pendapatan
-          : [
-              { kategori: 'Dana Desa (APBN)', nominal: 920000000, persentase: 49.8 },
-              { kategori: 'Alokasi Dana Desa / ADD (APBD Kab)', nominal: 580000000, persentase: 31.4 },
-              { kategori: 'Bagi Hasil Pajak & Retribusi Daerah', nominal: 145000000, persentase: 7.9 },
-              { kategori: 'Pendapatan Asli Desa (PADes)', nominal: 110600000, persentase: 6.0 },
-              { kategori: 'Bantuan Keuangan Provinsi & Lainnya', nominal: 90000000, persentase: 4.9 }
-            ];
-
-        const listBelanja = (Array.isArray(data.rincian_belanja) && data.rincian_belanja.length > 0)
-          ? data.rincian_belanja
-          : [
-              { kategori: 'Bidang Penyelenggaraan Pemerintahan Desa', nominal: 540000000, persentase: 29.7 },
-              { kategori: 'Bidang Pelaksanaan Pembangunan Desa', nominal: 760400000, persentase: 41.8 },
-              { kategori: 'Bidang Pembinaan Kemasyarakatan', nominal: 180000000, persentase: 9.9 },
-              { kategori: 'Bidang Pemberdayaan Masyarakat Desa', nominal: 260000000, persentase: 14.3 },
-              { kategori: 'Bidang Penanggulangan Bencana & Darurat', nominal: 80000000, persentase: 4.4 }
-            ];
+        const isEdit = Boolean(data && (data.id || data.tahun));
+        const listPendapatan = (isEdit && Array.isArray(data.rincian_pendapatan)) ? data.rincian_pendapatan : [];
+        const listBelanja = (isEdit && Array.isArray(data.rincian_belanja)) ? data.rincian_belanja : [];
 
         const rowsPendapatanHtml = listPendapatan.map(function(item) {
+          const formattedNom = item.nominal ? formatRupiahValue(item.nominal) : '';
           return '<div class="apb-item-row" style="display:flex; gap:8px; align-items:center; background:#0f172a; padding:8px 10px; border-radius:8px; border:1px solid var(--card-border); margin-bottom:6px;">' +
             '<input type="text" class="row-pendapatan-kategori" value="' + (item.kategori || '') + '" placeholder="Nama Sumber Pendapatan..." style="flex:3; font-size:12px;" required>' +
-            '<input type="number" class="row-pendapatan-nominal" value="' + (item.nominal || 0) + '" placeholder="Nominal (Rp)" style="flex:2; font-size:12px;" required>' +
-            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove()" title="Hapus Pos">🗑️</button>' +
+            '<input type="text" class="row-pendapatan-nominal" value="' + formattedNom + '" placeholder="Rp 0" style="flex:2; font-size:12px; font-weight:600; color:#34d399;" oninput="handleRupiahInput(this)" required>' +
+            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove(); updateApbCalculations();" title="Hapus Pos">Hapus</button>' +
           '</div>';
         }).join('');
 
         const rowsBelanjaHtml = listBelanja.map(function(item) {
+          const formattedNom = item.nominal ? formatRupiahValue(item.nominal) : '';
           return '<div class="apb-item-row" style="display:flex; gap:8px; align-items:center; background:#0f172a; padding:8px 10px; border-radius:8px; border:1px solid var(--card-border); margin-bottom:6px;">' +
             '<input type="text" class="row-belanja-kategori" value="' + (item.kategori || '') + '" placeholder="Nama Bidang Pengeluaran..." style="flex:3; font-size:12px;" required>' +
-            '<input type="number" class="row-belanja-nominal" value="' + (item.nominal || 0) + '" placeholder="Nominal (Rp)" style="flex:2; font-size:12px;" required>' +
-            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove()" title="Hapus Pos">🗑️</button>' +
+            '<input type="text" class="row-belanja-nominal" value="' + formattedNom + '" placeholder="Rp 0" style="flex:2; font-size:12px; font-weight:600; color:#f87171;" oninput="handleRupiahInput(this)" required>' +
+            '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove(); updateApbCalculations();" title="Hapus Pos">Hapus</button>' +
           '</div>';
         }).join('');
 
+        const tahunVal = isEdit ? (data.tahun || '') : new Date().getFullYear();
+        const statusVal = isEdit ? (data.status_publikasi || '') : '';
+        const formattedPend = (isEdit && data.pendapatan) ? formatRupiahValue(data.pendapatan) : '';
+        const formattedBel = (isEdit && data.belanja) ? formatRupiahValue(data.belanja) : '';
+
         return \`
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
-            <div class="form-group"><label>Tahun Anggaran</label><input type="number" name="tahun" value="\${data.tahun || 2025}" required></div>
-            <div class="form-group"><label>Status Publikasi</label><input type="text" name="status_publikasi" value="\${data.status_publikasi || 'Ditetapkan (Perdes No. 04/2025)'}"></div>
+            <div class="form-group"><label>Tahun Anggaran</label><input type="number" name="tahun" value="\${tahunVal}" placeholder="contoh: 2025" required></div>
+            <div class="form-group"><label>Status Publikasi</label><input type="text" name="status_publikasi" value="\${statusVal}" placeholder="contoh: Ditetapkan (Perdes No. 04/2025)"></div>
           </div>
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:16px;">
             <div class="form-group">
-              <label style="color:#34d399; font-weight:700;">📈 Total Pendapatan (Rp)</label>
-              <input type="number" name="pendapatan" id="apb-input-pendapatan" value="\${data.pendapatan || 0}" oninput="updateApbCalculations()" required>
+              <label style="color:#34d399; font-weight:700;">Total Pendapatan</label>
+              <input type="text" name="pendapatan_formatted" id="apb-input-pendapatan" value="\${formattedPend}" placeholder="Rp 0" style="font-weight:700; color:#34d399;" oninput="handleRupiahInput(this)" required>
             </div>
             <div class="form-group">
-              <label style="color:#f87171; font-weight:700;">📉 Total Belanja / Pengeluaran (Rp)</label>
-              <input type="number" name="belanja" id="apb-input-belanja" value="\${data.belanja || 0}" oninput="updateApbCalculations()" required>
+              <label style="color:#f87171; font-weight:700;">Total Belanja / Pengeluaran</label>
+              <input type="text" name="belanja_formatted" id="apb-input-belanja" value="\${formattedBel}" placeholder="Rp 0" style="font-weight:700; color:#f87171;" oninput="handleRupiahInput(this)" required>
             </div>
           </div>
 
           <div class="form-group" style="margin-bottom:16px; background:#041410; padding:12px; border-radius:10px; border:1px solid #065f46;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <label style="color:#34d399; font-weight:700; margin:0;">📋 Rincian Sumber Pendapatan (Daftar Pos)</label>
+              <label style="color:#34d399; font-weight:700; margin:0;">Rincian Sumber Pendapatan (Daftar Pos)</label>
               <button type="button" class="btn btn-outline" style="font-size:11px; padding:4px 10px;" onclick="addPendapatanRow()">+ Tambah Pos Pendapatan</button>
-            </div>keunggulanText
+            </div>
             <div id="apb-pendapatan-rows">
               \${rowsPendapatanHtml}
             </div>
@@ -1604,7 +1690,7 @@ function renderAdminDashboardHtml() {
             <div style="margin-top:10px; padding:8px 12px; background:#0f291e; border:1px dashed #10b981; border-radius:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
               <span style="font-size:11px; color:#a7f3d0;">Total Rincian: <strong id="calc-sum-pendapatan" style="color:#ffffff;">Rp 0</strong></span>
               <div style="display:flex; align-items:center; gap:6px;">
-                <span style="font-size:11px; color:#cbd5e1; font-style:italic;">🔒 Selisih dana yang belum tercatat (tidak bisa diedit):</span>
+                <span style="font-size:11px; color:#cbd5e1; font-style:italic;">Selisih dana yang belum tercatat (tidak bisa diedit):</span>
                 <strong id="calc-diff-pendapatan" style="font-size:12px; font-weight:700; color:#34d399; font-family:monospace; background:#022c22; padding:2px 8px; border-radius:4px; border:1px solid #059669;">Rp 0</strong>
               </div>
             </div>
@@ -1612,7 +1698,7 @@ function renderAdminDashboardHtml() {
 
           <div class="form-group" style="margin-bottom:16px; background:#1c0a0a; padding:12px; border-radius:10px; border:1px solid #7f1d1d;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <label style="color:#f87171; font-weight:700; margin:0;">💸 Rincian Pos Belanja / Pengeluaran (Daftar Pos)</label>
+              <label style="color:#f87171; font-weight:700; margin:0;">Rincian Pos Belanja / Pengeluaran (Daftar Pos)</label>
               <button type="button" class="btn btn-outline" style="font-size:11px; padding:4px 10px;" onclick="addBelanjaRow()">+ Tambah Pos Belanja</button>
             </div>
             <div id="apb-belanja-rows">
@@ -1622,7 +1708,7 @@ function renderAdminDashboardHtml() {
             <div style="margin-top:10px; padding:8px 12px; background:#2e1010; border:1px dashed #ef4444; border-radius:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
               <span style="font-size:11px; color:#fca5a5;">Total Rincian: <strong id="calc-sum-belanja" style="color:#ffffff;">Rp 0</strong></span>
               <div style="display:flex; align-items:center; gap:6px;">
-                <span style="font-size:11px; color:#cbd5e1; font-style:italic;">🔒 Selisih dana yang belum tercatat (tidak bisa diedit):</span>
+                <span style="font-size:11px; color:#cbd5e1; font-style:italic;">Selisih dana yang belum tercatat (tidak bisa diedit):</span>
                 <strong id="calc-diff-belanja" style="font-size:12px; font-weight:700; color:#f87171; font-family:monospace; background:#450a0a; padding:2px 8px; border-radius:4px; border:1px solid #b91c1c;">Rp 0</strong>
               </div>
             </div>
@@ -1631,30 +1717,53 @@ function renderAdminDashboardHtml() {
           <div class="form-group">
             <label>File Laporan PDF (URL / Upload ke R2)</label>
             <div style="display:flex; gap:8px;">
-              <input type="text" id="m-apbdes-pdf" name="file_pdf" value="\${data.file_pdf || ''}">
+              <input type="text" id="m-apbdes-pdf" name="file_pdf" value="\${data.file_pdf || ''}" placeholder="URL File PDF">
               <label class="upload-inline-btn" style="margin:0; display:flex; align-items:center;">
-                📤 Upload PDF R2
+                Upload PDF R2
                 <input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], 'm-apbdes-pdf')">
               </label>
             </div>
           </div>
-          <div class="form-group"><label>Keterangan / Catatan</label><input type="text" name="keterangan" value="\${data.keterangan || ''}"></div>
+          <div class="form-group"><label>Keterangan / Catatan</label><input type="text" name="keterangan" value="\${data.keterangan || ''}" placeholder="contoh: Realisasi APBDes telah disahkan"></div>
         \`;
       }
       return '';
+    }
+
+    function formatRupiahValue(value) {
+      if (!value && value !== 0) return '';
+      const numberString = String(value).replace(/[^0-9]/g, '');
+      if (!numberString) return '';
+      return 'Rp ' + Number(numberString).toLocaleString('id-ID');
+    }
+
+    function parseRupiahValue(str) {
+      if (!str) return 0;
+      const clean = String(str).replace(/[^0-9]/g, '');
+      return clean ? Number(clean) : 0;
+    }
+
+    function handleRupiahInput(el) {
+      const rawVal = parseRupiahValue(el.value);
+      if (rawVal === 0 && !el.value.replace(/[^0-9]/g, '')) {
+        el.value = '';
+      } else {
+        el.value = formatRupiahValue(rawVal);
+      }
+      updateApbCalculations();
     }
 
     function addPendapatanRow(kategori, nominal) {
       const container = document.getElementById('apb-pendapatan-rows');
       if (!container) return;
       kategori = kategori || '';
-      nominal = nominal !== undefined ? nominal : 0;
+      const formattedNom = nominal ? formatRupiahValue(nominal) : '';
       const div = document.createElement('div');
       div.className = 'apb-item-row';
       div.style.cssText = 'display:flex; gap:8px; align-items:center; background:#0f172a; padding:8px 10px; border-radius:8px; border:1px solid var(--card-border); margin-bottom:6px;';
       div.innerHTML = '<input type="text" class="row-pendapatan-kategori" value="' + kategori + '" placeholder="Nama Sumber Pendapatan..." style="flex:3; font-size:12px;" required>' +
-        '<input type="number" class="row-pendapatan-nominal" value="' + nominal + '" placeholder="Nominal (Rp)" style="flex:2; font-size:12px;" oninput="updateApbCalculations()" required>' +
-        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove(); updateApbCalculations();" title="Hapus Pos">🗑️</button>';
+        '<input type="text" class="row-pendapatan-nominal" value="' + formattedNom + '" placeholder="Rp 0" style="flex:2; font-size:12px; font-weight:600; color:#34d399;" oninput="handleRupiahInput(this)" required>' +
+        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove(); updateApbCalculations();" title="Hapus Pos">Hapus</button>';
       container.appendChild(div);
       updateApbCalculations();
     }
@@ -1663,13 +1772,13 @@ function renderAdminDashboardHtml() {
       const container = document.getElementById('apb-belanja-rows');
       if (!container) return;
       kategori = kategori || '';
-      nominal = nominal !== undefined ? nominal : 0;
+      const formattedNom = nominal ? formatRupiahValue(nominal) : '';
       const div = document.createElement('div');
       div.className = 'apb-item-row';
       div.style.cssText = 'display:flex; gap:8px; align-items:center; background:#0f172a; padding:8px 10px; border-radius:8px; border:1px solid var(--card-border); margin-bottom:6px;';
       div.innerHTML = '<input type="text" class="row-belanja-kategori" value="' + kategori + '" placeholder="Nama Bidang Pengeluaran..." style="flex:3; font-size:12px;" required>' +
-        '<input type="number" class="row-belanja-nominal" value="' + nominal + '" placeholder="Nominal (Rp)" style="flex:2; font-size:12px;" oninput="updateApbCalculations()" required>' +
-        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove(); updateApbCalculations();" title="Hapus Pos">🗑️</button>';
+        '<input type="text" class="row-belanja-nominal" value="' + formattedNom + '" placeholder="Rp 0" style="flex:2; font-size:12px; font-weight:600; color:#f87171;" oninput="handleRupiahInput(this)" required>' +
+        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.apb-item-row\\x27).remove(); updateApbCalculations();" title="Hapus Pos">Hapus</button>';
       container.appendChild(div);
       updateApbCalculations();
     }
@@ -1677,11 +1786,11 @@ function renderAdminDashboardHtml() {
     function updateApbCalculations() {
       const formatRp = (num) => 'Rp ' + Number(num || 0).toLocaleString('id-ID');
 
-      // 1. Hitung Pendapatan (Rincian Sumber Pendapatan - Total Pendapatan)
-      const totalPendTarget = Number(document.querySelector('input[name="pendapatan"]')?.value || 0);
+      // 1. Hitung Pendapatan
+      const totalPendTarget = parseRupiahValue(document.querySelector('input[name="pendapatan_formatted"]')?.value);
       let sumPend = 0;
       document.querySelectorAll('#apb-pendapatan-rows .row-pendapatan-nominal').forEach(el => {
-        sumPend += Number(el.value || 0);
+        sumPend += parseRupiahValue(el.value);
       });
       const diffPend = sumPend - totalPendTarget;
 
@@ -1690,15 +1799,24 @@ function renderAdminDashboardHtml() {
 
       const diffPendEl = document.getElementById('calc-diff-pendapatan');
       if (diffPendEl) {
-        diffPendEl.innerText = formatRp(diffPend);
-        diffPendEl.style.color = diffPend === 0 ? '#34d399' : (diffPend > 0 ? '#38bdf8' : '#f87171');
+        diffPendEl.innerText = formatRp(Math.abs(diffPend));
+        if (diffPend === 0) {
+          diffPendEl.style.color = '#34d399';
+          diffPendEl.style.borderColor = '#059669';
+        } else if (diffPend > 0) {
+          diffPendEl.style.color = '#38bdf8';
+          diffPendEl.style.borderColor = '#0284c7';
+        } else {
+          diffPendEl.style.color = '#f87171';
+          diffPendEl.style.borderColor = '#b91c1c';
+        }
       }
 
-      // 2. Hitung Belanja (Rincian Pos Belanja - Total Pengeluaran)
-      const totalBelTarget = Number(document.querySelector('input[name="belanja"]')?.value || 0);
+      // 2. Hitung Belanja
+      const totalBelTarget = parseRupiahValue(document.querySelector('input[name="belanja_formatted"]')?.value);
       let sumBel = 0;
       document.querySelectorAll('#apb-belanja-rows .row-belanja-nominal').forEach(el => {
-        sumBel += Number(el.value || 0);
+        sumBel += parseRupiahValue(el.value);
       });
       const diffBel = sumBel - totalBelTarget;
 
@@ -1707,8 +1825,17 @@ function renderAdminDashboardHtml() {
 
       const diffBelEl = document.getElementById('calc-diff-belanja');
       if (diffBelEl) {
-        diffBelEl.innerText = formatRp(diffBel);
-        diffBelEl.style.color = diffBel === 0 ? '#34d399' : (diffBel > 0 ? '#38bdf8' : '#f87171');
+        diffBelEl.innerText = formatRp(Math.abs(diffBel));
+        if (diffBel === 0) {
+          diffBelEl.style.color = '#34d399';
+          diffBelEl.style.borderColor = '#059669';
+        } else if (diffBel > 0) {
+          diffBelEl.style.color = '#38bdf8';
+          diffBelEl.style.borderColor = '#0284c7';
+        } else {
+          diffBelEl.style.color = '#f87171';
+          diffBelEl.style.borderColor = '#b91c1c';
+        }
       }
     }
 
@@ -1742,7 +1869,7 @@ function renderAdminDashboardHtml() {
           reader.readAsDataURL(file);
         });
       }
-      showToast('✅ Semua foto berhasil diunggah!');
+      showToast('Semua foto berhasil diunggah!');
       await loadData();
     }
 
@@ -1759,7 +1886,7 @@ function renderAdminDashboardHtml() {
           'Ganti' +
           '<input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], \\x27' + uid + '\\x27)">' +
         '</label>' +
-        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.kkn-photo-item\\x27).remove()" title="Hapus Foto">🗑️</button>';
+        '<button type="button" class="btn btn-danger" style="padding:6px 10px; font-size:12px;" onclick="this.closest(\\x27.kkn-photo-item\\x27).remove()" title="Hapus Foto">Hapus</button>';
       container.appendChild(div);
     }
 
@@ -1769,6 +1896,16 @@ function renderAdminDashboardHtml() {
       const formData = new FormData(form);
       const values = {};
       formData.forEach((val, key) => { values[key] = val; });
+
+      if (editingCollection === 'berita') {
+        if (values.kategori_select === 'Lainnya') {
+          values.kategori = (values.kategori_custom || '').trim() || 'Lainnya';
+        } else {
+          values.kategori = values.kategori_select || values.kategori || 'Pemerintahan';
+        }
+        delete values.kategori_select;
+        delete values.kategori_custom;
+      }
 
       if (editingCollection === 'programKKN') {
         const photoInputs = document.querySelectorAll('#kkn-photos-container .row-kkn-photo');
@@ -1795,30 +1932,32 @@ function renderAdminDashboardHtml() {
       }
 
       if (editingCollection === 'apbdes') {
-        if (values.pendapatan !== undefined) values.pendapatan = Number(values.pendapatan);
-        if (values.belanja !== undefined) values.belanja = Number(values.belanja);
-        if (values.tahun !== undefined) values.tahun = Number(values.tahun);
+        values.pendapatan = parseRupiahValue(values.pendapatan_formatted || values.pendapatan);
+        values.belanja = parseRupiahValue(values.belanja_formatted || values.belanja);
+        if (values.tahun !== undefined) values.tahun = Number(values.tahun) || new Date().getFullYear();
         delete values.pembiayaan;
+        delete values.pendapatan_formatted;
+        delete values.belanja_formatted;
         values.surplus_defisit = (values.pendapatan || 0) - (values.belanja || 0);
 
-        // Collect field array rows for rincian_pendapatan (without percentage)
+        // Collect field array rows for rincian_pendapatan (with parsed numeric rupiah)
         const pendRows = document.querySelectorAll('#apb-pendapatan-rows .apb-item-row');
         const rincian_pendapatan = [];
         pendRows.forEach(r => {
           const kat = r.querySelector('.row-pendapatan-kategori')?.value?.trim();
-          const nom = Number(r.querySelector('.row-pendapatan-nominal')?.value || 0);
+          const nom = parseRupiahValue(r.querySelector('.row-pendapatan-nominal')?.value);
           if (kat) {
             rincian_pendapatan.push({ kategori: kat, nominal: nom });
           }
         });
         values.rincian_pendapatan = rincian_pendapatan;
 
-        // Collect field array rows for rincian_belanja (without percentage)
+        // Collect field array rows for rincian_belanja (with parsed numeric rupiah)
         const belRows = document.querySelectorAll('#apb-belanja-rows .apb-item-row');
         const rincian_belanja = [];
         belRows.forEach(r => {
           const kat = r.querySelector('.row-belanja-kategori')?.value?.trim();
-          const nom = Number(r.querySelector('.row-belanja-nominal')?.value || 0);
+          const nom = parseRupiahValue(r.querySelector('.row-belanja-nominal')?.value);
           if (kat) {
             rincian_belanja.push({ kategori: kat, nominal: nom });
           }
@@ -1859,6 +1998,19 @@ function renderAdminDashboardHtml() {
       updateBadges();
       renderCurrentView();
       showToast('Data telah dihapus!');
+    }
+
+    function toggleBeritaKategoriCustom(val) {
+      const box = document.getElementById('m-berita-kat-custom-box');
+      const input = document.getElementById('m-berita-kat-custom');
+      if (box) {
+        if (val === 'Lainnya') {
+          box.style.display = 'block';
+          if (input) input.focus();
+        } else {
+          box.style.display = 'none';
+        }
+      }
     }
 
     function updateKknStatusBadgePreview(val) {

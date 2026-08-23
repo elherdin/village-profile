@@ -22,8 +22,11 @@
   <div
     style="background:#ffffff; border:1px solid #e2e8f0; border-radius:1.5rem; padding:3.5rem 1.5rem; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); max-width:42rem; margin:2rem auto;">
     <div
-      style="width:64px; height:64px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem; font-size:28px;">
-      📄
+      style="width:64px; height:64px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.25rem; color:#64748b;">
+      <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
     </div>
     <h3 style="font-size:1.25rem; font-weight:700; color:#0f172a; margin-bottom:0.5rem;">
       Belum Ada Data APBDes yang Ditetapkan
@@ -38,12 +41,12 @@
   <!-- Year Selector Tabs & Status -->
   <div class="year-selector-card">
     <div class="year-selector-left">
-      <span class="year-selector-label">Pilih Tahun Anggaran:</span>
+      <span class="year-selector-label">Pilih Anggaran:</span>
       <div class="year-buttons-group">
-        @for (apb of apbdesList(); track apb.tahun) {
-        <button (click)="selectYear(apb.tahun)" type="button"
-          [class]="'year-tab-btn ' + (selectedYear() === apb.tahun ? 'active' : '')">
-          Tahun {{ apb.tahun }}
+        @for (apb of apbdesList(); track apb.id || apb.tahun) {
+        <button (click)="selectAPBDes(apb.id)" type="button"
+          [class]="'year-tab-btn ' + (currentAPBDes()?.id === apb.id ? 'active' : '')">
+          {{ getTabLabel(apb) }}
         </button>
         }
       </div>
@@ -52,7 +55,7 @@
     <div *ngIf="currentAPBDes()" class="status-indicator">
       <span class="status-dot"></span>
       <span class="status-text">
-        Status: <strong>{{ currentAPBDes()?.status_publikasi }}</strong>
+        Status: <strong>{{ currentAPBDes()?.status_publikasi || 'Ditetapkan' }}</strong>
       </span>
     </div>
   </div>
@@ -109,7 +112,7 @@
       <div class="flex items-center justify-between mb-4">
         <h3 class="apb-table-heading m-0">
           <span class="indicator-dot bg-emerald-500"></span>
-          Rincian Sumber Pendapatan (Daftar Pos) {{ selectedYear() }}
+          Rincian Sumber Pendapatan (Daftar Pos) {{ currentAPBDes()?.tahun }}
         </h3>
       </div>
       <div class="table-scroll">
@@ -136,7 +139,7 @@
             </tr>
             <tr class="bg-emerald-100/50 text-xs text-emerald-900 border-t border-emerald-200">
               <td class="py-2.5 font-medium italic">
-                🔒 Selisih dana yang belum tercatat (tidak bisa diedit)
+                Selisih dana yang belum tercatat (tidak bisa diedit)
               </td>
               <td class="text-right font-mono font-bold py-2.5" [class.text-amber-700]="selisihPendapatan() !== 0"
                 [class.text-emerald-700]="selisihPendapatan() === 0">
@@ -153,7 +156,7 @@
       <div class="flex items-center justify-between mb-4">
         <h3 class="apb-table-heading m-0">
           <span class="indicator-dot bg-rose-500"></span>
-          Rincian Pos Belanja / Pengeluaran (Daftar Pos) {{ selectedYear() }}
+          Rincian Pos Belanja / Pengeluaran (Daftar Pos) {{ currentAPBDes()?.tahun }}
         </h3>
       </div>
       <div class="table-scroll">
@@ -179,7 +182,7 @@
             </tr>
             <tr class="bg-rose-100/50 text-xs text-rose-900 border-t border-rose-200">
               <td class="py-2.5 font-medium italic">
-                🔒 Selisih dana yang belum tercatat (tidak bisa diedit)
+                Selisih dana yang belum tercatat (tidak bisa diedit)
               </td>
               <td class="text-right font-mono font-bold py-2.5" [class.text-amber-700]="selisihBelanja() !== 0"
                 [class.text-rose-700]="selisihBelanja() === 0">

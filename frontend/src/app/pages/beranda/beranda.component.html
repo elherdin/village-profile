@@ -294,9 +294,9 @@
         <div class="news-content">
           <div>
             <div class="news-meta">
-              <span>📅 {{ item.tanggal_publikasi | date:'d MMMM yyyy' }}</span>
+              <span>{{ item.tanggal_publikasi | date:'d MMMM yyyy' }}</span>
               <span>•</span>
-              <span>✍️ {{ item.penulis || 'Admin Desa' }}</span>
+              <span>{{ item.penulis || 'Admin Desa' }}</span>
             </div>
             <h3 class="news-card-title">
               <a [routerLink]="['/berita', item.slug]">{{ item.judul }}</a>
