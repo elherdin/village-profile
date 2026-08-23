@@ -22,7 +22,7 @@ function normalizeMediaUrls(dataObj) {
       changed = true;
     }
 
-    if (!r2PublicUrl) {
+    if (!r2PublicUrl || r2PublicUrl.includes("r2.dev") || r2PublicUrl.includes("r2.cloudflarestorage.com")) {
       if (jsonStr.includes(".r2.dev/") || jsonStr.includes("r2.cloudflarestorage.com/")) {
         jsonStr = jsonStr.replace(/https:\/\/[^"'\\]*(?:\.r2\.dev|r2\.cloudflarestorage\.com)\/([^"'\\]+)/g, (match, key) => {
           return `/api/media-file?key=${encodeURIComponent(key)}`;

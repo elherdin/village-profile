@@ -543,9 +543,10 @@ function renderAdminDashboardHtml() {
             var sizeKb = m.size ? (m.size / 1024).toFixed(1) + ' KB' : 'R2 Object';
             var safeKey = encodeURIComponent(m.key || '');
             var safeName = encodeURIComponent(m.name || '');
-            var safeUrl = encodeURIComponent(m.url || '');
             var proxyUrl = '/api/media-file?key=' + safeKey;
-            var previewHtml = isImg ? '<img src="' + (m.url || proxyUrl) + '" onerror="if(this.src.indexOf(\\\'/api/media-file\\\')===-1){this.src=\\\'' + proxyUrl + '\\\';}">' : '<span style="font-size:28px;">File</span>';
+            var targetUrl = (m.url && !m.url.includes('r2.dev') && !m.url.includes('r2.cloudflarestorage.com')) ? m.url : proxyUrl;
+            var safeUrl = encodeURIComponent(targetUrl);
+            var previewHtml = isImg ? '<img src="' + proxyUrl + '" onerror="this.src=\\\'https://placehold.co/200x200/1e293b/94a3b8?text=Image\\\'">' : '<span style="font-size:28px;">File</span>';
             var btnImgHtml = isImg ? (
               '<button class="btn btn-primary" style="padding:4px 6px; font-size:10px; width:100%; justify-content:center; background:#047857;" onclick="setAsLogo(decodeURIComponent(\\'' + safeUrl + '\\'))">Jadikan Logo Desa</button>' +
               '<button class="btn btn-primary" style="padding:4px 6px; font-size:10px; width:100%; justify-content:center; background:#0284c7; margin-top:3px;" onclick="setAsFotoKades(decodeURIComponent(\\'' + safeUrl + '\\'))">Jadikan Foto Kepala Desa</button>'

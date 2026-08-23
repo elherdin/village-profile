@@ -91,12 +91,9 @@ async function uploadFileToStorage(arg1, arg2, mimeType) {
   fs.writeFileSync(targetPath, fileBuffer);
 
   const key = `desa-plantungan/${fileName}`;
-  let publicUrl = `/api/media-file?key=${encodeURIComponent(key)}`;
-  if (r2PublicUrl) {
-    publicUrl = `${r2PublicUrl.replace(/\/+$/, '')}/${key.replace(/^\/+/, '')}`;
-  } else if (BACKEND_URL) {
-    publicUrl = `${BACKEND_URL.replace(/\/+$/, '')}/api/media-file?key=${encodeURIComponent(key)}`;
-  }
+  const publicUrl = (r2PublicUrl && !r2PublicUrl.includes('r2.dev') && !r2PublicUrl.includes('r2.cloudflarestorage.com'))
+    ? `${r2PublicUrl.replace(/\/+$/, '')}/${key}`
+    : `/api/media-file?key=${encodeURIComponent(key)}`;
 
   if (isR2Configured && s3Client) {
     try {
@@ -201,12 +198,9 @@ async function syncMediaWithR2() {
       else if (fileName.match(/\.(svg)$/i)) mime = 'image/svg+xml';
       else if (fileName.match(/\.(gif)$/i)) mime = 'image/gif';
 
-      let publicUrl = `/api/media-file?key=${encodeURIComponent(item.Key)}`;
-      if (r2PublicUrl) {
-        publicUrl = `${r2PublicUrl.replace(/\/+$/, '')}/${item.Key.replace(/^\/+/, '')}`;
-      } else if (BACKEND_URL) {
-        publicUrl = `${BACKEND_URL.replace(/\/+$/, '')}/api/media-file?key=${encodeURIComponent(item.Key)}`;
-      }
+      const publicUrl = (r2PublicUrl && !r2PublicUrl.includes('r2.dev') && !r2PublicUrl.includes('r2.cloudflarestorage.com'))
+        ? `${r2PublicUrl.replace(/\/+$/, '')}/${item.Key.replace(/^\/+/, '')}`
+        : `/api/media-file?key=${encodeURIComponent(item.Key)}`;
 
       return {
         name: existing?.name || fileName,
