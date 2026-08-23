@@ -26,6 +26,11 @@ const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
 
+  if (pathname === '/favicon.ico') {
+    res.writeHead(204);
+    return res.end();
+  }
+
   const sendJson = (status, data) => {
     res.writeHead(status, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(data));

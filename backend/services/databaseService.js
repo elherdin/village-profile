@@ -15,8 +15,23 @@ function normalizeMediaUrls(dataObj) {
   if (!dataObj) return dataObj;
   try {
     let jsonStr = JSON.stringify(dataObj);
+    let changed = false;
+
     if (jsonStr.includes("http://localhost:")) {
       jsonStr = jsonStr.replace(/http:\/\/localhost:[0-9]+/g, "");
+      changed = true;
+    }
+
+    if (!r2PublicUrl) {
+      if (jsonStr.includes(".r2.dev/") || jsonStr.includes("r2.cloudflarestorage.com/")) {
+        jsonStr = jsonStr.replace(/https:\/\/[^"'\\]*(?:\.r2\.dev|r2\.cloudflarestorage\.com)\/([^"'\\]+)/g, (match, key) => {
+          return `/api/media-file?key=${encodeURIComponent(key)}`;
+        });
+        changed = true;
+      }
+    }
+
+    if (changed) {
       return JSON.parse(jsonStr);
     }
   } catch (_) {}

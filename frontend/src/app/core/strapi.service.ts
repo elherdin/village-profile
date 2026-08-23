@@ -45,6 +45,12 @@ export class StrapiService {
       if (data.startsWith('http://localhost:1337')) {
         return data.replace(/http:\/\/localhost:1337/g, backendBase);
       }
+      if (data.includes('.r2.dev/') || data.includes('r2.cloudflarestorage.com/')) {
+        const keyMatch = data.split(/(?:\.r2\.dev|r2\.cloudflarestorage\.com)\//)[1];
+        if (keyMatch) {
+          return `${backendBase}/api/media-file?key=${encodeURIComponent(keyMatch)}`;
+        }
+      }
       if (data.startsWith('/api/media-file')) {
         return `${backendBase}${data}`;
       }

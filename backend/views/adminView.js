@@ -538,14 +538,14 @@ function renderAdminDashboardHtml() {
         let cardsHtml = '';
         if (list.length === 0) {
           cardsHtml = '<p style="color:var(--text-muted); text-align:center; padding:30px;">Belum ada media yang diunggah.</p>';
-        } else {
           cardsHtml = '<div class="media-grid">' + list.map(function(m) {
             var isImg = (m.mimeType && m.mimeType.indexOf('image') !== -1) || (m.name && /\\.(jpg|jpeg|png|webp|gif|svg|avif)$/i.test(m.name));
-            var previewHtml = isImg ? '<img src="' + m.url + '">' : '<span style="font-size:28px;">File</span>';
             var sizeKb = m.size ? (m.size / 1024).toFixed(1) + ' KB' : 'R2 Object';
             var safeKey = encodeURIComponent(m.key || '');
             var safeName = encodeURIComponent(m.name || '');
             var safeUrl = encodeURIComponent(m.url || '');
+            var proxyUrl = '/api/media-file?key=' + safeKey;
+            var previewHtml = isImg ? '<img src="' + (m.url || proxyUrl) + '" onerror="if(this.src.indexOf(\\\'/api/media-file\\\')===-1){this.src=\\\'' + proxyUrl + '\\\';}">' : '<span style="font-size:28px;">File</span>';
             var btnImgHtml = isImg ? (
               '<button class="btn btn-primary" style="padding:4px 6px; font-size:10px; width:100%; justify-content:center; background:#047857;" onclick="setAsLogo(decodeURIComponent(\\'' + safeUrl + '\\'))">Jadikan Logo Desa</button>' +
               '<button class="btn btn-primary" style="padding:4px 6px; font-size:10px; width:100%; justify-content:center; background:#0284c7; margin-top:3px;" onclick="setAsFotoKades(decodeURIComponent(\\'' + safeUrl + '\\'))">Jadikan Foto Kepala Desa</button>'
