@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { PORT, UPLOAD_DIR, r2BucketName } = require('../config/env');
+const { PORT, BACKEND_URL, UPLOAD_DIR, r2BucketName, r2PublicUrl } = require('../config/env');
 const {
   s3Client,
   isR2Configured,
@@ -91,7 +91,12 @@ async function uploadFileToStorage(arg1, arg2, mimeType) {
   fs.writeFileSync(targetPath, fileBuffer);
 
   const key = `desa-plantungan/${fileName}`;
-  const publicUrl = `http://localhost:${PORT}/api/media-file?key=${encodeURIComponent(key)}`;
+  let publicUrl = `/api/media-file?key=${encodeURIComponent(key)}`;
+  if (r2PublicUrl) {
+    publicUrl = `${r2PublicUrl.replace(/\/+$/, '')}/${key.replace(/^\/+/, '')}`;
+  } else if (BACKEND_URL) {
+    publicUrl = `${BACKEND_URL.replace(/\/+$/, '')}/api/media-file?key=${encodeURIComponent(key)}`;
+  }
 
   if (isR2Configured && s3Client) {
     try {
@@ -196,10 +201,17 @@ async function syncMediaWithR2() {
       else if (fileName.match(/\.(svg)$/i)) mime = 'image/svg+xml';
       else if (fileName.match(/\.(gif)$/i)) mime = 'image/gif';
 
+      let publicUrl = `/api/media-file?key=${encodeURIComponent(item.Key)}`;
+      if (r2PublicUrl) {
+        publicUrl = `${r2PublicUrl.replace(/\/+$/, '')}/${item.Key.replace(/^\/+/, '')}`;
+      } else if (BACKEND_URL) {
+        publicUrl = `${BACKEND_URL.replace(/\/+$/, '')}/api/media-file?key=${encodeURIComponent(item.Key)}`;
+      }
+
       return {
         name: existing?.name || fileName,
         key: item.Key,
-        url: `http://localhost:${PORT}/api/media-file?key=${encodeURIComponent(item.Key)}`,
+        url: publicUrl,
         size: item.Size || existing?.size || 0,
         mimeType: existing?.mimeType || mime,
         storage: 'Cloudflare R2',

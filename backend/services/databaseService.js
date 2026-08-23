@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { DB_FILE, PORT } = require("../config/env");
+const { DB_FILE, PORT, BACKEND_URL, r2PublicUrl } = require("../config/env");
 const { 
   isPostgresConfigured, 
   initPostgres, 
@@ -10,11 +10,25 @@ const {
 
 let db = {};
 
+// Helper to normalize localhost URLs to relative or public R2 CDN URLs
+function normalizeMediaUrls(dataObj) {
+  if (!dataObj) return dataObj;
+  try {
+    let jsonStr = JSON.stringify(dataObj);
+    if (jsonStr.includes("http://localhost:")) {
+      jsonStr = jsonStr.replace(/http:\/\/localhost:[0-9]+/g, "");
+      return JSON.parse(jsonStr);
+    }
+  } catch (_) {}
+  return dataObj;
+}
+
 // 1. Initial load from local data-store.json disk cache
 try {
   if (fs.existsSync(DB_FILE)) {
     const raw = fs.readFileSync(DB_FILE, "utf8");
     db = JSON.parse(raw);
+    db = normalizeMediaUrls(db);
     if (!db.mediaLibrary) db.mediaLibrary = [];
   }
 } catch (e) {
@@ -29,12 +43,20 @@ if (isPostgresConfigured) {
       if (initialized) {
         const pgData = await loadAllFromPostgres();
         if (pgData && Object.keys(pgData).length > 0) {
-          Object.assign(db, pgData);
+          const cleanedPgData = normalizeMediaUrls(pgData);
+          Object.assign(db, cleanedPgData);
           if (!db.mediaLibrary) db.mediaLibrary = [];
+          
           // update local cache file
           try {
             fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
           } catch (_) {}
+
+          // If there were old localhost URLs in Postgres, update Postgres as well
+          if (JSON.stringify(pgData).includes("http://localhost:")) {
+            saveAllToPostgres(db).catch(() => {});
+          }
+
           console.log("[PostgreSQL] Data berhasil disinkronkan ke memori server!");
         }
       }
@@ -49,6 +71,7 @@ function getDb() {
 }
 
 function saveDb() {
+  db = normalizeMediaUrls(db);
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
   } catch (err) {
@@ -63,10 +86,10 @@ function saveDb() {
 }
 
 async function saveCollection(collectionName, data) {
-  db[collectionName] = data;
+  db[collectionName] = normalizeMediaUrls(data);
   saveDb();
   if (isPostgresConfigured) {
-    await saveCollectionToPostgres(collectionName, data);
+    await saveCollectionToPostgres(collectionName, db[collectionName]);
   }
 }
 
@@ -75,7 +98,13 @@ function fixR2Url(urlStr) {
   if (!urlStr || typeof urlStr !== "string") return urlStr;
   if (urlStr.includes("r2.dev/")) {
     const key = urlStr.split("r2.dev/")[1];
-    return `http://localhost:${PORT}/api/media-file?key=${encodeURIComponent(key)}`;
+    if (r2PublicUrl) {
+      return `${r2PublicUrl.replace(/\/+$/, "")}/${key.replace(/^\/+/, "")}`;
+    }
+    return `/api/media-file?key=${encodeURIComponent(key)}`;
+  }
+  if (urlStr.includes("http://localhost:")) {
+    return urlStr.replace(/http:\/\/localhost:[0-9]+/g, "");
   }
   return urlStr;
 }

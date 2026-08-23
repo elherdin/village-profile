@@ -21,13 +21,14 @@ import {
   MOCK_APBDES,
   MOCK_INFRASTRUKTUR_DESA
 } from './mock-data';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StrapiService {
   private http = inject(HttpClient);
-  public readonly apiUrl = 'http://localhost:1337/api';
+  public readonly apiUrl = environment.apiUrl || 'http://localhost:1337/api';
 
   // Reactive connection state signal
   public isBackendOnline = signal<boolean>(false);

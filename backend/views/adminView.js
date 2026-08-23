@@ -345,7 +345,7 @@ function renderAdminDashboardHtml() {
         <span style="font-size:11px; padding:2px 8px; border-radius:4px; background:${r2StatusBg}; color:${r2StatusColor}; font-weight:700;">
           ${r2StatusText}
         </span>
-        <a href="http://localhost:4200" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:700;">Lihat Web </a>
+        <a href="/" target="_blank" style="color:#38bdf8; text-decoration:none; font-weight:700;">Lihat Web</a>
       </div>
       <span style="font-size:10px; color:#64748b;">Bucket: ${r2BucketName}</span>
     </div>
@@ -624,7 +624,7 @@ function renderAdminDashboardHtml() {
               <div style="flex:1;">
                 <label style="font-size:13px; font-weight:700; color:var(--text-main);">Logo Resmi Desa</label>
                 <div style="display:flex; gap:8px; margin-top:6px;">
-                  <input type="text" id="p-logo" value="\${p.logo || ''}" placeholder="http://localhost:1337/api/media-file?key=...">
+                  <input type="text" id="p-logo" value="\${p.logo || ''}" placeholder="/api/media-file?key=...">
                   <label class="upload-inline-btn" style="margin:0; display:flex; align-items:center; white-space:nowrap;">
                     Upload Foto
                     <input type="file" style="display:none;" onchange="handleFileUpload(this.files[0], 'p-logo')">
