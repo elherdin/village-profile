@@ -26,10 +26,16 @@ if (r2PublicUrl.includes('r2.cloudflarestorage.com')) {
 const r2Endpoint = process.env.R2_ENDPOINT || (r2AccountId ? `https://${r2AccountId}.r2.cloudflarestorage.com` : '');
 
 const BACKEND_URL = process.env.BACKEND_URL || process.env.PUBLIC_URL || process.env.APP_URL || '';
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'desaPlantungan2026!';
+const AUTH_SECRET = process.env.AUTH_SECRET || 'desa-plantungan-secure-secret-token-key-2026';
 
 module.exports = {
   PORT,
   BACKEND_URL,
+  ADMIN_USERNAME,
+  ADMIN_PASSWORD,
+  AUTH_SECRET,
   DB_FILE,
   UPLOAD_DIR,
   r2AccountId,

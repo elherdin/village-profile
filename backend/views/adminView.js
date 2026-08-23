@@ -287,7 +287,55 @@ function renderAdminDashboardHtml() {
 <body>
 
   <!-- Sidebar Navigation -->
-  <aside class="sidebar">
+    <!-- 1. LOGIN VIEW -->
+  <div id="login-view" style="display:flex; width:100vw; height:100vh; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 30%, #1e293b 0%, #090d16 100%); padding:20px; z-index:9999;">
+    <div class="login-card" style="width:100%; max-width:420px; background:#1e293b; border:1px solid #334155; border-radius:18px; padding:36px 30px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.6); position:relative; overflow:hidden;">
+      <div style="position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, #4f46e5, #06b6d4, #10b981);"></div>
+      
+      <div style="text-align:center; margin-bottom:26px;">
+        <div style="width:52px; height:52px; margin:0 auto 14px; border-radius:12px; background:linear-gradient(135deg, #4f46e5, #4338ca); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:white; box-shadow:0 10px 25px -5px rgba(79,70,229,0.4);">
+          DP
+        </div>
+        <h2 style="font-size:19px; font-weight:800; color:#f8fafc; letter-spacing:-0.5px;">Panel Admin Desa</h2>
+        <p style="font-size:12px; color:#94a3b8; margin-top:4px;">Pemerintah Desa Plantungan, Kec. Blora</p>
+      </div>
+
+      <div id="login-error" style="display:none; padding:12px 14px; background:#450a0a; border:1px solid #dc2626; border-radius:8px; color:#fca5a5; font-size:13px; margin-bottom:16px;">
+        Username atau Password salah!
+      </div>
+
+      <form id="login-form" onsubmit="handleLoginSubmit(event)" style="display:flex; flex-direction:column; gap:16px;">
+        <div>
+          <label style="display:block; font-size:11px; font-weight:700; color:#cbd5e1; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Username</label>
+          <input type="text" id="login-username" required autocomplete="username" placeholder="Masukkan username" style="width:100%; padding:11px 14px; background:#0f172a; border:1px solid #334155; border-radius:8px; color:#f8fafc; font-size:13px; outline:none; transition:border-color 0.2s;">
+        </div>
+        <div>
+          <label style="display:block; font-size:11px; font-weight:700; color:#cbd5e1; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Password</label>
+          <div style="position:relative;">
+            <input type="password" id="login-password" required autocomplete="current-password" placeholder="Masukkan password" style="width:100%; padding:11px 55px 11px 14px; background:#0f172a; border:1px solid #334155; border-radius:8px; color:#f8fafc; font-size:13px; outline:none; transition:border-color 0.2s;">
+            <button type="button" onclick="togglePasswordVisibility()" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; color:#94a3b8; cursor:pointer; font-size:11px; font-weight:700;" id="toggle-pwd-btn">Lihat</button>
+          </div>
+        </div>
+        <button type="submit" id="login-submit-btn" style="width:100%; padding:12px; background:linear-gradient(135deg, #4f46e5, #4338ca); color:white; font-size:13px; font-weight:700; border:none; border-radius:8px; cursor:pointer; margin-top:6px; box-shadow:0 4px 14px rgba(79,70,229,0.3); transition:opacity 0.2s;">
+          Masuk ke Panel Admin
+        </button>
+      </form>
+
+      <div style="margin-top:20px; padding:12px 14px; background:rgba(15,23,42,0.6); border:1px dashed #334155; border-radius:8px; font-size:11px; color:#94a3b8;">
+        <div style="font-weight:700; color:#cbd5e1; margin-bottom:4px;">Akun Bawaan Administrator:</div>
+        <div style="display:flex; justify-content:space-between; margin-top:2px;">
+          <span>Username:</span> <strong style="color:#38bdf8; font-family:monospace;">admin</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:2px;">
+          <span>Password:</span> <strong style="color:#38bdf8; font-family:monospace;">desaPlantungan2026!</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. APP DASHBOARD VIEW -->
+  <div id="app-view" style="display:none; width:100vw; height:100vh; overflow:hidden;">
+    <aside class="sidebar">
     <div class="brand">
       
       <div class="brand-text">
@@ -341,6 +389,16 @@ function renderAdminDashboardHtml() {
     </div>
 
     <div class="sidebar-footer">
+      <div style="padding:10px 12px; background:#0f172a; border:1px solid #334155; border-radius:8px; display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div style="width:24px; height:24px; border-radius:6px; background:#4f46e5; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; color:white;">AD</div>
+          <div>
+            <div style="font-size:11px; font-weight:700; color:#f8fafc;" id="admin-user-display">admin</div>
+            <div style="font-size:9px; color:#10b981; font-weight:600;">Online</div>
+          </div>
+        </div>
+        <button onclick="handleLogout()" style="padding:3px 8px; font-size:10px; font-weight:700; background:#dc2626; color:white; border:none; border-radius:4px; cursor:pointer;" title="Keluar dari Panel Admin">Keluar</button>
+      </div>
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <span style="font-size:11px; padding:2px 8px; border-radius:4px; background:${r2StatusBg}; color:${r2StatusColor}; font-weight:700;">
           ${r2StatusText}
@@ -360,6 +418,7 @@ function renderAdminDashboardHtml() {
 
     <div class="content-body" id="content-area"></div>
   </main>
+  </div>
 
   <!-- Modal for Creating / Editing Collection Items -->
   <div class="modal" id="crud-modal">

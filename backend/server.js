@@ -3,19 +3,51 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
-const { PORT, DB_FILE, UPLOAD_DIR, r2BucketName } = require('./config/env');
+const { PORT, DB_FILE, UPLOAD_DIR, r2BucketName, ADMIN_USERNAME, ADMIN_PASSWORD, AUTH_SECRET } = require('./config/env');
 const { s3Client, isR2Configured } = require('./config/s3Client');
 const { isPostgresConfigured } = require('./config/postgresClient');
 const { db, saveDb, fixR2Url, formatStrapiSingle, formatStrapiCollection } = require('./services/databaseService');
 const { getObjectBufferFromR2, uploadFileToStorage, deleteFileFromStorage, syncMediaWithR2 } = require('./services/storageService');
 const { renderAdminDashboardHtml } = require('./views/adminView');
 
+// Token generation & verification helpers
+function generateAuthToken(username) {
+  const payload = JSON.stringify({ user: username, exp: Date.now() + 7 * 24 * 3600 * 1000 });
+  const b64 = Buffer.from(payload).toString('base64url');
+  const sig = crypto.createHmac('sha256', AUTH_SECRET).update(b64).digest('base64url');
+  return `${b64}.${sig}`;
+}
+
+function verifyAuthToken(req) {
+  const authHeader = req.headers['authorization'] || req.headers['x-admin-token'] || '';
+  let token = authHeader;
+  if (authHeader.startsWith('Bearer ')) {
+    token = authHeader.substring(7).trim();
+  }
+  if (!token) return null;
+
+  const parts = token.split('.');
+  if (parts.length !== 2) return null;
+  const [b64, sig] = parts;
+  const expectedSig = crypto.createHmac('sha256', AUTH_SECRET).update(b64).digest('base64url');
+  if (sig !== expectedSig) return null;
+
+  try {
+    const payload = JSON.parse(Buffer.from(b64, 'base64url').toString('utf8'));
+    if (payload.exp && payload.exp < Date.now()) return null;
+    return payload;
+  } catch (_) {
+    return null;
+  }
+}
+
 const server = http.createServer(async (req, res) => {
   // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Admin-Token');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
@@ -35,6 +67,47 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(status, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(data));
   };
+
+  // -------------------------------------------------------------
+  // Authentication Endpoints
+  // -------------------------------------------------------------
+  if (pathname === '/api/auth/login' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', () => {
+      try {
+        const { username, password } = JSON.parse(body);
+        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+          const token = generateAuthToken(username);
+          return sendJson(200, {
+            success: true,
+            token,
+            user: {
+              username: ADMIN_USERNAME,
+              name: 'Administrator Desa Plantungan',
+              role: 'Super Admin'
+            }
+          });
+        } else {
+          return sendJson(401, { success: false, error: 'Username atau Password salah!' });
+        }
+      } catch (err) {
+        return sendJson(400, { success: false, error: 'Format data login tidak valid' });
+      }
+    });
+    return;
+  }
+
+  if (pathname === '/api/auth/check' && req.method === 'GET') {
+    const user = verifyAuthToken(req);
+    if (user) {
+      return sendJson(200, {
+        authenticated: true,
+        user: { username: user.user, name: 'Administrator Desa Plantungan', role: 'Super Admin' }
+      });
+    }
+    return sendJson(200, { authenticated: false });
+  }
 
   // Serve direct media file from R2 or local disk
   if (pathname === '/api/media-file') {
