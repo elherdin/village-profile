@@ -58,9 +58,13 @@
       <div class="hero-aside">
         <div class="kades-card">
           <div class="kades-header">
-            <img
-              [src]="profil()?.foto_kades || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face'"
-              [alt]="profil()?.nama_kades || 'Kepala Desa'" class="kades-avatar">
+            <img *ngIf="profil()?.foto_kades" [src]="profil()?.foto_kades" [alt]="profil()?.nama_kades || 'Kepala Desa'"
+              class="kades-avatar">
+            <svg *ngIf="!profil()?.foto_kades" class="footer-logo-fallback" width="20" height="20" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
             <div class="kades-info">
               <h3 class="kades-name">{{ profil()?.nama_kades || 'Endang Susana' }}</h3>
               <p class="kades-role">Kepala Desa Plantungan</p>
