@@ -36,17 +36,47 @@ export class StrapiService {
   public profilDesa = signal<ProfilDesa | null>(null);
 
   /**
+   * Helper function to automatically resolve relative / local media URLs to live production backend
+   */
+  private resolveMediaUrls(data: any): any {
+    if (!data) return data;
+    if (typeof data === 'string') {
+      const backendBase = (environment.backendUrl || environment.apiUrl.replace(/\/api\/?$/, '')).replace(/\/+$/, '');
+      if (data.startsWith('http://localhost:1337')) {
+        return data.replace(/http:\/\/localhost:1337/g, backendBase);
+      }
+      if (data.startsWith('/api/media-file')) {
+        return `${backendBase}${data}`;
+      }
+      return data;
+    }
+    if (Array.isArray(data)) {
+      return data.map((item) => this.resolveMediaUrls(item));
+    }
+    if (typeof data === 'object') {
+      const copy: any = {};
+      for (const k of Object.keys(data)) {
+        copy[k] = this.resolveMediaUrls(data[k]);
+      }
+      return copy;
+    }
+    return data;
+  }
+
+  /**
    * Helper function to extract data from Strapi v4 / v5 responses
    */
   private normalizeStrapiData<T>(raw: any): T {
     if (!raw) return raw;
+    let result = raw;
     if (raw.data && typeof raw.data === 'object') {
       if (Array.isArray(raw.data)) {
-        return raw.data.map((item: any) => this.flattenEntity(item)) as unknown as T;
+        result = raw.data.map((item: any) => this.flattenEntity(item)) as unknown as T;
+      } else {
+        result = this.flattenEntity(raw.data) as unknown as T;
       }
-      return this.flattenEntity(raw.data) as unknown as T;
     }
-    return raw as T;
+    return this.resolveMediaUrls(result);
   }
 
   private flattenEntity(entity: any): any {

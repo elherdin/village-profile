@@ -11,7 +11,7 @@ export const MOCK_PROFIL_DESA: ProfilDesa = {
   id: 1,
   nama_desa: 'Desa Plantungan',
   tagline: 'Maju, Berdaya Saing, Berbudaya, dan Sejahtera Berbasis Potensi Lokal',
-  logo: 'http://localhost:1337/api/media-file?key=desa-plantungan/1786785184078_IMG_1445.jpg',
+  logo: 'https://api-desaplantungan.albyta.com/api/media-file?key=desa-plantungan/1786785184078_IMG_1445.jpg',
   tentang: `Desa Plantungan merupakan salah satu desa yang terletak di kawasan strategis dengan bentang alam yang asri dan tanah yang subur. Desa ini memiliki kekayaan sumber daya alam yang melimpah, khususnya di sektor pertanian pangan, perkebunan rakyat penghasil komoditas atsiri/minyak rakyat, serta kelembagaan ekonomi desa yang produktif melalui BUMDes Maju Bersama. 
 
 Masyarakat Desa Plantungan menjunjung tinggi nilai-nilai kearifan lokal, gotong royong, dan keterbukaan dalam tata kelola pemerintahan desa modern yang transparan dan akuntabel.`,
