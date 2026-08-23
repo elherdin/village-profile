@@ -320,16 +320,7 @@ function renderAdminDashboardHtml() {
           Masuk ke Panel Admin
         </button>
       </form>
-
-      <div style="margin-top:20px; padding:12px 14px; background:rgba(15,23,42,0.6); border:1px dashed #334155; border-radius:8px; font-size:11px; color:#94a3b8;">
-        <div style="font-weight:700; color:#cbd5e1; margin-bottom:4px;">Akun Bawaan Administrator:</div>
-        <div style="display:flex; justify-content:space-between; margin-top:2px;">
-          <span>Username:</span> <strong style="color:#38bdf8; font-family:monospace;">admin</strong>
-        </div>
-        <div style="display:flex; justify-content:space-between; margin-top:2px;">
-          <span>Password:</span> <strong style="color:#38bdf8; font-family:monospace;">desaPlantungan2026!</strong>
-        </div>
-      </div>
+      
     </div>
   </div>
 
@@ -440,9 +431,137 @@ function renderAdminDashboardHtml() {
     let currentView = 'profilDesa';
     let dbState = {};
 
+    function authFetch(url, options) {
+      options = options || {};
+      const token = localStorage.getItem('desa_admin_token');
+      options.headers = options.headers || {};
+      if (token) {
+        options.headers['Authorization'] = 'Bearer ' + token;
+        options.headers['X-Admin-Token'] = token;
+      }
+      return fetch(url, options).then(function(res) {
+        if (res.status === 401) {
+          handleLogout(false);
+          showToast('Sesi login telah berakhir. Silakan login kembali.');
+          throw new Error('Unauthorized');
+        }
+        return res;
+      });
+    }
+
+    async function checkAuthAndInit() {
+      const token = localStorage.getItem('desa_admin_token');
+      const loginView = document.getElementById('login-view');
+      const appView = document.getElementById('app-view');
+
+      if (!token) {
+        if (loginView) loginView.style.display = 'flex';
+        if (appView) appView.style.display = 'none';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/auth/check', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const result = await res.json();
+        if (result.authenticated) {
+          if (loginView) loginView.style.display = 'none';
+          if (appView) appView.style.display = 'flex';
+          const userDisplay = document.getElementById('admin-user-display');
+          if (userDisplay && result.user) userDisplay.innerText = result.user.username || 'admin';
+          loadData();
+        } else {
+          localStorage.removeItem('desa_admin_token');
+          if (loginView) loginView.style.display = 'flex';
+          if (appView) appView.style.display = 'none';
+        }
+      } catch (_) {
+        if (loginView) loginView.style.display = 'flex';
+        if (appView) appView.style.display = 'none';
+      }
+    }
+
+    async function handleLoginSubmit(event) {
+      if (event) event.preventDefault();
+      const usernameInput = document.getElementById('login-username');
+      const passwordInput = document.getElementById('login-password');
+      const errorBox = document.getElementById('login-error');
+      const submitBtn = document.getElementById('login-submit-btn');
+
+      if (!usernameInput || !passwordInput) return;
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value;
+
+      if (errorBox) errorBox.style.display = 'none';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Memeriksa...';
+      }
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: username, password: password })
+        });
+        const result = await res.json();
+
+        if (res.ok && result.success && result.token) {
+          localStorage.setItem('desa_admin_token', result.token);
+          const loginView = document.getElementById('login-view');
+          const appView = document.getElementById('app-view');
+          if (loginView) loginView.style.display = 'none';
+          if (appView) appView.style.display = 'flex';
+
+          showToast('Selamat Datang, ' + (result.user && result.user.username ? result.user.username : 'Administrator') + '!');
+          loadData();
+        } else {
+          if (errorBox) {
+            errorBox.innerText = result.error || 'Username atau Password salah!';
+            errorBox.style.display = 'block';
+          }
+        }
+      } catch (err) {
+        if (errorBox) {
+          errorBox.innerText = 'Gagal terhubung ke server: ' + err.message;
+          errorBox.style.display = 'block';
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Masuk ke Panel Admin';
+        }
+      }
+    }
+
+    function handleLogout(showNotification) {
+      localStorage.removeItem('desa_admin_token');
+      const loginView = document.getElementById('login-view');
+      const appView = document.getElementById('app-view');
+      if (appView) appView.style.display = 'none';
+      if (loginView) loginView.style.display = 'flex';
+      const pwdInput = document.getElementById('login-password');
+      if (pwdInput) pwdInput.value = '';
+      if (showNotification !== false) showToast('Berhasil keluar dari sesi admin.');
+    }
+
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById('login-password');
+      const toggleBtn = document.getElementById('toggle-pwd-btn');
+      if (!pwdInput) return;
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        if (toggleBtn) toggleBtn.innerText = 'Sembunyikan';
+      } else {
+        pwdInput.type = 'password';
+        if (toggleBtn) toggleBtn.innerText = 'Lihat';
+      }
+    }
+
     async function loadData() {
       try {
-        const res = await fetch('/api/cms-data');
+        const res = await authFetch('/api/cms-data');
         dbState = await res.json();
         updateBadges();
         renderCurrentView();
@@ -488,7 +607,7 @@ function renderAdminDashboardHtml() {
       const reader = new FileReader();
       reader.onload = async function() {
         const base64Data = reader.result;
-        const res = await fetch('/api/upload', {
+        const res = await authFetch('/api/upload', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -527,7 +646,7 @@ function renderAdminDashboardHtml() {
     }
 
     async function setProfilePhoto(field, url, label) {
-      await fetch('/api/set-profile-photo', {
+      await authFetch('/api/set-profile-photo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ field, url })
@@ -552,7 +671,7 @@ function renderAdminDashboardHtml() {
       }
       showToast('Menghapus file dari Cloudflare R2...');
       try {
-        const res = await fetch('/api/media-delete', {
+        const res = await authFetch('/api/media-delete', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ key })
@@ -572,7 +691,7 @@ function renderAdminDashboardHtml() {
     async function syncCloudflareR2() {
       showToast('Menyinkronkan daftar file dari Cloudflare R2...');
       try {
-        const res = await fetch('/api/media-sync');
+        const res = await authFetch('/api/media-sync');
         const result = await res.json();
         if (result.success) {
           showToast('Berhasil menyinkronkan ' + result.count + ' file dari Cloudflare R2!');
@@ -1417,7 +1536,7 @@ function renderAdminDashboardHtml() {
       if (document.getElementById('p-foto-desa')) dbState.profilDesa.foto_desa = document.getElementById('p-foto-desa').value.trim();
       if (document.getElementById('p-foto-kantor')) dbState.profilDesa.foto_kantor = document.getElementById('p-foto-kantor').value.trim();
 
-      await fetch('/api/cms-save', {
+      await authFetch('/api/cms-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ profilDesa: dbState.profilDesa })
@@ -1496,7 +1615,7 @@ function renderAdminDashboardHtml() {
       });
       dbState.dataKependudukan.mata_pencaharian = mata_pencaharian;
 
-      await fetch('/api/cms-save', {
+      await authFetch('/api/cms-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ dataKependudukan: dbState.dataKependudukan })
@@ -1908,7 +2027,7 @@ function renderAdminDashboardHtml() {
           const reader = new FileReader();
           reader.onload = async function() {
             try {
-              const res = await fetch('/api/upload', {
+              const res = await authFetch('/api/upload', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -2035,7 +2154,7 @@ function renderAdminDashboardHtml() {
         dbState[editingCollection].push({ id: newId, ...values });
       }
 
-      await fetch('/api/cms-save', {
+      await authFetch('/api/cms-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ [editingCollection]: dbState[editingCollection] })
@@ -2050,7 +2169,7 @@ function renderAdminDashboardHtml() {
     async function deleteItem(collection, id) {
       if (!confirm('Apakah Anda yakin ingin menghapus data ini?')) return;
       dbState[collection] = dbState[collection].filter(x => x.id !== id);
-      await fetch('/api/cms-save', {
+      await authFetch('/api/cms-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ [collection]: dbState[collection] })
@@ -2093,7 +2212,7 @@ function renderAdminDashboardHtml() {
       const msg = (dbState.pesanMasyarakat || []).find(x => x.id === id);
       if (msg) {
         msg.status = newStatus;
-        await fetch('/api/cms-save', {
+        await authFetch('/api/cms-save', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ pesanMasyarakat: dbState.pesanMasyarakat })
@@ -2107,7 +2226,7 @@ function renderAdminDashboardHtml() {
     async function deletePesan(id) {
       if (!confirm('Apakah Anda yakin ingin menghapus pesan aspirasi ini?')) return;
       dbState.pesanMasyarakat = (dbState.pesanMasyarakat || []).filter(x => x.id !== id);
-      await fetch('/api/cms-save', {
+      await authFetch('/api/cms-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pesanMasyarakat: dbState.pesanMasyarakat })
@@ -2117,7 +2236,7 @@ function renderAdminDashboardHtml() {
       showToast('Pesan aspirasi telah dihapus!');
     }
 
-    loadData();
+    checkAuthAndInit();
   </script>
 </body>
 </html>`;
